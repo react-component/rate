@@ -1,0 +1,36 @@
+@prefixClass: rc;
+@font-face {
+  font-family: 'jui';
+  src: url('https://at.alicdn.com/t/font_1449147263_3487175.eot'); /* IE9*/
+  src: url('https://at.alicdn.com/t/font_1449147263_3487175.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('https://at.alicdn.com/t/font_1449147263_3487175.woff') format('woff'), /* chrome、firefox */
+  url('https://at.alicdn.com/t/font_1449147263_3487175.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('https://at.alicdn.com/t/font_1449147263_3487175.svg#iconfont') format('svg'); /* iOS 4.1- */
+}                             
+.iconfont {
+    font-family: 'jui','rei';
+    font-weight: normal;
+    font-style: normal;
+    cursor: default;
+    -webkit-font-smoothing: antialiased; /*解决safair和chrome被加粗*/
+    -webkit-text-stroke-width: 0.2px; /*解决chrome锯齿*/
+}
+.@{prefixClass}-star-wrapper{
+  list-style: none;
+  font-size: 12px;
+  display: inline-block;
+}
+.@{prefixClass}-star-wrapper li{
+  display: inline-block;
+  cursor: pointer;
+  margin-right:5px; 
+}
+.@{prefixClass}-half-star::before{
+  content:"\e610";
+}
+.@{prefixClass}-all-star::before{
+  content: "\e60f";
+}
+.@{prefixClass}-zero-star::before{
+  content: "\e60e";
+}
