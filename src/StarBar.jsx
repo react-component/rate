@@ -7,59 +7,36 @@ function noop() {}
 
 const Rate = React.createClass({
   propTypes: {
-    initNum: PropTypes.number,
-    starNum: PropTypes.number,
-    color: PropTypes.string,
-    half: PropTypes.bool,
-    size: PropTypes.number,
+    value: PropTypes.number,
+    count: PropTypes.number,
+    allowHalf: PropTypes.bool,
     style: PropTypes.object,
-    beforeRender: PropTypes.func,
-    init: PropTypes.func,
-    onHover: PropTypes.func,
-    onClick: PropTypes.func,
-    onChange: PropTypes.func,
-    useHover: PropTypes.bool,
     prefixCls: PropTypes.string,
-    disableClick: PropTypes.bool,
-    disableHover: PropTypes.bool,
+    onChange: PropTypes.func,
   },
 
   getDefaultProps() {
     return {
-      initNum: 0,
-      starNum: 5,
-      half: true,
-
-      color: '#ff8208',
-      size: 15,
+      value: 0,
+      count: 5,
+      allowHalf: false,
       style: {},
       prefixCls: 'rc',
-
-      onHover: noop,
-      onClick: noop,
       onChange: noop,
-
-      useHover: false,
-      disableHover: true,
-      disableClick: true,
     };
   },
 
   getInitialState() {
-    this.currentStar = this.props.initNum;
+    this.currentStar = this.props.count;
     return {
-      num: this.props.initNum,
+      num: this.props.count,
     };
-  },
-
-  shouldComponentUpdate() {
-    return !(this.props.disableClick && this.props.disableHover);
   },
 
   getContainer() {
     return ReactDOM.findDOMNode(this);
   },
-  
+
   getContainerL() {
     return this.containerL || getOffsetLeft(this.getContainer().children[0]);
   },
@@ -68,64 +45,44 @@ const Rate = React.createClass({
     return this.singleW || (getOffsetLeft(this.getContainer().children[1]) - this.getContainerL());
   },
 
-  getStyles() {
-    const {style, color, size} = this.props;
-    style.fontSize = size + 'px';
-    style.color = color;
-    return style;
-  },
-
   handleHover(props) {
-    const self = this;
     const event = props.event;
-    let num = self.ifHalfNum(props.num, event.clientX, self.useHover);
-    if (!this.props.disableHover) {
-      if (event.type === 'mouseout') {
-        num = self.currentStar;
-        if (!self.props.useHover) {
-          self.setState({num: self.currentStar});
-        }
-      } else {
-        self.setState({num});
-      }
-      if (self.props.onHover) {
-        self.props.onHover(num, event);
-      }
+    let num = this.ifHalfNum(props.num, event.clientX);
+    if (event.type === 'mouseout') {
+      num = this.currentStar;
+      this.setState({num: this.currentStar});
+    } else {
+      this.setState({num});
     }
   },
 
   handleClick(props) {
     const event = props.event;
-    const num = this.ifHalfNum(props.num, event.clientX, !this.props.disableClick);
+    const num = this.ifHalfNum( props.num, event.clientX);
     this.setState({num});
-    
-    if (this.props.onClick) {
-      this.props.onClick(num, event);
-    }
   },
 
   ifHalfNum(num, x, isRemember) {
-    const self = this;
     let chooseNum = num + 1;
-    if (self.props.half && (x - self.getContainerL() - self.getSingleW() * num ) < self.getSingleW() / 2) {
+    if (this.props.allowHalf && (x - this.getContainerL() - this.getSingleW() * num ) < this.getSingleW() / 2) {
       chooseNum -= 0.5;
     }
     if (isRemember) {
-      self.currentStar = chooseNum;
-      self.props.onChange(chooseNum);
+      this.currentStar = chooseNum;
+      this.props.onChange(chooseNum);
     }
     return chooseNum;
   },
 
   render() {
+    const {count, allowHalf, style, prefixCls} = this.props;
     const {handleClick, handleHover} = this;
-    const {starNum, half, prefixCls} = this.props;
-    const star = new Array(starNum).fill(0);
+    const star = new Array(count).fill(0);
     const starContent = star.map((item, index) => {
-      return <Star num={index} prefixCls={prefixCls} ifHalf={half} choosed={this.state.num} starClick={handleClick} starHover={handleHover} key={index} />;
-    })
+      return <Star num={index} prefixCls={prefixCls} ifHalf={allowHalf} choosed={this.state.num} handleClick={handleClick} handleHover={handleHover} key={index} />;
+    });
 
-    return (<ul component="ul" className={`${prefixCls}-star-wrapper iconfont`} style={this.getStyles()}>
+    return (<ul component="ul" className={`${prefixCls}-star-wrapper`} style={style}>
         {starContent}
     </ul>);
   },

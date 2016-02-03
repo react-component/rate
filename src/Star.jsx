@@ -6,8 +6,8 @@ const Star = React.createClass({
     'choosed': PropTypes.number,
     'prefixCls': PropTypes.string,
     'ifHalf': PropTypes.bool,
-    'starClick': PropTypes.func,
-    'starHover': PropTypes.func,
+    'handleHover': PropTypes.func,
+    'handleClick': PropTypes.func,
   },
 
   getClassName() {
@@ -19,11 +19,11 @@ const Star = React.createClass({
   },
 
   handleHover(e) {
-    this.props.starHover({event: e, num: this.props.num});
+    this.props.handleHover({event: e, num: this.props.num});
   },
-  
+
   handleClick(e) {
-    this.props.starClick({event: e, num: this.props.num});
+    this.props.handleHover({event: e, num: this.props.num});
   },
   
   render() {

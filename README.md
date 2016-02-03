@@ -90,22 +90,22 @@ React.render(<Rate />, container);
     </thead>
     <tbody>
         <tr>
-          <td>starNum</td>
+          <td>count</td>
           <td>number</td>
           <td>5</td>
-          <td>总共需要显示星星的数量</td>
+          <td>display initial star numbers</td>
         </tr>
         <tr>
-          <td>initNum</td>
+          <td>value</td>
           <td>number</td>
           <td>0</td>
-          <td>起始高亮星星的数值</td>
+          <td>initial highlight value of the star</td>
         </tr>
         <tr>
-          <td>half</td>
+          <td>allowHalf</td>
           <td>bool</td>
           <td>false</td>
-          <td>是否支持半颗星的情况</td>
+          <td>support half star</td>
         </tr>
         <tr>
           <td>style</td>
@@ -114,52 +114,10 @@ React.render(<Rate />, container);
           <td>星星的样式必须符合react的style样式</td>
         </tr>
         <tr>
-          <td>color</td>
-          <td>string</td>
-          <td>"#ff8208"</td>
-          <td>星星的颜色,默认黄色</td>
-        </tr>
-        <tr>
-          <td>size</td>
-          <td>number</td>
-          <td>15</td>
-          <td>默认星星的大小,默认15px</td>
-        </tr>
-        <tr>
-          <td>useHover</td>
-          <td>bool</td>
-          <td>false</td>
-          <td>是否支持hover选择数量(必须disableHover为false的情况下，会覆盖click事件),</td>
-        </tr>
-         <tr>
-          <td>disableHover</td>
-          <td>bool</td>
-          <td>false</td>
-          <td>是否不开启点击事件</td>
-        </tr>
-         <tr>
-          <td>disableClick</td>
-          <td>bool</td>
-          <td>false</td>
-          <td>是否不开启hover事件</td>
-        </tr>
-        <tr>
-          <td>onHover</td>
-          <td>func</td>
-          <td>function(){}</td>
-          <td>鼠标在星星上移动的时候的事件</td>
-        </tr>
-        <tr>
-          <td>onClick</td>
-          <td>bool</td>
-          <td>false</td>
-          <td>鼠标点击星星的时候的事件</td>
-        </tr>
-        <tr>
           <td>onChange</td>
           <td>bool</td>
           <td>false</td>
-          <td>星星变化时候的事件</td>
+          <td>`onChange` will be triggered while the value of Star changing.</td>
         </tr>
     </tbody>
 </table>

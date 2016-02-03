@@ -2,10 +2,6 @@
 import Rate from 'rc-rate';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import '../assets/index.less';
 
-const options = {
-  'disableHover': false,
-  'useHover': true, 
-};
-
-ReactDOM.render(<Rate {...options}/>, document.getElementById('__react-content'));
+ReactDOM.render(<Rate />, document.getElementById('__react-content'));
