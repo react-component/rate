@@ -35,6 +35,7 @@ webpackJsonp([0,1],[
 	  'div',
 	  { style: { margin: 100, marginRight: 0 } },
 	  _react2.default.createElement(_rcRate2.default, {
+	    defaultValue: 2.5,
 	    onChange: onChange,
 	    style: { fontSize: 40 },
 	    allowHalf: true
@@ -112,6 +113,7 @@ webpackJsonp([0,1],[
 	  displayName: 'Rate',
 	
 	  propTypes: {
+	    disabled: _react.PropTypes.bool,
 	    value: _react.PropTypes.number,
 	    defaultValue: _react.PropTypes.number,
 	    count: _react.PropTypes.number,
@@ -192,15 +194,18 @@ webpackJsonp([0,1],[
 	    var allowHalf = _props.allowHalf;
 	    var style = _props.style;
 	    var prefixCls = _props.prefixCls;
+	    var disabled = _props.disabled;
 	    var _state = this.state;
 	    var value = _state.value;
 	    var hoverValue = _state.hoverValue;
 	
 	    var stars = [];
+	    var disabledClass = disabled ? prefixCls + '-disabled' : '';
 	    for (var index = 0; index < count; index++) {
 	      stars.push(_react2.default.createElement(_Star2.default, {
 	        ref: 'star_' + index,
 	        index: index,
+	        disabled: disabled,
 	        prefixCls: prefixCls + '-star',
 	        allowHalf: allowHalf,
 	        value: hoverValue === undefined ? value : hoverValue,
@@ -212,9 +217,9 @@ webpackJsonp([0,1],[
 	    return _react2.default.createElement(
 	      'ul',
 	      {
-	        className: '' + prefixCls,
+	        className: prefixCls + ' ' + disabledClass,
 	        style: style,
-	        onMouseLeave: this.onMouseLeave
+	        onMouseLeave: disabled ? null : this.onMouseLeave
 	      },
 	      stars
 	    );
@@ -19900,6 +19905,7 @@ webpackJsonp([0,1],[
 	    index: _react.PropTypes.number,
 	    prefixCls: _react.PropTypes.string,
 	    allowHalf: _react.PropTypes.bool,
+	    disabled: _react.PropTypes.bool,
 	    onHover: _react.PropTypes.func,
 	    onClick: _react.PropTypes.func
 	  },
@@ -19926,11 +19932,12 @@ webpackJsonp([0,1],[
 	  render: function render() {
 	    var onHover = this.onHover;
 	    var onClick = this.onClick;
+	    var disabled = this.props.disabled;
 	
 	    return _react2.default.createElement('li', {
 	      className: this.getClassName(),
-	      onClick: onClick,
-	      onMouseMove: onHover
+	      onClick: disabled ? null : onClick,
+	      onMouseMove: disabled ? null : onHover
 	    });
 	  }
 	});

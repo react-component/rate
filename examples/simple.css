@@ -21,11 +21,13 @@
   -webkit-text-stroke-width: 0.2px;
   /*解决chrome锯齿*/
 }
+.rc-rate-disabled {
+  cursor: default;
+}
 .rc-rate-star {
   margin: 0;
   padding: 0;
   display: inline-block;
-  cursor: pointer;
   margin-right: 5px;
 }
 .rc-rate-star-half:before {
