@@ -9,6 +9,7 @@ function onChange(v) {
 
 ReactDOM.render(<div style={{ margin: 100, marginRight: 0 }}>
   <Rate
+    defaultValue={2.5}
     onChange={onChange}
     style={{ fontSize: 40 }}
     allowHalf

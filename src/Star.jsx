@@ -6,6 +6,7 @@ const Star = React.createClass({
     index: PropTypes.number,
     prefixCls: PropTypes.string,
     allowHalf: PropTypes.bool,
+    disabled: PropTypes.bool,
     onHover: PropTypes.func,
     onClick: PropTypes.func,
   },
@@ -29,10 +30,11 @@ const Star = React.createClass({
 
   render() {
     const { onHover, onClick } = this;
+    const { disabled } = this.props;
     return (<li
       className={this.getClassName()}
-      onClick={onClick}
-      onMouseMove={onHover}
+      onClick={disabled ? null : onClick}
+      onMouseMove={disabled ? null : onHover}
     />);
   },
 });

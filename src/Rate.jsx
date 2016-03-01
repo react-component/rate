@@ -8,6 +8,7 @@ function noop() {
 
 const Rate = React.createClass({
   propTypes: {
+    disabled: PropTypes.bool,
     value: PropTypes.number,
     defaultValue: PropTypes.number,
     count: PropTypes.number,
@@ -91,13 +92,15 @@ const Rate = React.createClass({
   },
 
   render() {
-    const { count, allowHalf, style, prefixCls } = this.props;
+    const { count, allowHalf, style, prefixCls, disabled } = this.props;
     const { value, hoverValue } = this.state;
     const stars = [];
+    const disabledClass = disabled ? `${prefixCls}-disabled` : '';
     for (let index = 0; index < count; index++) {
       stars.push(<Star
         ref={`star_${index}`}
         index={index}
+        disabled={disabled}
         prefixCls={`${prefixCls}-star`}
         allowHalf={allowHalf}
         value={hoverValue === undefined ? value : hoverValue}
@@ -107,9 +110,9 @@ const Rate = React.createClass({
       />);
     }
     return (<ul
-      className={`${prefixCls}`}
+      className={`${prefixCls} ${disabledClass}`}
       style={style}
-      onMouseLeave={this.onMouseLeave}
+      onMouseLeave={disabled ? null : this.onMouseLeave}
     >
       {stars}
     </ul>);
