@@ -79,6 +79,7 @@ React.render(<Rate />, container);
         <tr>
           <td>value</td>
           <td>number</td>
+          <td></td>
           <td>controlled value</td>
         </tr>
         <tr>
@@ -97,10 +98,12 @@ React.render(<Rate />, container);
           <td>style</td>
           <td>object</td>
           <td>{}</td>
+          <td></td>
         </tr>
         <tr>
           <td>onChange</td>
           <td>function(value: Number)</td>
+          <td></td>
           <td>`onChange` will be triggered when click.</td>
         </tr>
     </tbody>
