@@ -1,35 +1,39 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
 const Star = React.createClass({
   propTypes: {
-    'num': PropTypes.number,
-    'choosed': PropTypes.number,
-    'prefixCls': PropTypes.string,
-    'ifHalf': PropTypes.bool,
-    'handleHover': PropTypes.func,
-    'handleClick': PropTypes.func,
+    value: PropTypes.number,
+    index: PropTypes.number,
+    prefixCls: PropTypes.string,
+    allowHalf: PropTypes.bool,
+    onHover: PropTypes.func,
+    onClick: PropTypes.func,
+  },
+
+  onHover(e) {
+    this.props.onHover(e, this.props.index);
+  },
+
+  onClick(e) {
+    this.props.onClick(e, this.props.index);
   },
 
   getClassName() {
-    const {num, choosed, prefixCls, ifHalf} = this.props;
-    if (num + 0.5 === choosed && ifHalf) {
-      return `${prefixCls}-half-star active`;
+    const { index, value, prefixCls, allowHalf } = this.props;
+    const starValue = index + 1;
+    if (allowHalf && value + 0.5 === starValue) {
+      return `${prefixCls} ${prefixCls}-half ${prefixCls}-active`;
     }
-    return num < choosed ? `${prefixCls}-all-star` : `${prefixCls}-zero-star`;
+    return starValue <= value ? `${prefixCls} ${prefixCls}-full` : `${prefixCls} ${prefixCls}-zero`;
   },
 
-  handleHover(e) {
-    this.props.handleHover({event: e, num: this.props.num});
-  },
-
-  handleClick(e) {
-    this.props.handleHover({event: e, num: this.props.num});
-  },
-  
   render() {
-    const {num} = this.props;
-    const {handleHover, handleClick} = this;
-    return (<li ref="star_item" className={this.getClassName()} data-num={num} onClick={handleClick} onMouseOver={handleHover} onMouseOut={handleHover} onMouseMove={handleHover}></li>);
+    const { onHover, onClick } = this;
+    return (<li
+      className={this.getClassName()}
+      onClick={onClick}
+      onMouseMove={onHover}
+    />);
   },
 });
 
