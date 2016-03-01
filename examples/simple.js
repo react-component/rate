@@ -27,10 +27,15 @@ webpackJsonp([0,1],[
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	function onChange(v) {
+	  console.log('selected star', v);
+	}
+	
 	_reactDom2.default.render(_react2.default.createElement(
 	  'div',
 	  { style: { margin: 100, marginRight: 0 } },
 	  _react2.default.createElement(_rcRate2.default, {
+	    onChange: onChange,
 	    style: { fontSize: 40 },
 	    allowHalf: true
 	  })
