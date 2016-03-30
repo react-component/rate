@@ -30,12 +30,14 @@ const Star = React.createClass({
 
   render() {
     const { onHover, onClick } = this;
-    const { disabled } = this.props;
+    const { disabled, prefixCls } = this.props;
     return (<li
       className={this.getClassName()}
       onClick={disabled ? null : onClick}
       onMouseMove={disabled ? null : onHover}
-    />);
+    >
+      <div className={`${prefixCls}-content`}/>
+    </li>);
   },
 });
 
