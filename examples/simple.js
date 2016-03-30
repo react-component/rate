@@ -19932,13 +19932,19 @@ webpackJsonp([0,1],[
 	  render: function render() {
 	    var onHover = this.onHover;
 	    var onClick = this.onClick;
-	    var disabled = this.props.disabled;
+	    var _props2 = this.props;
+	    var disabled = _props2.disabled;
+	    var prefixCls = _props2.prefixCls;
 	
-	    return _react2.default.createElement('li', {
-	      className: this.getClassName(),
-	      onClick: disabled ? null : onClick,
-	      onMouseMove: disabled ? null : onHover
-	    });
+	    return _react2.default.createElement(
+	      'li',
+	      {
+	        className: this.getClassName(),
+	        onClick: disabled ? null : onClick,
+	        onMouseMove: disabled ? null : onHover
+	      },
+	      _react2.default.createElement('div', { className: prefixCls + '-content' })
+	    );
 	  }
 	});
 	
