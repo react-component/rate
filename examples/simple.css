@@ -36,7 +36,7 @@
   margin-right: 8px;
   position: relative;
   -webkit-transition: all 0.3s ease;
-          transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .rc-rate-star:before,
 .rc-rate-star-content:before {
@@ -44,7 +44,7 @@
   cursor: pointer;
   content: "\E694";
   -webkit-transition: all 0.3s ease;
-          transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .rc-rate-star:hover {
   -webkit-transform: scale(1.1);
