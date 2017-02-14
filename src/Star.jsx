@@ -37,7 +37,7 @@ const Star = React.createClass({
         onClick={disabled ? null : onClick}
         onMouseMove={disabled ? null : onHover}
       >
-        <div className={`${prefixCls}-content`}/>
+        <div className={`${prefixCls}-content`} />
       </li>
     );
   },
