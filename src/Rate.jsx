@@ -17,6 +17,7 @@ const Rate = React.createClass({
     style: PropTypes.object,
     prefixCls: PropTypes.string,
     onChange: PropTypes.func,
+    onHoverChange: PropTypes.func,
     className: PropTypes.string,
   },
 
@@ -58,12 +59,14 @@ const Rate = React.createClass({
     this.setState({
       hoverValue,
     });
+    this.props.onHoverChange(hoverValue);
   },
 
   onMouseLeave() {
     this.setState({
       hoverValue: undefined,
     });
+    this.props.onHoverChange(undefined);
   },
 
   onClick(event, index) {

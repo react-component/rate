@@ -106,6 +106,12 @@ React.render(<Rate />, container);
           <td></td>
           <td>`onChange` will be triggered when click.</td>
         </tr>
+        <tr>
+          <td>onHoverChange</td>
+          <td>function(value: Number)</td>
+          <td></td>
+          <td>`onHoverChange` will be triggered when hover on stars.</td>
+        </tr>
     </tbody>
 </table>
 
