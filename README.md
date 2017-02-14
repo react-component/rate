@@ -21,7 +21,6 @@ React Rate Component
 [download-image]: https://img.shields.io/npm/dm/rc-rate.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-rate
 
-
 ## Screenshots
 
 <img src="https://img.alicdn.com/tps/TB1ijlpLVXXXXb8XpXXXXXXXXXX-466-172.png" width="288"/>
@@ -111,6 +110,12 @@ React.render(<Rate />, container);
           <td>function(value: Number)</td>
           <td></td>
           <td>`onHoverChange` will be triggered when hover on stars.</td>
+        </tr>
+        <tr>
+          <td>charactor</td>
+          <td>ReactNode</td>
+          <td>★</td>
+          <td>The each charactor of rate</td>
         </tr>
     </tbody>
 </table>

@@ -19,6 +19,7 @@ const Rate = React.createClass({
     onChange: PropTypes.func,
     onHoverChange: PropTypes.func,
     className: PropTypes.string,
+    charactor: PropTypes.node,
   },
 
   getDefaultProps() {
@@ -29,6 +30,7 @@ const Rate = React.createClass({
       style: {},
       prefixCls: 'rc-rate',
       onChange: noop,
+      charactor: '★',
     };
   },
 
@@ -97,7 +99,7 @@ const Rate = React.createClass({
   },
 
   render() {
-    const { count, allowHalf, style, prefixCls, disabled, className } = this.props;
+    const { count, allowHalf, style, prefixCls, disabled, className, charactor } = this.props;
     const { value, hoverValue } = this.state;
     const stars = [];
     const disabledClass = disabled ? `${prefixCls}-disabled` : '';
@@ -113,6 +115,7 @@ const Rate = React.createClass({
           onClick={this.onClick}
           onHover={this.onHover}
           key={index}
+          charactor={charactor}
         />
       );
     }
