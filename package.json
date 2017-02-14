@@ -1,6 +1,6 @@
 {
   "name": "rc-rate",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "React Star Rate Component",
   "keywords": [
     "react",
@@ -16,11 +16,13 @@
   "bugs": {
     "url": "https://github.com/react-component/rate/issues"
   },
-  "files":["lib", "assets/*.css"],
+  "files": [
+    "lib",
+    "assets/*.css"
+  ],
   "licenses": "MIT",
-  
-  "main":"./lib/index",
-  "config":{
+  "main": "./lib/index",
+  "config": {
     "port": 8000
   },
   "scripts": {
@@ -45,5 +47,8 @@
   },
   "pre-commit": [
     "lint"
-  ]
+  ],
+  "dependencies": {
+    "classnames": "^2.2.5"
+  }
 }

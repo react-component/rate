@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 import { getOffsetLeft } from './util';
 import Star from './Star';
 
@@ -16,6 +17,7 @@ const Rate = React.createClass({
     style: PropTypes.object,
     prefixCls: PropTypes.string,
     onChange: PropTypes.func,
+    className: PropTypes.string,
   },
 
   getDefaultProps() {
@@ -92,30 +94,34 @@ const Rate = React.createClass({
   },
 
   render() {
-    const { count, allowHalf, style, prefixCls, disabled } = this.props;
+    const { count, allowHalf, style, prefixCls, disabled, className } = this.props;
     const { value, hoverValue } = this.state;
     const stars = [];
     const disabledClass = disabled ? `${prefixCls}-disabled` : '';
     for (let index = 0; index < count; index++) {
-      stars.push(<Star
-        ref={`star_${index}`}
-        index={index}
-        disabled={disabled}
-        prefixCls={`${prefixCls}-star`}
-        allowHalf={allowHalf}
-        value={hoverValue === undefined ? value : hoverValue}
-        onClick={this.onClick}
-        onHover={this.onHover}
-        key={index}
-      />);
+      stars.push(
+        <Star
+          ref={`star_${index}`}
+          index={index}
+          disabled={disabled}
+          prefixCls={`${prefixCls}-star`}
+          allowHalf={allowHalf}
+          value={hoverValue === undefined ? value : hoverValue}
+          onClick={this.onClick}
+          onHover={this.onHover}
+          key={index}
+        />
+      );
     }
-    return (<ul
-      className={`${prefixCls} ${disabledClass}`}
-      style={style}
-      onMouseLeave={disabled ? null : this.onMouseLeave}
-    >
-      {stars}
-    </ul>);
+    return (
+      <ul
+        className={classNames(prefixCls, disabledClass, className)}
+        style={style}
+        onMouseLeave={disabled ? null : this.onMouseLeave}
+      >
+        {stars}
+      </ul>
+    );
   },
 });
 

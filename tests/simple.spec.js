@@ -15,7 +15,11 @@ describe('rate', () => {
     document.body.removeChild(div);
   });
   it('render works', () => {
-    const instance = ReactDOM.render(<Rate count={3} value={1.5} allowHalf/>, div);
+    const instance = ReactDOM.render(
+      <Rate count={3} value={1.5} allowHalf className="custom" />
+    , div);
+    const wrapper = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'rc-rate');
+    expect(wrapper[0].className).to.be('rc-rate custom');
     const components = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'rc-rate-star');
     expect(components.length).to.be(3);
     expect(components[0].className).to.be('rc-rate-star rc-rate-star-full');

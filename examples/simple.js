@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 import Rate from 'rc-rate';
 import React from 'react';
 import ReactDOM from 'react-dom';
