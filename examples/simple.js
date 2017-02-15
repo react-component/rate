@@ -23,22 +23,30 @@ webpackJsonp([0,1],[
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	__webpack_require__(165);
+	__webpack_require__(166);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	/* eslint no-console: 0 */
 	function onChange(v) {
 	  console.log('selected star', v);
 	}
 	
 	_reactDom2.default.render(_react2.default.createElement(
 	  'div',
-	  { style: { margin: 100, marginRight: 0 } },
+	  { style: { margin: 100 } },
 	  _react2.default.createElement(_rcRate2.default, {
 	    defaultValue: 2.5,
 	    onChange: onChange,
 	    style: { fontSize: 40 },
 	    allowHalf: true
+	  }),
+	  _react2.default.createElement(_rcRate2.default, {
+	    defaultValue: 2.5,
+	    onChange: onChange,
+	    style: { fontSize: 50, marginLeft: 24 },
+	    allowHalf: true,
+	    charactor: '$'
 	  })
 	), document.getElementById('__react-content'));
 
@@ -55,11 +63,11 @@ webpackJsonp([0,1],[
 	var _src = __webpack_require__(3);
 	
 	var _src2 = _interopRequireDefault(_src);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	exports.default = _src2.default; // export this package's api
-
+	
 	module.exports = exports['default'];
 
 /***/ },
@@ -99,9 +107,13 @@ webpackJsonp([0,1],[
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _util = __webpack_require__(163);
+	var _classnames = __webpack_require__(163);
 	
-	var _Star = __webpack_require__(164);
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _util = __webpack_require__(164);
+	
+	var _Star = __webpack_require__(165);
 	
 	var _Star2 = _interopRequireDefault(_Star);
 	
@@ -120,7 +132,10 @@ webpackJsonp([0,1],[
 	    allowHalf: _react.PropTypes.bool,
 	    style: _react.PropTypes.object,
 	    prefixCls: _react.PropTypes.string,
-	    onChange: _react.PropTypes.func
+	    onChange: _react.PropTypes.func,
+	    onHoverChange: _react.PropTypes.func,
+	    className: _react.PropTypes.string,
+	    charactor: _react.PropTypes.node
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -130,7 +145,8 @@ webpackJsonp([0,1],[
 	      allowHalf: false,
 	      style: {},
 	      prefixCls: 'rc-rate',
-	      onChange: noop
+	      onChange: noop,
+	      charactor: '★'
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -158,11 +174,13 @@ webpackJsonp([0,1],[
 	    this.setState({
 	      hoverValue: hoverValue
 	    });
+	    this.props.onHoverChange(hoverValue);
 	  },
 	  onMouseLeave: function onMouseLeave() {
 	    this.setState({
 	      hoverValue: undefined
 	    });
+	    this.props.onHoverChange(undefined);
 	  },
 	  onClick: function onClick(event, index) {
 	    var value = this.getStarValue(index, event.pageX);
@@ -189,15 +207,17 @@ webpackJsonp([0,1],[
 	    return value;
 	  },
 	  render: function render() {
-	    var _props = this.props;
-	    var count = _props.count;
-	    var allowHalf = _props.allowHalf;
-	    var style = _props.style;
-	    var prefixCls = _props.prefixCls;
-	    var disabled = _props.disabled;
-	    var _state = this.state;
-	    var value = _state.value;
-	    var hoverValue = _state.hoverValue;
+	    var _props = this.props,
+	        count = _props.count,
+	        allowHalf = _props.allowHalf,
+	        style = _props.style,
+	        prefixCls = _props.prefixCls,
+	        disabled = _props.disabled,
+	        className = _props.className,
+	        charactor = _props.charactor;
+	    var _state = this.state,
+	        value = _state.value,
+	        hoverValue = _state.hoverValue;
 	
 	    var stars = [];
 	    var disabledClass = disabled ? prefixCls + '-disabled' : '';
@@ -211,13 +231,14 @@ webpackJsonp([0,1],[
 	        value: hoverValue === undefined ? value : hoverValue,
 	        onClick: this.onClick,
 	        onHover: this.onHover,
-	        key: index
+	        key: index,
+	        charactor: charactor
 	      }));
 	    }
 	    return _react2.default.createElement(
 	      'ul',
 	      {
-	        className: prefixCls + ' ' + disabledClass,
+	        className: (0, _classnames2.default)(prefixCls, disabledClass, className),
 	        style: style,
 	        onMouseLeave: disabled ? null : this.onMouseLeave
 	      },
@@ -341,8 +362,94 @@ webpackJsonp([0,1],[
 /***/ function(module, exports) {
 
 	// shim for using process in browser
-	
 	var process = module.exports = {};
+	
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+	
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+	
+	function defaultSetTimout() {
+	    throw new Error('setTimeout has not been defined');
+	}
+	function defaultClearTimeout () {
+	    throw new Error('clearTimeout has not been defined');
+	}
+	(function () {
+	    try {
+	        if (typeof setTimeout === 'function') {
+	            cachedSetTimeout = setTimeout;
+	        } else {
+	            cachedSetTimeout = defaultSetTimout;
+	        }
+	    } catch (e) {
+	        cachedSetTimeout = defaultSetTimout;
+	    }
+	    try {
+	        if (typeof clearTimeout === 'function') {
+	            cachedClearTimeout = clearTimeout;
+	        } else {
+	            cachedClearTimeout = defaultClearTimeout;
+	        }
+	    } catch (e) {
+	        cachedClearTimeout = defaultClearTimeout;
+	    }
+	} ())
+	function runTimeout(fun) {
+	    if (cachedSetTimeout === setTimeout) {
+	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    // if setTimeout wasn't available but was latter defined
+	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+	        cachedSetTimeout = setTimeout;
+	        return setTimeout(fun, 0);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedSetTimeout(fun, 0);
+	    } catch(e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	            return cachedSetTimeout.call(null, fun, 0);
+	        } catch(e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	            return cachedSetTimeout.call(this, fun, 0);
+	        }
+	    }
+	
+	
+	}
+	function runClearTimeout(marker) {
+	    if (cachedClearTimeout === clearTimeout) {
+	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    // if clearTimeout wasn't available but was latter defined
+	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+	        cachedClearTimeout = clearTimeout;
+	        return clearTimeout(marker);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedClearTimeout(marker);
+	    } catch (e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	            return cachedClearTimeout.call(null, marker);
+	        } catch (e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	            return cachedClearTimeout.call(this, marker);
+	        }
+	    }
+	
+	
+	
+	}
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -367,7 +474,7 @@ webpackJsonp([0,1],[
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = runTimeout(cleanUpNextTick);
 	    draining = true;
 	
 	    var len = queue.length;
@@ -384,7 +491,7 @@ webpackJsonp([0,1],[
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    runClearTimeout(timeout);
 	}
 	
 	process.nextTick = function (fun) {
@@ -396,7 +503,7 @@ webpackJsonp([0,1],[
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        runTimeout(drainQueue);
 	    }
 	};
 	
@@ -19839,6 +19946,60 @@ webpackJsonp([0,1],[
 
 /***/ },
 /* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = [];
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+	
+			return classes.join(' ');
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 164 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19889,7 +20050,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19914,7 +20075,8 @@ webpackJsonp([0,1],[
 	    allowHalf: _react.PropTypes.bool,
 	    disabled: _react.PropTypes.bool,
 	    onHover: _react.PropTypes.func,
-	    onClick: _react.PropTypes.func
+	    onClick: _react.PropTypes.func,
+	    charactor: _react.PropTypes.node
 	  },
 	
 	  onHover: function onHover(e) {
@@ -19924,11 +20086,11 @@ webpackJsonp([0,1],[
 	    this.props.onClick(e, this.props.index);
 	  },
 	  getClassName: function getClassName() {
-	    var _props = this.props;
-	    var index = _props.index;
-	    var value = _props.value;
-	    var prefixCls = _props.prefixCls;
-	    var allowHalf = _props.allowHalf;
+	    var _props = this.props,
+	        index = _props.index,
+	        value = _props.value,
+	        prefixCls = _props.prefixCls,
+	        allowHalf = _props.allowHalf;
 	
 	    var starValue = index + 1;
 	    if (allowHalf && value + 0.5 === starValue) {
@@ -19937,11 +20099,12 @@ webpackJsonp([0,1],[
 	    return starValue <= value ? prefixCls + ' ' + prefixCls + '-full' : prefixCls + ' ' + prefixCls + '-zero';
 	  },
 	  render: function render() {
-	    var onHover = this.onHover;
-	    var onClick = this.onClick;
-	    var _props2 = this.props;
-	    var disabled = _props2.disabled;
-	    var prefixCls = _props2.prefixCls;
+	    var onHover = this.onHover,
+	        onClick = this.onClick;
+	    var _props2 = this.props,
+	        disabled = _props2.disabled,
+	        prefixCls = _props2.prefixCls,
+	        charactor = _props2.charactor;
 	
 	    return _react2.default.createElement(
 	      'li',
@@ -19950,7 +20113,16 @@ webpackJsonp([0,1],[
 	        onClick: disabled ? null : onClick,
 	        onMouseMove: disabled ? null : onHover
 	      },
-	      _react2.default.createElement('div', { className: prefixCls + '-content' })
+	      _react2.default.createElement(
+	        'div',
+	        { className: prefixCls + '-first' },
+	        charactor
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: prefixCls + '-second' },
+	        charactor
+	      )
 	    );
 	  }
 	});
@@ -19959,7 +20131,7 @@ webpackJsonp([0,1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
