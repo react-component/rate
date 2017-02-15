@@ -68,3 +68,28 @@
     }
   }
 }
+
+@icon-url: "//at.alicdn.com/t/font_r5u29ls31bgldi";
+
+@font-face {
+  font-family: 'anticon';
+  src: url('@{icon-url}.eot'); /* IE9*/
+  src: url('@{icon-url}.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('@{icon-url}.woff') format('woff'), /* chrome、firefox */ url('@{icon-url}.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('@{icon-url}.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.anticon {
+  font-style: normal;
+  vertical-align: baseline;
+  text-align: center;
+  text-transform: none;
+  line-height: 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  &:before {
+    display: block;
+    font-family: "anticon" !important;
+  }
+}
+
+.anticon-star:before { content: "\e660"; };

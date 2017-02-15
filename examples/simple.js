@@ -16,12 +16,21 @@ ReactDOM.render(
       style={{ fontSize: 40 }}
       allowHalf
     />
+    <br />
     <Rate
       defaultValue={2.5}
       onChange={onChange}
-      style={{ fontSize: 50, marginLeft: 24 }}
+      style={{ fontSize: 50, marginTop: 24 }}
       allowHalf
       charactor="$"
+    />
+    <br />
+    <Rate
+      defaultValue={2.5}
+      onChange={onChange}
+      style={{ fontSize: 50, marginTop: 24 }}
+      allowHalf
+      charactor={<i className="anticon anticon-star" />}
     />
   </div>
 , document.getElementById('__react-content'));
