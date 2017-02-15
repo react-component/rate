@@ -41,12 +41,21 @@ webpackJsonp([0,1],[
 	    style: { fontSize: 40 },
 	    allowHalf: true
 	  }),
+	  _react2.default.createElement('br', null),
 	  _react2.default.createElement(_rcRate2.default, {
 	    defaultValue: 2.5,
 	    onChange: onChange,
-	    style: { fontSize: 50, marginLeft: 24 },
+	    style: { fontSize: 50, marginTop: 24 },
 	    allowHalf: true,
 	    charactor: '$'
+	  }),
+	  _react2.default.createElement('br', null),
+	  _react2.default.createElement(_rcRate2.default, {
+	    defaultValue: 2.5,
+	    onChange: onChange,
+	    style: { fontSize: 50, marginTop: 24 },
+	    allowHalf: true,
+	    charactor: _react2.default.createElement('i', { className: 'anticon anticon-star' })
 	  })
 	), document.getElementById('__react-content'));
 

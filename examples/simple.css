@@ -58,5 +58,29 @@
 .rc-rate-star-full:hover .rc-rate-star-second {
   color: #f8c165;
 }
+@font-face {
+  font-family: 'anticon';
+  src: url('//at.alicdn.com/t/font_r5u29ls31bgldi.eot');
+  /* IE9*/
+  src: url('//at.alicdn.com/t/font_r5u29ls31bgldi.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('//at.alicdn.com/t/font_r5u29ls31bgldi.woff') format('woff'), /* chrome、firefox */ url('//at.alicdn.com/t/font_r5u29ls31bgldi.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('//at.alicdn.com/t/font_r5u29ls31bgldi.svg#iconfont') format('svg');
+  /* iOS 4.1- */
+}
+.anticon {
+  font-style: normal;
+  vertical-align: baseline;
+  text-align: center;
+  text-transform: none;
+  line-height: 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.anticon:before {
+  display: block;
+  font-family: "anticon" !important;
+}
+.anticon-star:before {
+  content: "\e660";
+}
 
 /*# sourceMappingURL=simple.css.map*/
