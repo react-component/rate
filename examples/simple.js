@@ -155,7 +155,8 @@ webpackJsonp([0,1],[
 	      style: {},
 	      prefixCls: 'rc-rate',
 	      onChange: noop,
-	      charactor: '★'
+	      charactor: '★',
+	      onHoverChange: noop
 	    };
 	  },
 	  getInitialState: function getInitialState() {
