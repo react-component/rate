@@ -31,6 +31,7 @@ const Rate = React.createClass({
       prefixCls: 'rc-rate',
       onChange: noop,
       charactor: '★',
+      onHoverChange: noop,
     };
   },
 
