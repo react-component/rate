@@ -22,7 +22,7 @@ ReactDOM.render(
       onChange={onChange}
       style={{ fontSize: 50, marginTop: 24 }}
       allowHalf
-      charactor="$"
+      character="$"
     />
     <br />
     <Rate
@@ -30,7 +30,7 @@ ReactDOM.render(
       onChange={onChange}
       style={{ fontSize: 50, marginTop: 24 }}
       allowHalf
-      charactor={<i className="anticon anticon-star" />}
+      character={<i className="anticon anticon-star" />}
     />
   </div>
 , document.getElementById('__react-content'));

@@ -9,7 +9,7 @@ const Star = React.createClass({
     disabled: PropTypes.bool,
     onHover: PropTypes.func,
     onClick: PropTypes.func,
-    charactor: PropTypes.node,
+    character: PropTypes.node,
   },
 
   onHover(e) {
@@ -31,15 +31,15 @@ const Star = React.createClass({
 
   render() {
     const { onHover, onClick } = this;
-    const { disabled, prefixCls, charactor } = this.props;
+    const { disabled, prefixCls, character } = this.props;
     return (
       <li
         className={this.getClassName()}
         onClick={disabled ? null : onClick}
         onMouseMove={disabled ? null : onHover}
       >
-        <div className={`${prefixCls}-first`}>{charactor}</div>
-        <div className={`${prefixCls}-second`}>{charactor}</div>
+        <div className={`${prefixCls}-first`}>{character}</div>
+        <div className={`${prefixCls}-second`}>{character}</div>
       </li>
     );
   },

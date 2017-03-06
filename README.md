@@ -112,10 +112,10 @@ React.render(<Rate />, container);
           <td>`onHoverChange` will be triggered when hover on stars.</td>
         </tr>
         <tr>
-          <td>charactor</td>
+          <td>character</td>
           <td>ReactNode</td>
           <td>★</td>
-          <td>The each charactor of rate</td>
+          <td>The each character of rate</td>
         </tr>
     </tbody>
 </table>
