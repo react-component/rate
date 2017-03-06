@@ -47,7 +47,7 @@ webpackJsonp([0,1],[
 	    onChange: onChange,
 	    style: { fontSize: 50, marginTop: 24 },
 	    allowHalf: true,
-	    charactor: '$'
+	    character: '$'
 	  }),
 	  _react2.default.createElement('br', null),
 	  _react2.default.createElement(_rcRate2.default, {
@@ -55,7 +55,7 @@ webpackJsonp([0,1],[
 	    onChange: onChange,
 	    style: { fontSize: 50, marginTop: 24 },
 	    allowHalf: true,
-	    charactor: _react2.default.createElement('i', { className: 'anticon anticon-star' })
+	    character: _react2.default.createElement('i', { className: 'anticon anticon-star' })
 	  })
 	), document.getElementById('__react-content'));
 
@@ -144,7 +144,7 @@ webpackJsonp([0,1],[
 	    onChange: _react.PropTypes.func,
 	    onHoverChange: _react.PropTypes.func,
 	    className: _react.PropTypes.string,
-	    charactor: _react.PropTypes.node
+	    character: _react.PropTypes.node
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -155,7 +155,7 @@ webpackJsonp([0,1],[
 	      style: {},
 	      prefixCls: 'rc-rate',
 	      onChange: noop,
-	      charactor: '★',
+	      character: '★',
 	      onHoverChange: noop
 	    };
 	  },
@@ -224,7 +224,7 @@ webpackJsonp([0,1],[
 	        prefixCls = _props.prefixCls,
 	        disabled = _props.disabled,
 	        className = _props.className,
-	        charactor = _props.charactor;
+	        character = _props.character;
 	    var _state = this.state,
 	        value = _state.value,
 	        hoverValue = _state.hoverValue;
@@ -242,7 +242,7 @@ webpackJsonp([0,1],[
 	        onClick: this.onClick,
 	        onHover: this.onHover,
 	        key: index,
-	        charactor: charactor
+	        character: character
 	      }));
 	    }
 	    return _react2.default.createElement(
@@ -20086,7 +20086,7 @@ webpackJsonp([0,1],[
 	    disabled: _react.PropTypes.bool,
 	    onHover: _react.PropTypes.func,
 	    onClick: _react.PropTypes.func,
-	    charactor: _react.PropTypes.node
+	    character: _react.PropTypes.node
 	  },
 	
 	  onHover: function onHover(e) {
@@ -20114,7 +20114,7 @@ webpackJsonp([0,1],[
 	    var _props2 = this.props,
 	        disabled = _props2.disabled,
 	        prefixCls = _props2.prefixCls,
-	        charactor = _props2.charactor;
+	        character = _props2.character;
 	
 	    return _react2.default.createElement(
 	      'li',
@@ -20126,12 +20126,12 @@ webpackJsonp([0,1],[
 	      _react2.default.createElement(
 	        'div',
 	        { className: prefixCls + '-first' },
-	        charactor
+	        character
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: prefixCls + '-second' },
-	        charactor
+	        character
 	      )
 	    );
 	  }
