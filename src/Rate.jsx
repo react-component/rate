@@ -1,5 +1,6 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { getOffsetLeft } from './util';
 import Star from './Star';
@@ -7,8 +8,8 @@ import Star from './Star';
 function noop() {
 }
 
-const Rate = React.createClass({
-  propTypes: {
+export default class Rate extends React.Component {
+  static propTypes = {
     disabled: PropTypes.bool,
     value: PropTypes.number,
     defaultValue: PropTypes.number,
@@ -20,30 +21,29 @@ const Rate = React.createClass({
     onHoverChange: PropTypes.func,
     className: PropTypes.string,
     character: PropTypes.node,
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      defaultValue: 0,
-      count: 5,
-      allowHalf: false,
-      style: {},
-      prefixCls: 'rc-rate',
-      onChange: noop,
-      character: '★',
-      onHoverChange: noop,
-    };
-  },
+  static defaultProps = {
+    defaultValue: 0,
+    count: 5,
+    allowHalf: false,
+    style: {},
+    prefixCls: 'rc-rate',
+    onChange: noop,
+    character: '★',
+    onHoverChange: noop,
+  };
 
-  getInitialState() {
-    let value = this.props.value;
+  constructor(props) {
+    super(props);
+    let value = props.value;
     if (value === undefined) {
-      value = this.props.defaultValue;
+      value = props.defaultValue;
     }
-    return {
+    this.state = {
       value,
     };
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
@@ -55,24 +55,24 @@ const Rate = React.createClass({
         value,
       });
     }
-  },
+  }
 
-  onHover(event, index) {
+  onHover = (event, index) => {
     const hoverValue = this.getStarValue(index, event.pageX);
     this.setState({
       hoverValue,
     });
     this.props.onHoverChange(hoverValue);
-  },
+  }
 
-  onMouseLeave() {
+  onMouseLeave = () => {
     this.setState({
       hoverValue: undefined,
     });
     this.props.onHoverChange(undefined);
-  },
+  }
 
-  onClick(event, index) {
+  onClick = (event, index) => {
     const value = this.getStarValue(index, event.pageX);
     if (!('value' in this.props)) {
       this.setState({
@@ -81,11 +81,11 @@ const Rate = React.createClass({
     }
     this.onMouseLeave();
     this.props.onChange(value);
-  },
+  }
 
   getStarDOM(index) {
     return ReactDOM.findDOMNode(this.refs[`star_${index}`]);
-  },
+  }
 
   getStarValue(index, x) {
     let value = index + 1;
@@ -97,7 +97,7 @@ const Rate = React.createClass({
       }
     }
     return value;
-  },
+  }
 
   render() {
     const { count, allowHalf, style, prefixCls, disabled, className, character } = this.props;
@@ -129,7 +129,5 @@ const Rate = React.createClass({
         {stars}
       </ul>
     );
-  },
-});
-
-export default Rate;
+  }
+}
