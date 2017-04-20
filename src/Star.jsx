@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Star = React.createClass({
-  propTypes: {
+export default class Star extends React.Component {
+  static propTypes = {
     value: PropTypes.number,
     index: PropTypes.number,
     prefixCls: PropTypes.string,
@@ -10,24 +11,26 @@ const Star = React.createClass({
     onHover: PropTypes.func,
     onClick: PropTypes.func,
     character: PropTypes.node,
-  },
+  };
 
-  onHover(e) {
-    this.props.onHover(e, this.props.index);
-  },
+  onHover = (e) => {
+    const { onHover, index } = this.props;
+    onHover(e, index);
+  }
 
-  onClick(e) {
-    this.props.onClick(e, this.props.index);
-  },
+  onClick = (e) => {
+    const { onClick, index } = this.props;
+    onClick(e, index);
+  }
 
   getClassName() {
-    const { index, value, prefixCls, allowHalf } = this.props;
+    const { prefixCls, index, value, allowHalf } = this.props;
     const starValue = index + 1;
     if (allowHalf && value + 0.5 === starValue) {
       return `${prefixCls} ${prefixCls}-half ${prefixCls}-active`;
     }
     return starValue <= value ? `${prefixCls} ${prefixCls}-full` : `${prefixCls} ${prefixCls}-zero`;
-  },
+  }
 
   render() {
     const { onHover, onClick } = this;
@@ -42,7 +45,5 @@ const Star = React.createClass({
         <div className={`${prefixCls}-second`}>{character}</div>
       </li>
     );
-  },
-});
-
-export default Star;
+  }
+}
