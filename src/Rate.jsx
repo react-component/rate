@@ -40,6 +40,9 @@ export default class Rate extends React.Component {
     if (value === undefined) {
       value = props.defaultValue;
     }
+
+    this.stars = {};
+
     this.state = {
       value,
     };
@@ -84,7 +87,7 @@ export default class Rate extends React.Component {
   }
 
   getStarDOM(index) {
-    return ReactDOM.findDOMNode(this.refs[`star_${index}`]);
+    return ReactDOM.findDOMNode(this.stars[index]);
   }
 
   getStarValue(index, x) {
@@ -99,6 +102,10 @@ export default class Rate extends React.Component {
     return value;
   }
 
+  saveRef = (index) => (node) => {
+    this.stars[index] = node;
+  }
+
   render() {
     const { count, allowHalf, style, prefixCls, disabled, className, character } = this.props;
     const { value, hoverValue } = this.state;
@@ -107,7 +114,7 @@ export default class Rate extends React.Component {
     for (let index = 0; index < count; index++) {
       stars.push(
         <Star
-          ref={`star_${index}`}
+          ref={this.saveRef(index)}
           index={index}
           disabled={disabled}
           prefixCls={`${prefixCls}-star`}
