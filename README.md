@@ -6,6 +6,7 @@ React Rate Component
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
+[![Test coverage][codecov-image]][codecov-url]
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
 [![npm download][download-image]][download-url]
 
@@ -13,8 +14,8 @@ React Rate Component
 [npm-url]: http://npmjs.org/package/rc-rate
 [travis-image]: https://img.shields.io/travis/react-component/rate.svg?style=flat-square
 [travis-url]: https://travis-ci.org/react-component/rate
-[coveralls-image]: https://img.shields.io/coveralls/react-component/rate.svg?style=flat-square
-[coveralls-url]: https://coveralls.io/r/react-component/rate?branch=master
+[codecov-image]: https://img.shields.io/codecov/c/github/react-component/rate/master.svg?style=flat-square
+[codecov-url]: https://codecov.io/gh/react-component/rate/branch/master
 [gemnasium-image]: http://img.shields.io/gemnasium/react-component/rate.svg?style=flat-square
 [gemnasium-url]: https://gemnasium.com/react-component/rate
 [node-url]: http://nodejs.org/download/
