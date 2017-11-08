@@ -34,17 +34,29 @@
     "start": "rc-tools run server",
     "pub": "rc-tools run pub",
     "lint": "rc-tools run lint",
-    "karma": "rc-test run karma",
-    "saucelabs": "rc-test run saucelabs",
-    "test": "rc-test run test",
-    "chrome-test": "rc-test run chrome-test",
-    "coverage": "rc-test run coverage"
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "jest": {
+    "setupFiles": [
+      "./tests/setup.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "transform": {
+      "\\.jsx?$": "./node_modules/rc-tools/scripts/jestPreprocessor.js"
+    }
   },
   "devDependencies": {
-    "core-js": "^2.5.1",
-    "expect.js": "0.3.x",
+    "enzyme": "^3.1.1",
+    "enzyme-adapter-react-16": "^1.0.4",
+    "enzyme-to-json": "^3.2.1",
+    "jest": "^21.2.1",
     "pre-commit": "1.x",
-    "rc-test": "^6.0.8",
     "rc-tools": "^7.0.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"

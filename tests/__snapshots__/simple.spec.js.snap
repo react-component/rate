@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rate render works 1`] = `
+<ul
+  class="rc-rate custom"
+>
+  <li
+    class="rc-rate-star rc-rate-star-full"
+  >
+    <div
+      class="rc-rate-star-first"
+    >
+      ★
+    </div>
+    <div
+      class="rc-rate-star-second"
+    >
+      ★
+    </div>
+  </li>
+  <li
+    class="rc-rate-star rc-rate-star-half rc-rate-star-active"
+  >
+    <div
+      class="rc-rate-star-first"
+    >
+      ★
+    </div>
+    <div
+      class="rc-rate-star-second"
+    >
+      ★
+    </div>
+  </li>
+  <li
+    class="rc-rate-star rc-rate-star-zero"
+  >
+    <div
+      class="rc-rate-star-first"
+    >
+      ★
+    </div>
+    <div
+      class="rc-rate-star-second"
+    >
+      ★
+    </div>
+  </li>
+</ul>
+`;
