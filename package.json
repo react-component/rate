@@ -18,30 +18,34 @@
   },
   "files": [
     "lib",
+    "es",
     "assets/*.css"
   ],
   "licenses": "MIT",
   "main": "./lib/index",
+  "module": "./es/index",
   "config": {
     "port": 8000
   },
   "scripts": {
     "build": "rc-tools run build",
+    "compile": "rc-tools run compile --babel-runtime",
     "gh-pages": "rc-tools run gh-pages",
     "start": "rc-tools run server",
     "pub": "rc-tools run pub",
     "lint": "rc-tools run lint",
-    "karma": "rc-tools run karma",
-    "saucelabs": "rc-tools run saucelabs",
-    "test": "rc-tools run test",
-    "chrome-test": "rc-tools run chrome-test",
-    "coverage": "rc-tools run coverage"
+    "karma": "rc-test run karma",
+    "saucelabs": "rc-test run saucelabs",
+    "test": "rc-test run test",
+    "chrome-test": "rc-test run chrome-test",
+    "coverage": "rc-test run coverage"
   },
   "devDependencies": {
     "core-js": "^2.5.1",
     "expect.js": "0.3.x",
     "pre-commit": "1.x",
-    "rc-tools": "5.x",
+    "rc-test": "^6.0.8",
+    "rc-tools": "^7.0.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
@@ -49,6 +53,7 @@
     "lint"
   ],
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "classnames": "^2.2.5",
     "prop-types": "^15.5.8"
   }
