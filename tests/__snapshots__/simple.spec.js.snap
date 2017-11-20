@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rate render works 1`] = `
+exports[`rate allowHalf render works 1`] = `
 <ul
   class="rc-rate custom"
+  tabindex="0"
 >
   <li
     class="rc-rate-star rc-rate-star-full"
@@ -20,6 +21,56 @@ exports[`rate render works 1`] = `
   </li>
   <li
     class="rc-rate-star rc-rate-star-half rc-rate-star-active"
+  >
+    <div
+      class="rc-rate-star-first"
+    >
+      ★
+    </div>
+    <div
+      class="rc-rate-star-second"
+    >
+      ★
+    </div>
+  </li>
+  <li
+    class="rc-rate-star rc-rate-star-zero"
+  >
+    <div
+      class="rc-rate-star-first"
+    >
+      ★
+    </div>
+    <div
+      class="rc-rate-star-second"
+    >
+      ★
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`rate full render works 1`] = `
+<ul
+  class="rc-rate custom"
+  tabindex="0"
+>
+  <li
+    class="rc-rate-star rc-rate-star-full"
+  >
+    <div
+      class="rc-rate-star-first"
+    >
+      ★
+    </div>
+    <div
+      class="rc-rate-star-second"
+    >
+      ★
+    </div>
+  </li>
+  <li
+    class="rc-rate-star rc-rate-star-zero"
   >
     <div
       class="rc-rate-star-first"
