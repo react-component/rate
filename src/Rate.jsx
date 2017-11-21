@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import KeyCode from 'rc-util/lib/KeyCode';
 import { getOffsetLeft } from './util';
 import Star from './Star';
 
@@ -21,6 +22,10 @@ export default class Rate extends React.Component {
     onHoverChange: PropTypes.func,
     className: PropTypes.string,
     character: PropTypes.node,
+    tabIndex: PropTypes.number,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onKeyDown: PropTypes.func,
   };
 
   static defaultProps = {
@@ -32,6 +37,7 @@ export default class Rate extends React.Component {
     onChange: noop,
     character: '★',
     onHoverChange: noop,
+    tabIndex: 0,
   };
 
   constructor(props) {
@@ -45,6 +51,7 @@ export default class Rate extends React.Component {
 
     this.state = {
       value,
+      focused: false,
     };
   }
 
@@ -77,13 +84,54 @@ export default class Rate extends React.Component {
 
   onClick = (event, index) => {
     const value = this.getStarValue(index, event.pageX);
-    if (!('value' in this.props)) {
-      this.setState({
-        value,
-      });
-    }
     this.onMouseLeave();
-    this.props.onChange(value);
+    this.changeValue(value);
+  }
+
+  onFocus = () => {
+    const { onFocus } = this.props;
+    this.setState({
+      focused: true,
+    });
+    if (onFocus) {
+      onFocus();
+    }
+  }
+
+  onBlur = () => {
+    const { onBlur } = this.props;
+    this.setState({
+      focused: false,
+    });
+    if (onBlur) {
+      onBlur();
+    }
+  }
+
+  onKeyDown = (event) => {
+    const { keyCode } = event;
+    const { count, allowHalf, onKeyDown } = this.props;
+    let { value } = this.state;
+    if (keyCode === KeyCode.RIGHT && value < count) {
+      if (allowHalf) {
+        value += 0.5;
+      } else {
+        value += 1;
+      }
+      this.changeValue(value);
+      event.preventDefault();
+    } else if (keyCode === KeyCode.LEFT && value > 0) {
+      if (allowHalf) {
+        value -= 0.5;
+      } else {
+        value -= 1;
+      }
+      this.changeValue(value);
+      event.preventDefault();
+    }
+    if (onKeyDown) {
+      onKeyDown(event);
+    }
   }
 
   getStarDOM(index) {
@@ -102,13 +150,31 @@ export default class Rate extends React.Component {
     return value;
   }
 
+  changeValue(value) {
+    if (!('value' in this.props)) {
+      this.setState({
+        value,
+      });
+    }
+    this.props.onChange(value);
+  }
+
   saveRef = (index) => (node) => {
     this.stars[index] = node;
   }
 
   render() {
-    const { count, allowHalf, style, prefixCls, disabled, className, character } = this.props;
-    const { value, hoverValue } = this.state;
+    const {
+      count,
+      allowHalf,
+      style,
+      prefixCls,
+      disabled,
+      className,
+      character,
+      tabIndex,
+    } = this.props;
+    const { value, hoverValue, focused } = this.state;
     const stars = [];
     const disabledClass = disabled ? `${prefixCls}-disabled` : '';
     for (let index = 0; index < count; index++) {
@@ -124,6 +190,7 @@ export default class Rate extends React.Component {
           onHover={this.onHover}
           key={index}
           character={character}
+          focused={focused}
         />
       );
     }
@@ -132,6 +199,10 @@ export default class Rate extends React.Component {
         className={classNames(prefixCls, disabledClass, className)}
         style={style}
         onMouseLeave={disabled ? null : this.onMouseLeave}
+        tabIndex={disabled ? -1 : tabIndex}
+        onFocus={disabled ? null : this.onFocus}
+        onBlur={disabled ? null : this.onBlur}
+        onKeyDown={disabled ? null : this.onKeyDown}
       >
         {stars}
       </ul>

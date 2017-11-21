@@ -11,6 +11,7 @@
   vertical-align: middle;
   font-weight: normal;
   font-style: normal;
+  outline: none;
 
   &-disabled &-star {
     &:before,
@@ -38,7 +39,7 @@
       transition: all .3s;
     }
 
-    &:hover {
+    &-focused, &:hover {
       transform: scale(1.1);
     }
 

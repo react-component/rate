@@ -11,6 +11,7 @@ export default class Star extends React.Component {
     onHover: PropTypes.func,
     onClick: PropTypes.func,
     character: PropTypes.node,
+    focused: PropTypes.bool,
   };
 
   onHover = (e) => {
@@ -24,12 +25,23 @@ export default class Star extends React.Component {
   }
 
   getClassName() {
-    const { prefixCls, index, value, allowHalf } = this.props;
+    const { prefixCls, index, value, allowHalf, focused } = this.props;
     const starValue = index + 1;
-    if (allowHalf && value + 0.5 === starValue) {
-      return `${prefixCls} ${prefixCls}-half ${prefixCls}-active`;
+    let className = prefixCls;
+    if (value === 0 && index === 0 && focused) {
+      className += ` ${prefixCls}-focused`;
+    } else if (allowHalf && value + 0.5 === starValue) {
+      className += ` ${prefixCls}-half ${prefixCls}-active`;
+      if (focused) {
+        className += ` ${prefixCls}-focused`;
+      }
+    } else {
+      className += starValue <= value ? ` ${prefixCls}-full` : ` ${prefixCls}-zero`;
+      if (starValue === value && focused) {
+        className += ` ${prefixCls}-focused`;
+      }
     }
-    return starValue <= value ? `${prefixCls} ${prefixCls}-full` : `${prefixCls} ${prefixCls}-zero`;
+    return className;
   }
 
   render() {
