@@ -7,6 +7,7 @@
   vertical-align: middle;
   font-weight: normal;
   font-style: normal;
+  outline: none;
 }
 .rc-rate-disabled .rc-rate-star:before,
 .rc-rate-disabled .rc-rate-star-content:before {
@@ -31,6 +32,7 @@
 .rc-rate-star-second {
   transition: all .3s;
 }
+.rc-rate-star-focused,
 .rc-rate-star:hover {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
