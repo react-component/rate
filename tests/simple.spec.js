@@ -75,4 +75,46 @@ describe('rate', () => {
       expect(handleChange).toBeCalledWith(2);
     });
   });
+
+  describe('focus & blur', () => {
+    let container;
+    beforeEach(() => {
+      container = document.createElement('div');
+      document.body.appendChild(container);
+    });
+
+    afterEach(() => {
+      document.body.removeChild(container);
+    });
+
+    it('focus()', () => {
+      const handleFocus = jest.fn();
+      const wrapper = mount(
+        <Rate count={3} value={1} onFocus={handleFocus} />,
+        { attachTo: container }
+      );
+      wrapper.instance().focus();
+      expect(handleFocus).toBeCalled();
+    });
+
+    it('blur()', () => {
+      const handleBlur = jest.fn();
+      const wrapper = mount(
+        <Rate count={3} value={1} onBlur={handleBlur} />,
+        { attachTo: container }
+      );
+      wrapper.instance().focus();
+      wrapper.instance().blur();
+      expect(handleBlur).toBeCalled();
+    });
+
+    it('autoFocus', () => {
+      const handleFocus = jest.fn();
+      mount(
+        <Rate autoFocus count={3} value={1} onFocus={handleFocus} />,
+        { attachTo: container }
+      );
+      expect(handleFocus).toBeCalled();
+    });
+  });
 });

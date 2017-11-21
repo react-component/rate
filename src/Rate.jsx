@@ -26,6 +26,7 @@ export default class Rate extends React.Component {
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onKeyDown: PropTypes.func,
+    autoFocus: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -53,6 +54,12 @@ export default class Rate extends React.Component {
       value,
       focused: false,
     };
+  }
+
+  componentDidMount() {
+    if (this.props.autoFocus && !this.props.disabled) {
+      this.focus();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -150,6 +157,18 @@ export default class Rate extends React.Component {
     return value;
   }
 
+  focus() {
+    if (!this.props.disabled) {
+      this.rate.focus();
+    }
+  }
+
+  blur() {
+    if (!this.props.disabled) {
+      this.rate.focus();
+    }
+  }
+
   changeValue(value) {
     if (!('value' in this.props)) {
       this.setState({
@@ -161,6 +180,10 @@ export default class Rate extends React.Component {
 
   saveRef = (index) => (node) => {
     this.stars[index] = node;
+  }
+
+  saveRate = (node) => {
+    this.rate = node;
   }
 
   render() {
@@ -203,6 +226,7 @@ export default class Rate extends React.Component {
         onFocus={disabled ? null : this.onFocus}
         onBlur={disabled ? null : this.onBlur}
         onKeyDown={disabled ? null : this.onKeyDown}
+        ref={this.saveRate}
       >
         {stars}
       </ul>
