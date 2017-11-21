@@ -1,3 +1,8 @@
+## 2.3.0
+
+- Add keyboard support.
+- Add focus() blur() and autoFocus.
+
 ## 2.1.0
 
 - Fix typo `charactor` to `character`.
