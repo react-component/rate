@@ -76,6 +76,26 @@ describe('rate', () => {
     });
   });
 
+  describe('allowClear', () => {
+    it('allowClear is false', () => {
+      const handleChange = jest.fn();
+      const wrapper = mount(
+        <Rate count={5} value={1} allowClear={false} onChange={handleChange} />
+      );
+      wrapper.find('li').at(3).simulate('click');
+      wrapper.find('li').at(3).simulate('click');
+      expect(handleChange).toBeCalledWith(4);
+    });
+    it('allowClear is true', () => {
+      const handleChange = jest.fn();
+      const wrapper = mount(
+        <Rate count={5} value={4} onChange={handleChange} />
+      );
+      wrapper.find('li').at(3).simulate('click');
+      expect(handleChange).toBeCalledWith(0);
+    });
+  });
+
   describe('focus & blur', () => {
     let container;
     beforeEach(() => {

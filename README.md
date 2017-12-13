@@ -95,6 +95,12 @@ React.render(<Rate />, container);
           <td>support half star</td>
         </tr>
         <tr>
+          <td>allowClear</td>
+          <td>bool</td>
+          <td>true</td>
+          <td>reset when click again</td>
+        </tr>
+        <tr>
           <td>style</td>
           <td>object</td>
           <td>{}</td>

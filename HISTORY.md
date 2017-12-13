@@ -1,3 +1,7 @@
+## 2.4.0
+
+- Add allowClear support.
+
 ## 2.3.0
 
 - Add keyboard support.
