@@ -48,6 +48,16 @@ describe('rate', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
+    it('click works', () => {
+      const wrapper = mount(
+        <Rate count={5} value={4.5} allowHalf />
+      );
+      wrapper.find('li').at(2).simulate('click');
+      expect(
+        wrapper.find('li').at(4).hasClass('rc-rate-star-full')
+      ).toBe(false);
+    });
+
     it('support focus and blur', () => {
       const wrapper = mount(
         <Rate count={3} value={1.5} allowHalf />
@@ -93,6 +103,27 @@ describe('rate', () => {
       );
       wrapper.find('li').at(3).simulate('click');
       expect(handleChange).toBeCalledWith(0);
+    });
+    it('cleaned star disable hover', () => {
+      const wrapper = mount(
+        <Rate count={5} defaultValue={4} />
+      );
+      wrapper.find('li').at(3).simulate('click');
+      wrapper.find('li').at(3).simulate('mouseMove');
+      expect(
+        wrapper.find('li').at(3).hasClass('rc-rate-star-full')
+      ).toBe(false);
+    });
+    it('cleaned star reset', () => {
+      const wrapper = mount(
+        <Rate count={5} defaultValue={4} />
+      );
+      wrapper.find('li').at(3).simulate('click');
+      wrapper.find('ul').simulate('mouseLeave');
+      wrapper.find('li').at(3).simulate('mouseMove');
+      expect(
+        wrapper.find('li').at(3).hasClass('rc-rate-star-full')
+      ).toBe(true);
     });
   });
 

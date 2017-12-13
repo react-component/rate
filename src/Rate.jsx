@@ -55,7 +55,7 @@ export default class Rate extends React.Component {
     this.state = {
       value,
       focused: false,
-      CleanedValue: null,
+      cleanedValue: null,
     };
   }
 
@@ -79,11 +79,11 @@ export default class Rate extends React.Component {
 
   onHover = (event, index) => {
     const hoverValue = this.getStarValue(index, event.pageX);
-    const { CleanedValue } = this.state;
-    if (hoverValue !== CleanedValue) {
+    const { cleanedValue } = this.state;
+    if (hoverValue !== cleanedValue) {
       this.setState({
         hoverValue,
-        CleanedValue: null,
+        cleanedValue: null,
       });
     }
     this.props.onHoverChange(hoverValue);
@@ -92,7 +92,7 @@ export default class Rate extends React.Component {
   onMouseLeave = () => {
     this.setState({
       hoverValue: undefined,
-      CleanedValue: null,
+      cleanedValue: null,
     });
     this.props.onHoverChange(undefined);
   }
@@ -106,7 +106,7 @@ export default class Rate extends React.Component {
     this.onMouseLeave(true);
     this.changeValue(isReset ? 0 : value);
     this.setState({
-      CleanedValue: isReset ? value : null,
+      cleanedValue: isReset ? value : null,
     });
   }
 
