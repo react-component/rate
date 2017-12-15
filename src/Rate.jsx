@@ -16,6 +16,7 @@ export default class Rate extends React.Component {
     defaultValue: PropTypes.number,
     count: PropTypes.number,
     allowHalf: PropTypes.bool,
+    allowClear: PropTypes.bool,
     style: PropTypes.object,
     prefixCls: PropTypes.string,
     onChange: PropTypes.func,
@@ -33,6 +34,7 @@ export default class Rate extends React.Component {
     defaultValue: 0,
     count: 5,
     allowHalf: false,
+    allowClear: true,
     style: {},
     prefixCls: 'rc-rate',
     onChange: noop,
@@ -53,6 +55,7 @@ export default class Rate extends React.Component {
     this.state = {
       value,
       focused: false,
+      cleanedValue: null,
     };
   }
 
@@ -76,23 +79,35 @@ export default class Rate extends React.Component {
 
   onHover = (event, index) => {
     const hoverValue = this.getStarValue(index, event.pageX);
-    this.setState({
-      hoverValue,
-    });
+    const { cleanedValue } = this.state;
+    if (hoverValue !== cleanedValue) {
+      this.setState({
+        hoverValue,
+        cleanedValue: null,
+      });
+    }
     this.props.onHoverChange(hoverValue);
   }
 
   onMouseLeave = () => {
     this.setState({
       hoverValue: undefined,
+      cleanedValue: null,
     });
     this.props.onHoverChange(undefined);
   }
 
   onClick = (event, index) => {
     const value = this.getStarValue(index, event.pageX);
-    this.onMouseLeave();
-    this.changeValue(value);
+    let isReset = false;
+    if (this.props.allowClear) {
+      isReset = value === this.state.value;
+    }
+    this.onMouseLeave(true);
+    this.changeValue(isReset ? 0 : value);
+    this.setState({
+      cleanedValue: isReset ? value : null,
+    });
   }
 
   onFocus = () => {
@@ -148,9 +163,10 @@ export default class Rate extends React.Component {
   getStarValue(index, x) {
     let value = index + 1;
     if (this.props.allowHalf) {
-      const leftEdge = getOffsetLeft(this.getStarDOM(0));
-      const width = getOffsetLeft(this.getStarDOM(1)) - leftEdge;
-      if ((x - leftEdge - width * index) < width / 2) {
+      const starEle = this.getStarDOM(index);
+      const leftDis = getOffsetLeft(starEle);
+      const width = starEle.clientWidth;
+      if ((x - leftDis) < width / 2) {
         value -= 0.5;
       }
     }

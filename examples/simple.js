@@ -15,6 +15,7 @@ ReactDOM.render(
       onChange={onChange}
       style={{ fontSize: 40 }}
       allowHalf
+      allowClear={false}
     />
     <br />
     <Rate
@@ -30,6 +31,13 @@ ReactDOM.render(
       onChange={onChange}
       style={{ fontSize: 50, marginTop: 24 }}
       allowHalf
+      character={<i className="anticon anticon-star" />}
+    />
+    <br />
+    <Rate
+      defaultValue={2}
+      onChange={onChange}
+      style={{ fontSize: 50, marginTop: 24 }}
       character={<i className="anticon anticon-star" />}
     />
   </div>
