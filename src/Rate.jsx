@@ -23,6 +23,7 @@ export default class Rate extends React.Component {
     onHoverChange: PropTypes.func,
     className: PropTypes.string,
     character: PropTypes.node,
+    unselectedCharacter: PropTypes.node,
     tabIndex: PropTypes.number,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -211,6 +212,7 @@ export default class Rate extends React.Component {
       disabled,
       className,
       character,
+      unselectedCharacter,
       tabIndex,
     } = this.props;
     const { value, hoverValue, focused } = this.state;
@@ -229,6 +231,7 @@ export default class Rate extends React.Component {
           onHover={this.onHover}
           key={index}
           character={character}
+          unselectedCharacter={unselectedCharacter || character}
           focused={focused}
         />
       );

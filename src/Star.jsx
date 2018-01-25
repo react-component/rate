@@ -11,6 +11,7 @@ export default class Star extends React.Component {
     onHover: PropTypes.func,
     onClick: PropTypes.func,
     character: PropTypes.node,
+    unselectedCharacter: PropTypes.node,
     focused: PropTypes.bool,
   };
 
@@ -44,17 +45,31 @@ export default class Star extends React.Component {
     return className;
   }
 
+  getCharacters() {
+    const { index, value, allowHalf, character, unselectedCharacter } = this.props;
+    const starValue = index + 1;
+    const characters = { first: character, second: character };
+    if (allowHalf && value + 0.5 === starValue) {
+      characters.second = unselectedCharacter;
+    } else if (starValue > value) {
+      characters.first = unselectedCharacter;
+      characters.second = unselectedCharacter;
+    }
+    return characters;
+  }
+
   render() {
     const { onHover, onClick } = this;
-    const { disabled, prefixCls, character } = this.props;
+    const { disabled, prefixCls } = this.props;
+    const characters = this.getCharacters();
     return (
       <li
         className={this.getClassName()}
         onClick={disabled ? null : onClick}
         onMouseMove={disabled ? null : onHover}
       >
-        <div className={`${prefixCls}-first`}>{character}</div>
-        <div className={`${prefixCls}-second`}>{character}</div>
+        <div className={`${prefixCls}-first`}>{characters.first}</div>
+        <div className={`${prefixCls}-second`}>{characters.second}</div>
       </li>
     );
   }

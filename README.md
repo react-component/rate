@@ -124,6 +124,12 @@ React.render(<Rate />, container);
           <td>★</td>
           <td>The each character of rate</td>
         </tr>
+        <tr>
+          <td>unselectedCharacter</td>
+          <td>ReactNode</td>
+          <td></td>
+          <td>The character of unselected rate (if not specified, `character` will be used instead)</td>
+        </tr>
     </tbody>
 </table>
 
