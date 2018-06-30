@@ -56,7 +56,7 @@ import ReactDOM from 'react-dom'
 import Rate from 'rc-rate'
 
 ReactDOM.render(
-  <Rate size="24" />,
+  <Rate />,
   document.getElementById('root')
 )
 ```
