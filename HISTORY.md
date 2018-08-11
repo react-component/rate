@@ -1,3 +1,7 @@
+## 2.4.1
+
+- Better accessibility support.
+
 ## 2.4.0
 
 - Add allowClear support.

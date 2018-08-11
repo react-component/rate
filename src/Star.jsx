@@ -12,6 +12,7 @@ export default class Star extends React.Component {
     onClick: PropTypes.func,
     character: PropTypes.node,
     focused: PropTypes.bool,
+    count: PropTypes.number,
   };
 
   onHover = (e) => {
@@ -22,6 +23,13 @@ export default class Star extends React.Component {
   onClick = (e) => {
     const { onClick, index } = this.props;
     onClick(e, index);
+  }
+
+  onKeyDown = (e) => {
+    const { onClick, index } = this.props;
+    if (e.keyCode === 13) {
+      onClick(e, index);
+    }
   }
 
   getClassName() {
@@ -45,13 +53,19 @@ export default class Star extends React.Component {
   }
 
   render() {
-    const { onHover, onClick } = this;
-    const { disabled, prefixCls, character } = this.props;
+    const { onHover, onClick, onKeyDown } = this;
+    const { disabled, prefixCls, character, index, count, value } = this.props;
     return (
       <li
         className={this.getClassName()}
         onClick={disabled ? null : onClick}
+        onKeyDown={disabled ? null : onKeyDown}
         onMouseMove={disabled ? null : onHover}
+        role="radio"
+        aria-checked={value > index ? 'true' : 'false'}
+        aria-posinset={index}
+        aria-setsize={count}
+        tabIndex={0}
       >
         <div className={`${prefixCls}-first`}>{character}</div>
         <div className={`${prefixCls}-second`}>{character}</div>
