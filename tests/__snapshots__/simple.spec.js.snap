@@ -3,10 +3,16 @@
 exports[`rate allowHalf render works 1`] = `
 <ul
   class="rc-rate custom"
+  role="radiogroup"
   tabindex="0"
 >
   <li
+    aria-checked="true"
+    aria-posinset="0"
+    aria-setsize="3"
     class="rc-rate-star rc-rate-star-full"
+    role="radio"
+    tabindex="0"
   >
     <div
       class="rc-rate-star-first"
@@ -20,7 +26,12 @@ exports[`rate allowHalf render works 1`] = `
     </div>
   </li>
   <li
+    aria-checked="true"
+    aria-posinset="1"
+    aria-setsize="3"
     class="rc-rate-star rc-rate-star-half rc-rate-star-active"
+    role="radio"
+    tabindex="0"
   >
     <div
       class="rc-rate-star-first"
@@ -34,7 +45,12 @@ exports[`rate allowHalf render works 1`] = `
     </div>
   </li>
   <li
+    aria-checked="false"
+    aria-posinset="2"
+    aria-setsize="3"
     class="rc-rate-star rc-rate-star-zero"
+    role="radio"
+    tabindex="0"
   >
     <div
       class="rc-rate-star-first"
@@ -53,10 +69,16 @@ exports[`rate allowHalf render works 1`] = `
 exports[`rate full render works 1`] = `
 <ul
   class="rc-rate custom"
+  role="radiogroup"
   tabindex="0"
 >
   <li
+    aria-checked="true"
+    aria-posinset="0"
+    aria-setsize="3"
     class="rc-rate-star rc-rate-star-full"
+    role="radio"
+    tabindex="0"
   >
     <div
       class="rc-rate-star-first"
@@ -70,7 +92,12 @@ exports[`rate full render works 1`] = `
     </div>
   </li>
   <li
+    aria-checked="false"
+    aria-posinset="1"
+    aria-setsize="3"
     class="rc-rate-star rc-rate-star-zero"
+    role="radio"
+    tabindex="0"
   >
     <div
       class="rc-rate-star-first"
@@ -84,7 +111,12 @@ exports[`rate full render works 1`] = `
     </div>
   </li>
   <li
+    aria-checked="false"
+    aria-posinset="2"
+    aria-setsize="3"
     class="rc-rate-star rc-rate-star-zero"
+    role="radio"
+    tabindex="0"
   >
     <div
       class="rc-rate-star-first"
