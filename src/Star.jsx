@@ -63,7 +63,7 @@ export default class Star extends React.Component {
         onMouseMove={disabled ? null : onHover}
         role="radio"
         aria-checked={value > index ? 'true' : 'false'}
-        aria-posinset={index}
+        aria-posinset={index + 1}
         aria-setsize={count}
         tabIndex={0}
       >
