@@ -104,7 +104,7 @@ export default class Rate extends React.Component {
       isReset = value === this.state.value;
     }
     this.onMouseLeave(true);
-    this.changeValue(isReset ? 0 : value);
+    this.changeValue(isReset ? 0 : value,event);
     this.setState({
       cleanedValue: isReset ? value : null,
     });
@@ -185,7 +185,7 @@ export default class Rate extends React.Component {
     }
   }
 
-  changeValue(value) {
+  changeValue(value,event) {
     if (!('value' in this.props)) {
       this.setState({
         value,
