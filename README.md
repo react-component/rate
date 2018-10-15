@@ -124,6 +124,12 @@ React.render(<Rate />, container);
           <td>★</td>
           <td>The each character of rate</td>
         </tr>
+        <tr>
+          <td>disabled</td>
+          <td>bool</td>
+          <td>false</td>
+          <td></td>
+        </tr>
     </tbody>
 </table>
 
