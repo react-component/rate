@@ -145,17 +145,14 @@ class Rate extends React.Component {
     }
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    if ('value' in nextProps) {
-      let value = nextProps.value;
-      if (value === undefined) {
-        value = nextProps.defaultValue;
-      }
+  static getDerivedStateFromProps(nextProps, state) {
+    if ('value' in nextProps && nextProps.value !== undefined) {
       return {
-        value,
+        ...state,
+        value: nextProps.value,
       };
     }
-    return null;
+    return state;
   }
 
   getStarDOM(index) {
