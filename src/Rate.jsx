@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { polyfill } from 'react-lifecycles-compat';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { getOffsetLeft } from './util';
 import Star from './Star';
@@ -9,7 +10,7 @@ import Star from './Star';
 function noop() {
 }
 
-export default class Rate extends React.Component {
+class Rate extends React.Component {
   static propTypes = {
     disabled: PropTypes.bool,
     value: PropTypes.number,
@@ -62,18 +63,6 @@ export default class Rate extends React.Component {
   componentDidMount() {
     if (this.props.autoFocus && !this.props.disabled) {
       this.focus();
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if ('value' in nextProps) {
-      let value = nextProps.value;
-      if (value === undefined) {
-        value = nextProps.defaultValue;
-      }
-      this.setState({
-        value,
-      });
     }
   }
 
@@ -154,6 +143,19 @@ export default class Rate extends React.Component {
     if (onKeyDown) {
       onKeyDown(event);
     }
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    if ('value' in nextProps) {
+      let value = nextProps.value;
+      if (value === undefined) {
+        value = nextProps.defaultValue;
+      }
+      return {
+        value,
+      };
+    }
+    return null;
   }
 
   getStarDOM(index) {
@@ -251,3 +253,7 @@ export default class Rate extends React.Component {
     );
   }
 }
+
+polyfill(Rate);
+
+export default Rate;
