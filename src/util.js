@@ -1,3 +1,5 @@
+/* eslint-disable import/prefer-default-export */
+
 function getScroll(w, top) {
   let ret = top ? w.pageYOffset : w.pageXOffset;
   const method = top ? 'scrollTop' : 'scrollLeft';
@@ -14,13 +16,12 @@ function getScroll(w, top) {
 }
 
 function getClientPosition(elem) {
-  let box;
   let x;
   let y;
   const doc = elem.ownerDocument;
   const body = doc.body;
   const docElem = doc && doc.documentElement;
-  box = elem.getBoundingClientRect();
+  const box = elem.getBoundingClientRect();
   x = box.left;
   y = box.top;
   x -= docElem.clientLeft || body.clientLeft || 0;
