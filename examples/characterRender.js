@@ -11,11 +11,12 @@ ReactDOM.render(
   <div style={{ margin: 100 }}>
     <Rate
       defaultValue={3}
-      characterRender={(node) => (
-        <Tooltip placement="top" overlay="rrr">
+      characterRender={(node, props) => (
+        <Tooltip placement="top" overlay={props.index}>
           {node}
         </Tooltip>
       )}
     />
-  </div>
-, document.getElementById('__react-content'));
+  </div>,
+  document.getElementById('__react-content'),
+);
