@@ -1,6 +1,6 @@
 {
   "name": "rc-rate",
-  "version": "2.4.3",
+  "version": "2.5.0",
   "description": "React Star Rate Component",
   "keywords": [
     "react",
@@ -38,20 +38,6 @@
     "coverage": "rc-tools run test --coverage",
     "pre-commit": "rc-tools run pre-commit",
     "lint-staged": "lint-staged"
-  },
-  "jest": {
-    "setupFiles": [
-      "./tests/setup.js"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "transform": {
-      "\\.jsx?$": "./node_modules/rc-tools/scripts/jestPreprocessor.js"
-    }
   },
   "dependencies": {
     "classnames": "^2.2.5",
