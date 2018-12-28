@@ -11,6 +11,7 @@ export default class Star extends React.Component {
     onHover: PropTypes.func,
     onClick: PropTypes.func,
     character: PropTypes.node,
+    characterRender: PropTypes.func,
     focused: PropTypes.bool,
     count: PropTypes.number,
   };
@@ -54,8 +55,8 @@ export default class Star extends React.Component {
 
   render() {
     const { onHover, onClick, onKeyDown } = this;
-    const { disabled, prefixCls, character, index, count, value } = this.props;
-    return (
+    const { disabled, prefixCls, character, characterRender, index, count, value } = this.props;
+    let start = (
       <li
         className={this.getClassName()}
         onClick={disabled ? null : onClick}
@@ -71,5 +72,11 @@ export default class Star extends React.Component {
         <div className={`${prefixCls}-second`}>{character}</div>
       </li>
     );
+
+    if (characterRender) {
+      start = characterRender(start, this.props);
+    }
+
+    return start;
   }
 }

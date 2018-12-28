@@ -24,6 +24,7 @@ class Rate extends React.Component {
     onHoverChange: PropTypes.func,
     className: PropTypes.string,
     character: PropTypes.node,
+    characterRender: PropTypes.func,
     tabIndex: PropTypes.number,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -210,6 +211,7 @@ class Rate extends React.Component {
       disabled,
       className,
       character,
+      characterRender,
       tabIndex,
     } = this.props;
     const { value, hoverValue, focused } = this.state;
@@ -229,6 +231,7 @@ class Rate extends React.Component {
           onHover={this.onHover}
           key={index}
           character={character}
+          characterRender={characterRender}
           focused={focused}
         />
       );
