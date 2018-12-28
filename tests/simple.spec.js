@@ -49,7 +49,7 @@ describe('rate', () => {
     it('click works', () => {
       const wrapper = mount(<Rate count={5} value={4.5} allowHalf />);
       wrapper
-        .find('li')
+        .find('li > div')
         .at(2)
         .simulate('click');
       expect(
