@@ -7,8 +7,7 @@ import KeyCode from 'rc-util/lib/KeyCode';
 import { getOffsetLeft } from './util';
 import Star from './Star';
 
-function noop() {
-}
+function noop() {}
 
 class Rate extends React.Component {
   static propTypes = {
@@ -24,6 +23,7 @@ class Rate extends React.Component {
     onHoverChange: PropTypes.func,
     className: PropTypes.string,
     character: PropTypes.node,
+    characterRender: PropTypes.func,
     tabIndex: PropTypes.number,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -61,12 +61,14 @@ class Rate extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.autoFocus && !this.props.disabled) {
+    const { autoFocus, disabled } = this.props;
+    if (autoFocus && !disabled) {
       this.focus();
     }
   }
 
   onHover = (event, index) => {
+    const { onHoverChange } = this.props;
     const hoverValue = this.getStarValue(index, event.pageX);
     const { cleanedValue } = this.state;
     if (hoverValue !== cleanedValue) {
@@ -75,29 +77,32 @@ class Rate extends React.Component {
         cleanedValue: null,
       });
     }
-    this.props.onHoverChange(hoverValue);
-  }
+    onHoverChange(hoverValue);
+  };
 
   onMouseLeave = () => {
+    const { onHoverChange } = this.props;
     this.setState({
       hoverValue: undefined,
       cleanedValue: null,
     });
-    this.props.onHoverChange(undefined);
-  }
+    onHoverChange(undefined);
+  };
 
   onClick = (event, index) => {
-    const value = this.getStarValue(index, event.pageX);
+    const { allowClear } = this.props;
+    const { value } = this.state;
+    const newValue = this.getStarValue(index, event.pageX);
     let isReset = false;
-    if (this.props.allowClear) {
-      isReset = value === this.state.value;
+    if (allowClear) {
+      isReset = newValue === value;
     }
     this.onMouseLeave(true);
-    this.changeValue(isReset ? 0 : value);
+    this.changeValue(isReset ? 0 : newValue);
     this.setState({
-      cleanedValue: isReset ? value : null,
+      cleanedValue: isReset ? newValue : null,
     });
-  }
+  };
 
   onFocus = () => {
     const { onFocus } = this.props;
@@ -107,7 +112,7 @@ class Rate extends React.Component {
     if (onFocus) {
       onFocus();
     }
-  }
+  };
 
   onBlur = () => {
     const { onBlur } = this.props;
@@ -117,9 +122,9 @@ class Rate extends React.Component {
     if (onBlur) {
       onBlur();
     }
-  }
+  };
 
-  onKeyDown = (event) => {
+  onKeyDown = event => {
     const { keyCode } = event;
     const { count, allowHalf, onKeyDown } = this.props;
     let { value } = this.state;
@@ -143,7 +148,7 @@ class Rate extends React.Component {
     if (onKeyDown) {
       onKeyDown(event);
     }
-  }
+  };
 
   static getDerivedStateFromProps(nextProps, state) {
     if ('value' in nextProps && nextProps.value !== undefined) {
@@ -160,45 +165,49 @@ class Rate extends React.Component {
   }
 
   getStarValue(index, x) {
+    const { allowHalf } = this.props;
     let value = index + 1;
-    if (this.props.allowHalf) {
+    if (allowHalf) {
       const starEle = this.getStarDOM(index);
       const leftDis = getOffsetLeft(starEle);
       const width = starEle.clientWidth;
-      if ((x - leftDis) < width / 2) {
+      if (x - leftDis < width / 2) {
         value -= 0.5;
       }
     }
     return value;
   }
 
+  saveRef = index => node => {
+    this.stars[index] = node;
+  };
+
+  saveRate = node => {
+    this.rate = node;
+  };
+
   focus() {
-    if (!this.props.disabled) {
+    const { disabled } = this.props;
+    if (!disabled) {
       this.rate.focus();
     }
   }
 
   blur() {
-    if (!this.props.disabled) {
+    const { disabled } = this.props;
+    if (!disabled) {
       this.rate.focus();
     }
   }
 
   changeValue(value) {
+    const { onChange } = this.props;
     if (!('value' in this.props)) {
       this.setState({
         value,
       });
     }
-    this.props.onChange(value);
-  }
-
-  saveRef = (index) => (node) => {
-    this.stars[index] = node;
-  }
-
-  saveRate = (node) => {
-    this.rate = node;
+    onChange(value);
   }
 
   render() {
@@ -210,6 +219,7 @@ class Rate extends React.Component {
       disabled,
       className,
       character,
+      characterRender,
       tabIndex,
     } = this.props;
     const { value, hoverValue, focused } = this.state;
@@ -229,8 +239,9 @@ class Rate extends React.Component {
           onHover={this.onHover}
           key={index}
           character={character}
+          characterRender={characterRender}
           focused={focused}
-        />
+        />,
       );
     }
     return (

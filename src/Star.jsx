@@ -11,26 +11,27 @@ export default class Star extends React.Component {
     onHover: PropTypes.func,
     onClick: PropTypes.func,
     character: PropTypes.node,
+    characterRender: PropTypes.func,
     focused: PropTypes.bool,
     count: PropTypes.number,
   };
 
-  onHover = (e) => {
+  onHover = e => {
     const { onHover, index } = this.props;
     onHover(e, index);
-  }
+  };
 
-  onClick = (e) => {
+  onClick = e => {
     const { onClick, index } = this.props;
     onClick(e, index);
-  }
+  };
 
-  onKeyDown = (e) => {
+  onKeyDown = e => {
     const { onClick, index } = this.props;
     if (e.keyCode === 13) {
       onClick(e, index);
     }
-  }
+  };
 
   getClassName() {
     const { prefixCls, index, value, allowHalf, focused } = this.props;
@@ -54,22 +55,29 @@ export default class Star extends React.Component {
 
   render() {
     const { onHover, onClick, onKeyDown } = this;
-    const { disabled, prefixCls, character, index, count, value } = this.props;
-    return (
-      <li
-        className={this.getClassName()}
-        onClick={disabled ? null : onClick}
-        onKeyDown={disabled ? null : onKeyDown}
-        onMouseMove={disabled ? null : onHover}
-        role="radio"
-        aria-checked={value > index ? 'true' : 'false'}
-        aria-posinset={index + 1}
-        aria-setsize={count}
-        tabIndex={0}
-      >
-        <div className={`${prefixCls}-first`}>{character}</div>
-        <div className={`${prefixCls}-second`}>{character}</div>
+    const { disabled, prefixCls, character, characterRender, index, count, value } = this.props;
+    let start = (
+      <li className={this.getClassName()}>
+        <div
+          onClick={disabled ? null : onClick}
+          onKeyDown={disabled ? null : onKeyDown}
+          onMouseMove={disabled ? null : onHover}
+          role="radio"
+          aria-checked={value > index ? 'true' : 'false'}
+          aria-posinset={index + 1}
+          aria-setsize={count}
+          tabIndex={0}
+        >
+          <div className={`${prefixCls}-first`}>{character}</div>
+          <div className={`${prefixCls}-second`}>{character}</div>
+        </div>
       </li>
     );
+
+    if (characterRender) {
+      start = characterRender(start, this.props);
+    }
+
+    return start;
   }
 }
