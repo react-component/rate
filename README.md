@@ -51,9 +51,33 @@ online example: http://react-component.github.io/rate/
 ## Usage
 
 ```js
-var Rate = require('rc-rate');
-var React = require('react');
-React.render(<Rate />, container);
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Rate from 'rc-rate'
+
+ReactDOM.render(
+  <Rate />,
+  document.getElementById('root')
+)
+```
+
+### with [styled-components](https://github.com/styled-components/styled-components)
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Rate from 'rc-rate'
+import styled from 'styled-components'
+
+cosnt StyledRate = styled(Rate)`
+  &.rc-rate {
+    font-size: ${({ size }) => size}px;
+  }
+`
+
+ReactDOM.render(
+  <StyledRate size="24" />,
+  document.getElementById('root')
+)
 ```
 
 ## API
