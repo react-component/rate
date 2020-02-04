@@ -40,65 +40,49 @@
 @-webkit-keyframes rcToolTipZoomIn {
   0% {
     opacity: 0;
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    -webkit-transform: scale(0, 0);
-            transform: scale(0, 0);
+    transform-origin: 50% 50%;
+    transform: scale(0, 0);
   }
   100% {
     opacity: 1;
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
+    transform-origin: 50% 50%;
+    transform: scale(1, 1);
   }
 }
 @keyframes rcToolTipZoomIn {
   0% {
     opacity: 0;
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    -webkit-transform: scale(0, 0);
-            transform: scale(0, 0);
+    transform-origin: 50% 50%;
+    transform: scale(0, 0);
   }
   100% {
     opacity: 1;
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
+    transform-origin: 50% 50%;
+    transform: scale(1, 1);
   }
 }
 @-webkit-keyframes rcToolTipZoomOut {
   0% {
     opacity: 1;
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
+    transform-origin: 50% 50%;
+    transform: scale(1, 1);
   }
   100% {
     opacity: 0;
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    -webkit-transform: scale(0, 0);
-            transform: scale(0, 0);
+    transform-origin: 50% 50%;
+    transform: scale(0, 0);
   }
 }
 @keyframes rcToolTipZoomOut {
   0% {
     opacity: 1;
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
+    transform-origin: 50% 50%;
+    transform: scale(1, 1);
   }
   100% {
     opacity: 0;
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    -webkit-transform: scale(0, 0);
-            transform: scale(0, 0);
+    transform-origin: 50% 50%;
+    transform: scale(0, 0);
   }
 }
 .rc-tooltip {
