@@ -196,7 +196,7 @@ class Rate extends React.Component {
   blur() {
     const { disabled } = this.props;
     if (!disabled) {
-      this.rate.focus();
+      this.rate.blur();
     }
   }
 
