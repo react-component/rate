@@ -68,7 +68,7 @@ import ReactDOM from 'react-dom'
 import Rate from 'rc-rate'
 import styled from 'styled-components'
 
-cosnt StyledRate = styled(Rate)`
+const StyledRate = styled(Rate)`
   &.rc-rate {
     font-size: ${({ size }) => size}px;
   }
