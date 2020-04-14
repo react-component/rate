@@ -10,6 +10,11 @@ describe('rate', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
+    it('render works in RTL', () => {
+      const wrapper = render(<Rate count={3} value={1} direction="rtl" className="custom" />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
     it('support focus and blur', () => {
       const wrapper = mount(<Rate count={3} value={2} />);
       wrapper.simulate('focus');
@@ -50,11 +55,40 @@ describe('rate', () => {
         expect(handleChange).toBeCalledWith(3);
       });
     });
+
+    describe('support keyboard in RTL', () => {
+      it('left & right', () => {
+        const handleChange = jest.fn();
+        const wrapper = mount(<Rate count={3} value={1} direction="rtl" onChange={handleChange} />);
+        wrapper.simulate('keyDown', { keyCode: KeyCode.LEFT });
+        expect(handleChange).toBeCalledWith(2);
+        handleChange.mockReset();
+        wrapper.simulate('keyDown', { keyCode: KeyCode.RIGHT });
+        expect(handleChange).toBeCalledWith(0);
+      });
+
+      it('enter', () => {
+        const handleChange = jest.fn();
+        const wrapper = mount(<Rate count={3} value={1} direction="rtl" onChange={handleChange} />);
+        wrapper
+          .find('li > div')
+          .at(2)
+          .simulate('keyDown', { keyCode: KeyCode.ENTER });
+        expect(handleChange).toBeCalledWith(3);
+      });
+    });
   });
 
   describe('allowHalf', () => {
     it('render works', () => {
       const wrapper = render(<Rate count={3} value={1.5} allowHalf className="custom" />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('render works in RTL', () => {
+      const wrapper = render(
+        <Rate count={3} value={1.5} allowHalf direction="rtl" className="custom" />,
+      );
       expect(wrapper).toMatchSnapshot();
     });
 
@@ -99,6 +133,16 @@ describe('rate', () => {
       handleChange.mockReset();
       wrapper.simulate('keyDown', { keyCode: KeyCode.RIGHT });
       expect(handleChange).toBeCalledWith(2);
+    });
+
+    it('support keyboard in RTL', () => {
+      const handleChange = jest.fn();
+      const wrapper = mount(<Rate count={3} value={1.5} allowHalf direction="rtl" onChange={handleChange} />);
+      wrapper.simulate('keyDown', { keyCode: KeyCode.LEFT });
+      expect(handleChange).toBeCalledWith(2);
+      handleChange.mockReset();
+      wrapper.simulate('keyDown', { keyCode: KeyCode.RIGHT });
+      expect(handleChange).toBeCalledWith(1);
     });
   });
 
@@ -198,6 +242,17 @@ describe('rate', () => {
       const handleFocus = jest.fn();
       mount(<Rate autoFocus count={3} value={1} onFocus={handleFocus} />, { attachTo: container });
       expect(handleFocus).toBeCalled();
+    });
+  });
+
+  describe('right class', () => {
+    it('rtl', () => {
+      const wrapper = mount(<Rate count={3} value={1} direction="rtl" />);
+      expect(wrapper.find('.rc-rate-rtl').length).toBe(1);
+    });
+    it('disabled', () => {
+      const wrapper = mount(<Rate count={3} value={1} disabled />);
+      expect(wrapper.find('.rc-rate-disabled').length).toBe(1);
     });
   });
 });
