@@ -106,8 +106,41 @@ describe('rate', () => {
       ).toBe(false);
     });
 
+    it('click works in RTL', () => {
+      const wrapper = mount(<Rate count={5} value={4.5} direction="rtl" allowHalf />);
+      wrapper
+        .find('li > div')
+        .at(2)
+        .simulate('click');
+      expect(
+        wrapper
+          .find('li')
+          .at(4)
+          .hasClass('rc-rate-star-full'),
+      ).toBe(false);
+    });
+
     it('support focus and blur', () => {
       const wrapper = mount(<Rate count={3} value={1.5} allowHalf />);
+      wrapper.simulate('focus');
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .hasClass('rc-rate-star-focused'),
+      ).toBe(true);
+
+      wrapper.simulate('blur');
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .hasClass('rc-rate-star-focused'),
+      ).toBe(false);
+    });
+
+    it('support focus and blur in RTL', () => {
+      const wrapper = mount(<Rate count={3} value={1.5} direction="rtl" allowHalf />);
       wrapper.simulate('focus');
       expect(
         wrapper
