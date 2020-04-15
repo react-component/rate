@@ -186,37 +186,6 @@ describe('rate', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('click works', () => {
-      const handleChange = jest.fn();
-      const wrapper = mount(
-        <Rate count={3} value={0.5} allowHalf allowClear={false} onChange={handleChange} />,
-      );
-      wrapper
-        .find('.rc-rate-star-first')
-        .at(0)
-        .simulate('click');
-      expect(handleChange).toBeCalledWith(0.5);
-    });
-
-    it('click works in RTL', () => {
-      const handleChange = jest.fn();
-      const wrapper = mount(
-        <Rate
-          count={3}
-          value={1.5}
-          direction="rtl"
-          allowHalf
-          allowClear={false}
-          onChange={handleChange}
-        />,
-      );
-      wrapper
-        .find('.rc-rate-star-first')
-        .at(0)
-        .simulate('click');
-      expect(handleChange).toBeCalledWith(0.5);
-    });
-
     it('support focus and blur', () => {
       const wrapper = mount(<Rate count={3} value={1.5} allowHalf />);
       wrapper.simulate('focus');
@@ -253,34 +222,6 @@ describe('rate', () => {
           .at(1)
           .hasClass('rc-rate-star-focused'),
       ).toBe(false);
-    });
-
-    it('support mouseMove', () => {
-      const wrapper = mount(<Rate count={3} value={1.5} allowHalf />);
-      wrapper
-        .find('li > div > .rc-rate-star-second')
-        .at(1)
-        .simulate('mouseMove');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-full'),
-      ).toBe(true);
-    });
-
-    it('support mouseMove in RTL', () => {
-      const wrapper = mount(<Rate count={3} value={1.5} direction="rtl" allowHalf />);
-      wrapper
-        .find('li > div')
-        .at(1)
-        .simulate('mouseMove');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-full'),
-      ).toBe(true);
     });
 
     it('support keyboard', () => {
