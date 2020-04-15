@@ -1,13 +1,12 @@
 /* eslint no-console: 0 */
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Rate from 'rc-rate';
-import Tooltip from 'rc-tooltip';
-import 'rc-tooltip/assets/bootstrap_white.css';
+import React from "react";
+import Rate from "rc-rate";
+import Tooltip from "rc-tooltip";
+import "rc-tooltip/assets/bootstrap_white.css";
 
-import '../assets/index.less';
+import "../assets/index.less";
 
-ReactDOM.render(
+export default () => (
   <div style={{ margin: 100 }}>
     <Rate
       defaultValue={3}
@@ -17,6 +16,5 @@ ReactDOM.render(
         </Tooltip>
       )}
     />
-  </div>,
-  document.getElementById('__react-content'),
+  </div>
 );
