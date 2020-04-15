@@ -250,6 +250,20 @@ describe('rate', () => {
       ).toBe(false);
     });
 
+    it('support mouseMove', () => {
+      const wrapper = mount(<Rate count={3} value={1.5} allowHalf />);
+      wrapper
+        .find('li > div > .rc-rate-star-second')
+        .at(1)
+        .simulate('mouseMove');
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .hasClass('rc-rate-star-full'),
+      ).toBe(true);
+    });
+
     it('support mouseMove in RTL', () => {
       const wrapper = mount(<Rate count={3} value={1.5} direction="rtl" allowHalf />);
       wrapper
