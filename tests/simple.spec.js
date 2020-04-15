@@ -204,6 +204,20 @@ describe('rate', () => {
       ).toBe(false);
     });
 
+    it('support mouseMove in RTL', () => {
+      const wrapper = mount(<Rate count={3} value={1.5} direction="rtl" allowHalf />);
+      wrapper
+        .find('li > div')
+        .at(1)
+        .simulate('mouseMove');
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .hasClass('rc-rate-star-full'),
+      ).toBe(true);
+    });
+
     it('support keyboard', () => {
       const handleChange = jest.fn();
       const wrapper = mount(<Rate count={3} value={1.5} allowHalf onChange={handleChange} />);
