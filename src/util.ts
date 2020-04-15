@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 
-function getScroll(w: Window, top?: boolean) {
-  let ret = top ? w.pageYOffset : w.pageXOffset;
-  const method = top ? 'scrollTop' : 'scrollLeft';
+function getScroll(w: Window) {
+  let ret = w.pageXOffset;
+  const method = 'scrollLeft';
   if (typeof ret !== 'number') {
     const d = w.document;
     // ie6,7,8 standard mode
