@@ -186,6 +186,20 @@ describe('rate', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
+    it('click works', () => {
+      const wrapper = mount(<Rate count={5} value={4.5} allowHalf />);
+      wrapper
+        .find('li > div')
+        .at(2)
+        .simulate('click');
+      expect(
+        wrapper
+          .find('li')
+          .at(4)
+          .hasClass('rc-rate-star-full'),
+      ).toBe(false);
+    });
+
     it('support focus and blur', () => {
       const wrapper = mount(<Rate count={3} value={1.5} allowHalf />);
       wrapper.simulate('focus');
