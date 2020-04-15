@@ -4,29 +4,29 @@ import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { getOffsetLeft } from './util';
-import Star from './Star';
+import Star, { StarProps } from './Star';
 
 function noop() {}
 
 export interface RateProps {
-  disabled: boolean;
-  value: number;
-  defaultValue: number;
-  count: number;
-  allowHalf: boolean;
-  allowClear: boolean;
-  style: React.CSSProperties;
-  prefixCls: string;
-  onChange: (value: number) => void;
-  onHoverChange: (value: number) => void;
-  className: string;
-  character: React.ReactNode;
-  characterRender: () => React.ReactNode;
-  tabIndex: number;
-  onFocus: () => void;
-  onBlur: () => void;
-  onKeyDown: React.KeyboardEventHandler<HTMLUListElement>;
-  autoFocus: boolean;
+  disabled?: boolean;
+  value?: number;
+  defaultValue?: number;
+  count?: number;
+  allowHalf?: boolean;
+  allowClear?: boolean;
+  style?: React.CSSProperties;
+  prefixCls?: string;
+  onChange?: (value: number) => void;
+  onHoverChange?: (value: number) => void;
+  className?: string;
+  character?: React.ReactNode;
+  characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
+  tabIndex?: number;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  onKeyDown?: React.KeyboardEventHandler<HTMLUListElement>;
+  autoFocus?: boolean;
 }
 
 interface RateState {

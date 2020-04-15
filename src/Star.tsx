@@ -1,20 +1,20 @@
 import React from 'react';
 
 export interface StarProps {
-  value: number;
-  index: number;
-  prefixCls: string;
-  allowHalf: boolean;
-  disabled: boolean;
-  onHover: (e: React.MouseEvent<HTMLDivElement>, index: number) => void;
-  onClick: (
+  value?: number;
+  index?: number;
+  prefixCls?: string;
+  allowHalf?: boolean;
+  disabled?: boolean;
+  onHover?: (e: React.MouseEvent<HTMLDivElement>, index: number) => void;
+  onClick?: (
     e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>,
     index: number,
   ) => void;
-  character: React.ReactNode;
-  characterRender: (origin: React.ReactNode, props: StarProps) => React.ReactNode;
-  focused: boolean;
-  count: number;
+  character?: React.ReactNode;
+  characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
+  focused?: boolean;
+  count?: number;
 }
 
 export default class Star extends React.Component<StarProps> {
@@ -77,7 +77,7 @@ export default class Star extends React.Component<StarProps> {
     );
 
     if (characterRender) {
-      start = characterRender(start, this.props);
+      start = characterRender(start as React.ReactElement, this.props);
     }
 
     return start;

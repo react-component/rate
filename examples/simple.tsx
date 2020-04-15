@@ -1,10 +1,10 @@
 /* eslint no-console: 0 */
-import Rate from "rc-rate";
-import React from "react";
-import "../assets/index.less";
+import React from 'react';
+import Rate from '../src';
+import '../assets/index.less';
 
-function onChange(v) {
-  console.log("selected star", v);
+function onChange(v: number) {
+  console.log('selected star', v);
 }
 
 export default () => (
