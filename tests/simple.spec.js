@@ -20,6 +20,16 @@ describe('rate', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
+    it('click works', () => {
+      const handleChange = jest.fn();
+      const wrapper = mount(<Rate count={3} value={1} onChange={handleChange} />);
+      wrapper
+        .find('li > div')
+        .at(1)
+        .simulate('click');
+      expect(handleChange).toBeCalledWith(2);
+    });
+
     it('click works in RTL', () => {
       const handleChange = jest.fn();
       const wrapper = mount(<Rate count={3} value={1} direction="rtl" onChange={handleChange} />);
@@ -28,6 +38,20 @@ describe('rate', () => {
         .at(1)
         .simulate('click');
       expect(handleChange).toBeCalledWith(2);
+    });
+
+    it('support mouseMove', () => {
+      const wrapper = mount(<Rate count={3} value={1} />);
+      wrapper
+        .find('li > div')
+        .at(1)
+        .simulate('mouseMove');
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .hasClass('rc-rate-star-full'),
+      ).toBe(true);
     });
 
     it('support mouseMove in RTL', () => {
