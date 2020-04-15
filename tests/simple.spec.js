@@ -188,24 +188,24 @@ describe('rate', () => {
 
     it('click works', () => {
       const handleChange = jest.fn();
-      const wrapper = mount(<Rate count={3} value={1} allowHalf onChange={handleChange} />);
+      const wrapper = mount(<Rate count={3} value={0.5} allowHalf onChange={handleChange} />);
       wrapper
-        .find('.rc-rate-star-first')
+        .find('.rc-rate-star-second')
         .at(0)
         .simulate('click');
-      expect(handleChange).toBeCalledWith(0.5);
+      expect(handleChange).toBeCalledWith(1);
     });
 
     it('click works in RTL', () => {
       const handleChange = jest.fn();
       const wrapper = mount(
-        <Rate count={3} value={1} direction="rtl" allowHalf onChange={handleChange} />,
+        <Rate count={3} value={1.5} direction="rtl" allowHalf onChange={handleChange} />,
       );
       wrapper
-        .find('.rc-rate-star-first')
-        .at(0)
+        .find('.rc-rate-star-second')
+        .at(1)
         .simulate('click');
-      expect(handleChange).toBeCalledWith(0.5);
+      expect(handleChange).toBeCalledWith(2);
     });
 
     it('support focus and blur', () => {
