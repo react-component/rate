@@ -15,11 +15,6 @@ describe('rate', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('render works in RTL', () => {
-      const wrapper = render(<Rate count={3} value={1} direction="rtl" className="custom" />);
-      expect(wrapper).toMatchSnapshot();
-    });
-
     it('click works', () => {
       const handleChange = jest.fn();
       const wrapper = mount(<Rate count={3} value={1} onChange={handleChange} />);
@@ -120,28 +115,6 @@ describe('rate', () => {
       it('enter', () => {
         const handleChange = jest.fn();
         const wrapper = mount(<Rate count={3} value={1} onChange={handleChange} />);
-        wrapper
-          .find('li > div')
-          .at(2)
-          .simulate('keyDown', { keyCode: KeyCode.ENTER });
-        expect(handleChange).toBeCalledWith(3);
-      });
-    });
-
-    describe('support keyboard in RTL', () => {
-      it('left & right', () => {
-        const handleChange = jest.fn();
-        const wrapper = mount(<Rate count={3} value={1} direction="rtl" onChange={handleChange} />);
-        wrapper.simulate('keyDown', { keyCode: KeyCode.LEFT });
-        expect(handleChange).toBeCalledWith(2);
-        handleChange.mockReset();
-        wrapper.simulate('keyDown', { keyCode: KeyCode.RIGHT });
-        expect(handleChange).toBeCalledWith(0);
-      });
-
-      it('enter', () => {
-        const handleChange = jest.fn();
-        const wrapper = mount(<Rate count={3} value={1} direction="rtl" onChange={handleChange} />);
         wrapper
           .find('li > div')
           .at(2)
