@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 
-function getScroll(w, top) {
-  let ret = top ? w.pageYOffset : w.pageXOffset;
-  const method = top ? 'scrollTop' : 'scrollLeft';
+function getScroll(w: Window) {
+  let ret = w.pageXOffset;
+  const method = 'scrollLeft';
   if (typeof ret !== 'number') {
     const d = w.document;
     // ie6,7,8 standard mode
@@ -15,11 +15,11 @@ function getScroll(w, top) {
   return ret;
 }
 
-function getClientPosition(elem) {
-  let x;
-  let y;
+function getClientPosition(elem: HTMLElement) {
+  let x: number;
+  let y: number;
   const doc = elem.ownerDocument;
-  const body = doc.body;
+  const { body } = doc;
   const docElem = doc && doc.documentElement;
   const box = elem.getBoundingClientRect();
   x = box.left;
@@ -32,10 +32,11 @@ function getClientPosition(elem) {
   };
 }
 
-export function getOffsetLeft(el) {
+export function getOffsetLeft(el: HTMLElement) {
   const pos = getClientPosition(el);
   const doc = el.ownerDocument;
-  const w = doc.defaultView || doc.parentWindow;
+  // Only IE use `parentWindow`
+  const w: Window = doc.defaultView || (doc as any).parentWindow;
   pos.left += getScroll(w);
   return pos.left;
 }

@@ -1,14 +1,13 @@
 /* eslint no-console: 0 */
-import Rate from 'rc-rate';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import Rate from '../src';
 import '../assets/index.less';
 
-function onChange(v) {
+function onChange(v: number) {
   console.log('selected star', v);
 }
 
-ReactDOM.render(
+export default () => (
   <div style={{ margin: 100 }}>
     <Rate
       defaultValue={2.5}
@@ -41,4 +40,4 @@ ReactDOM.render(
       character={<i className="anticon anticon-star" />}
     />
   </div>
-, document.getElementById('__react-content'));
+);

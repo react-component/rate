@@ -1,36 +1,42 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { getOffsetLeft } from './util';
-import Star from './Star';
+import Star, { StarProps } from './Star';
 
 function noop() {}
 
-class Rate extends React.Component {
-  static propTypes = {
-    disabled: PropTypes.bool,
-    value: PropTypes.number,
-    defaultValue: PropTypes.number,
-    count: PropTypes.number,
-    allowHalf: PropTypes.bool,
-    allowClear: PropTypes.bool,
-    style: PropTypes.object,
-    prefixCls: PropTypes.string,
-    onChange: PropTypes.func,
-    onHoverChange: PropTypes.func,
-    className: PropTypes.string,
-    character: PropTypes.node,
-    characterRender: PropTypes.func,
-    tabIndex: PropTypes.number,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onKeyDown: PropTypes.func,
-    autoFocus: PropTypes.bool,
-  };
+export interface RateProps {
+  disabled?: boolean;
+  value?: number;
+  defaultValue?: number;
+  count?: number;
+  allowHalf?: boolean;
+  allowClear?: boolean;
+  style?: React.CSSProperties;
+  prefixCls?: string;
+  onChange?: (value: number) => void;
+  onHoverChange?: (value: number) => void;
+  className?: string;
+  character?: React.ReactNode;
+  characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
+  tabIndex?: number;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  onKeyDown?: React.KeyboardEventHandler<HTMLUListElement>;
+  autoFocus?: boolean;
+}
 
+interface RateState {
+  value: number;
+  cleanedValue: number;
+  hoverValue?: number;
+  focused: boolean;
+}
+
+class Rate extends React.Component<RateProps, RateState> {
   static defaultProps = {
     defaultValue: 0,
     count: 5,
@@ -44,9 +50,13 @@ class Rate extends React.Component {
     tabIndex: 0,
   };
 
-  constructor(props) {
+  stars: Record<string, Star>;
+
+  rate: HTMLUListElement;
+
+  constructor(props: RateProps) {
     super(props);
-    let value = props.value;
+    let { value } = props;
     if (value === undefined) {
       value = props.defaultValue;
     }
@@ -67,7 +77,7 @@ class Rate extends React.Component {
     }
   }
 
-  onHover = (event, index) => {
+  onHover = (event: React.MouseEvent<HTMLDivElement>, index: number) => {
     const { onHoverChange } = this.props;
     const hoverValue = this.getStarValue(index, event.pageX);
     const { cleanedValue } = this.state;
@@ -89,15 +99,15 @@ class Rate extends React.Component {
     onHoverChange(undefined);
   };
 
-  onClick = (event, index) => {
+  onClick = (event: React.MouseEvent | React.KeyboardEvent, index: number) => {
     const { allowClear } = this.props;
     const { value } = this.state;
-    const newValue = this.getStarValue(index, event.pageX);
+    const newValue = this.getStarValue(index, (event as React.MouseEvent).pageX);
     let isReset = false;
     if (allowClear) {
       isReset = newValue === value;
     }
-    this.onMouseLeave(true);
+    this.onMouseLeave();
     this.changeValue(isReset ? 0 : newValue);
     this.setState({
       cleanedValue: isReset ? newValue : null,
@@ -124,7 +134,7 @@ class Rate extends React.Component {
     }
   };
 
-  onKeyDown = event => {
+  onKeyDown: React.KeyboardEventHandler<HTMLUListElement> = event => {
     const { keyCode } = event;
     const { count, allowHalf, onKeyDown } = this.props;
     let { value } = this.state;
@@ -150,7 +160,7 @@ class Rate extends React.Component {
     }
   };
 
-  static getDerivedStateFromProps(nextProps, state) {
+  static getDerivedStateFromProps(nextProps: RateProps, state: RateState) {
     if ('value' in nextProps && nextProps.value !== undefined) {
       return {
         ...state,
@@ -160,11 +170,11 @@ class Rate extends React.Component {
     return state;
   }
 
-  getStarDOM(index) {
-    return ReactDOM.findDOMNode(this.stars[index]);
+  getStarDOM(index: number): HTMLElement {
+    return findDOMNode(this.stars[index]);
   }
 
-  getStarValue(index, x) {
+  getStarValue(index: number, x: number) {
     const { allowHalf } = this.props;
     let value = index + 1;
     if (allowHalf) {
@@ -178,11 +188,11 @@ class Rate extends React.Component {
     return value;
   }
 
-  saveRef = index => node => {
+  saveRef = (index: number) => (node: Star) => {
     this.stars[index] = node;
   };
 
-  saveRate = node => {
+  saveRate = (node: HTMLUListElement) => {
     this.rate = node;
   };
 
@@ -200,7 +210,7 @@ class Rate extends React.Component {
     }
   }
 
-  changeValue(value) {
+  changeValue(value: number) {
     const { onChange } = this.props;
     if (!('value' in this.props)) {
       this.setState({
@@ -225,7 +235,7 @@ class Rate extends React.Component {
     const { value, hoverValue, focused } = this.state;
     const stars = [];
     const disabledClass = disabled ? `${prefixCls}-disabled` : '';
-    for (let index = 0; index < count; index++) {
+    for (let index = 0; index < count; index += 1) {
       stars.push(
         <Star
           ref={this.saveRef(index)}
