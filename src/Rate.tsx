@@ -77,7 +77,7 @@ class Rate extends React.Component<RateProps, RateState> {
     }
   }
 
-  onHover = (event: MouseEvent, index: number) => {
+  onHover = (event: React.MouseEvent<HTMLDivElement>, index: number) => {
     const { onHoverChange } = this.props;
     const hoverValue = this.getStarValue(index, event.pageX);
     const { cleanedValue } = this.state;
@@ -99,10 +99,10 @@ class Rate extends React.Component<RateProps, RateState> {
     onHoverChange(undefined);
   };
 
-  onClick = (event: MouseEvent, index: number) => {
+  onClick = (event: React.MouseEvent | React.KeyboardEvent, index: number) => {
     const { allowClear } = this.props;
     const { value } = this.state;
-    const newValue = this.getStarValue(index, event.pageX);
+    const newValue = this.getStarValue(index, (event as React.MouseEvent).pageX);
     let isReset = false;
     if (allowClear) {
       isReset = newValue === value;

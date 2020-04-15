@@ -1,21 +1,24 @@
 import React from 'react';
 
-export default class Star extends React.Component {
-  static propTypes = {
-    value: PropTypes.number,
-    index: PropTypes.number,
-    prefixCls: PropTypes.string,
-    allowHalf: PropTypes.bool,
-    disabled: PropTypes.bool,
-    onHover: PropTypes.func,
-    onClick: PropTypes.func,
-    character: PropTypes.node,
-    characterRender: PropTypes.func,
-    focused: PropTypes.bool,
-    count: PropTypes.number,
-  };
+export interface StarProps {
+  value: number;
+  index: number;
+  prefixCls: string;
+  allowHalf: boolean;
+  disabled: boolean;
+  onHover: (e: React.MouseEvent<HTMLDivElement>, index: number) => void;
+  onClick: (
+    e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>,
+    index: number,
+  ) => void;
+  character: React.ReactNode;
+  characterRender: (origin: React.ReactNode, props: StarProps) => React.ReactNode;
+  focused: boolean;
+  count: number;
+}
 
-  onHover = e => {
+export default class Star extends React.Component<StarProps> {
+  onHover: React.MouseEventHandler<HTMLDivElement> = e => {
     const { onHover, index } = this.props;
     onHover(e, index);
   };
@@ -25,7 +28,7 @@ export default class Star extends React.Component {
     onClick(e, index);
   };
 
-  onKeyDown = e => {
+  onKeyDown: React.KeyboardEventHandler<HTMLDivElement> = e => {
     const { onClick, index } = this.props;
     if (e.keyCode === 13) {
       onClick(e, index);
@@ -55,7 +58,7 @@ export default class Star extends React.Component {
   render() {
     const { onHover, onClick, onKeyDown } = this;
     const { disabled, prefixCls, character, characterRender, index, count, value } = this.props;
-    let start = (
+    let start: React.ReactNode = (
       <li className={this.getClassName()}>
         <div
           onClick={disabled ? null : onClick}
