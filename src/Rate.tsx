@@ -1,7 +1,6 @@
 import React from 'react';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { getOffsetLeft } from './util';
 import Star, { StarProps } from './Star';
@@ -27,6 +26,7 @@ export interface RateProps {
   onBlur?: () => void;
   onKeyDown?: React.KeyboardEventHandler<HTMLUListElement>;
   autoFocus?: boolean;
+  direction?: string;
 }
 
 interface RateState {
@@ -48,6 +48,7 @@ class Rate extends React.Component<RateProps, RateState> {
     character: '★',
     onHoverChange: noop,
     tabIndex: 0,
+    direction: 'ltr',
   };
 
   stars: Record<string, Star>;
@@ -136,9 +137,10 @@ class Rate extends React.Component<RateProps, RateState> {
 
   onKeyDown: React.KeyboardEventHandler<HTMLUListElement> = event => {
     const { keyCode } = event;
-    const { count, allowHalf, onKeyDown } = this.props;
+    const { count, allowHalf, onKeyDown, direction } = this.props;
+    const reverse = direction === 'rtl';
     let { value } = this.state;
-    if (keyCode === KeyCode.RIGHT && value < count) {
+    if (keyCode === KeyCode.RIGHT && value < count && !reverse) {
       if (allowHalf) {
         value += 0.5;
       } else {
@@ -146,11 +148,27 @@ class Rate extends React.Component<RateProps, RateState> {
       }
       this.changeValue(value);
       event.preventDefault();
-    } else if (keyCode === KeyCode.LEFT && value > 0) {
+    } else if (keyCode === KeyCode.LEFT && value > 0 && !reverse) {
       if (allowHalf) {
         value -= 0.5;
       } else {
         value -= 1;
+      }
+      this.changeValue(value);
+      event.preventDefault();
+    } else if (keyCode === KeyCode.RIGHT && value > 0 && reverse){
+      if (allowHalf) {
+        value -= 0.5;
+      } else {
+        value -= 1;
+      }
+      this.changeValue(value);
+      event.preventDefault();
+    } else if (keyCode === KeyCode.LEFT && value < count && reverse){
+      if (allowHalf) {
+        value += 0.5;
+      } else {
+        value += 1;
       }
       this.changeValue(value);
       event.preventDefault();
@@ -175,13 +193,16 @@ class Rate extends React.Component<RateProps, RateState> {
   }
 
   getStarValue(index: number, x: number) {
-    const { allowHalf } = this.props;
+    const { allowHalf, direction } = this.props;
+    const reverse = direction === 'rtl';
     let value = index + 1;
     if (allowHalf) {
       const starEle = this.getStarDOM(index);
       const leftDis = getOffsetLeft(starEle);
       const width = starEle.clientWidth;
-      if (x - leftDis < width / 2) {
+      if (reverse && x - leftDis > width / 2) {
+        value -= 0.5;
+      } else if (!reverse && x - leftDis < width / 2) {
         value -= 0.5;
       }
     }
@@ -231,6 +252,7 @@ class Rate extends React.Component<RateProps, RateState> {
       character,
       characterRender,
       tabIndex,
+      direction,
     } = this.props;
     const { value, hoverValue, focused } = this.state;
     const stars = [];
@@ -254,9 +276,12 @@ class Rate extends React.Component<RateProps, RateState> {
         />,
       );
     }
+    const rateClassName = classNames(prefixCls, disabledClass, className, {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    });
     return (
       <ul
-        className={classNames(prefixCls, disabledClass, className)}
+        className={rateClassName}
         style={style}
         onMouseLeave={disabled ? null : this.onMouseLeave}
         tabIndex={disabled ? -1 : tabIndex}
@@ -271,7 +296,5 @@ class Rate extends React.Component<RateProps, RateState> {
     );
   }
 }
-
-polyfill(Rate);
 
 export default Rate;

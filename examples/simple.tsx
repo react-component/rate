@@ -8,7 +8,8 @@ function onChange(v: number) {
 }
 
 export default () => (
-  <div style={{ margin: 100 }}>
+  <div style={{ margin: 50 }}>
+    <h2>Base</h2>
     <Rate
       defaultValue={2.5}
       onChange={onChange}
@@ -36,6 +37,15 @@ export default () => (
     <Rate
       defaultValue={2}
       onChange={onChange}
+      style={{ fontSize: 50, marginTop: 24 }}
+      character={<i className="anticon anticon-star" />}
+    />
+    <h2>RTL</h2>
+    <Rate
+      defaultValue={1}
+      direction="rtl"
+      onChange={onChange}
+      allowHalf
       style={{ fontSize: 50, marginTop: 24 }}
       character={<i className="anticon anticon-star" />}
     />

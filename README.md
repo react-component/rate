@@ -154,6 +154,12 @@ ReactDOM.render(
           <td>false</td>
           <td></td>
         </tr>
+        <tr>
+          <td>direction</td>
+          <td>string</td>
+          <td>ltr</td>
+          <td>The direction of rate</td>
+        </tr>
     </tbody>
 </table>
 

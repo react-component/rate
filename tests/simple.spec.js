@@ -10,8 +10,80 @@ describe('rate', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
+    it('render works in RTL', () => {
+      const wrapper = render(<Rate count={3} value={1} direction="rtl" className="custom" />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('click works', () => {
+      const handleChange = jest.fn();
+      const wrapper = mount(<Rate count={3} value={1} onChange={handleChange} />);
+      wrapper
+        .find('li > div')
+        .at(1)
+        .simulate('click');
+      expect(handleChange).toBeCalledWith(2);
+    });
+
+    it('click works in RTL', () => {
+      const handleChange = jest.fn();
+      const wrapper = mount(<Rate count={3} value={1} direction="rtl" onChange={handleChange} />);
+      wrapper
+        .find('li > div')
+        .at(1)
+        .simulate('click');
+      expect(handleChange).toBeCalledWith(2);
+    });
+
+    it('support mouseMove', () => {
+      const wrapper = mount(<Rate count={3} value={1} />);
+      wrapper
+        .find('li > div')
+        .at(1)
+        .simulate('mouseMove');
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .hasClass('rc-rate-star-full'),
+      ).toBe(true);
+    });
+
+    it('support mouseMove in RTL', () => {
+      const wrapper = mount(<Rate count={3} value={1} direction="rtl" />);
+      wrapper
+        .find('li > div')
+        .at(1)
+        .simulate('mouseMove');
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .hasClass('rc-rate-star-full'),
+      ).toBe(true);
+    });
+
     it('support focus and blur', () => {
       const wrapper = mount(<Rate count={3} value={2} />);
+      wrapper.simulate('focus');
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .hasClass('rc-rate-star-focused'),
+      ).toBe(true);
+
+      wrapper.simulate('blur');
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .hasClass('rc-rate-star-focused'),
+      ).toBe(false);
+    });
+
+    it('support focus and blur in RTL', () => {
+      const wrapper = mount(<Rate count={3} value={2} direction="rtl" />);
       wrapper.simulate('focus');
       expect(
         wrapper
@@ -50,11 +122,40 @@ describe('rate', () => {
         expect(handleChange).toBeCalledWith(3);
       });
     });
+
+    describe('support keyboard in RTL', () => {
+      it('left & right', () => {
+        const handleChange = jest.fn();
+        const wrapper = mount(<Rate count={3} value={1} direction="rtl" onChange={handleChange} />);
+        wrapper.simulate('keyDown', { keyCode: KeyCode.LEFT });
+        expect(handleChange).toBeCalledWith(2);
+        handleChange.mockReset();
+        wrapper.simulate('keyDown', { keyCode: KeyCode.RIGHT });
+        expect(handleChange).toBeCalledWith(0);
+      });
+
+      it('enter', () => {
+        const handleChange = jest.fn();
+        const wrapper = mount(<Rate count={3} value={1} direction="rtl" onChange={handleChange} />);
+        wrapper
+          .find('li > div')
+          .at(2)
+          .simulate('keyDown', { keyCode: KeyCode.ENTER });
+        expect(handleChange).toBeCalledWith(3);
+      });
+    });
   });
 
   describe('allowHalf', () => {
     it('render works', () => {
       const wrapper = render(<Rate count={3} value={1.5} allowHalf className="custom" />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('render works in RTL', () => {
+      const wrapper = render(
+        <Rate count={3} value={1.5} allowHalf direction="rtl" className="custom" />,
+      );
       expect(wrapper).toMatchSnapshot();
     });
 
@@ -91,6 +192,25 @@ describe('rate', () => {
       ).toBe(false);
     });
 
+    it('support focus and blur in RTL', () => {
+      const wrapper = mount(<Rate count={3} value={1.5} direction="rtl" allowHalf />);
+      wrapper.simulate('focus');
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .hasClass('rc-rate-star-focused'),
+      ).toBe(true);
+
+      wrapper.simulate('blur');
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .hasClass('rc-rate-star-focused'),
+      ).toBe(false);
+    });
+
     it('support keyboard', () => {
       const handleChange = jest.fn();
       const wrapper = mount(<Rate count={3} value={1.5} allowHalf onChange={handleChange} />);
@@ -99,6 +219,40 @@ describe('rate', () => {
       handleChange.mockReset();
       wrapper.simulate('keyDown', { keyCode: KeyCode.RIGHT });
       expect(handleChange).toBeCalledWith(2);
+    });
+
+    it('support keyboard in RTL', () => {
+      const handleChange = jest.fn();
+      const wrapper = mount(<Rate count={3} value={1.5} allowHalf direction="rtl" onChange={handleChange} />);
+      wrapper.simulate('keyDown', { keyCode: KeyCode.LEFT });
+      expect(handleChange).toBeCalledWith(2);
+      handleChange.mockReset();
+      wrapper.simulate('keyDown', { keyCode: KeyCode.RIGHT });
+      expect(handleChange).toBeCalledWith(1);
+    });
+
+    it('hover Rate of allowHalf', () => {
+      const onHoverChange = jest.fn();
+      const wrapper = mount(<Rate count={3} value={1} allowHalf onHoverChange={onHoverChange} />);
+      wrapper
+        .find('li > div')
+        .at(1)
+        .simulate('mouseMove', {
+          pageX: -1,
+        });
+      expect(onHoverChange).toHaveBeenCalledWith(1.5);
+    });
+
+    it('hover Rate of allowHalf and rtl', () => {
+      const onHoverChange = jest.fn();
+      const wrapper = mount(<Rate count={3} value={1} allowHalf direction="rtl" onHoverChange={onHoverChange} />);
+      wrapper
+        .find('li > div')
+        .at(1)
+        .simulate('mouseMove', {
+          pageX: 1,
+        });
+      expect(onHoverChange).toHaveBeenCalledWith(1.5);
     });
   });
 
@@ -198,6 +352,26 @@ describe('rate', () => {
       const handleFocus = jest.fn();
       mount(<Rate autoFocus count={3} value={1} onFocus={handleFocus} />, { attachTo: container });
       expect(handleFocus).toBeCalled();
+    });
+  });
+
+  describe('right class', () => {
+    it('rtl', () => {
+      const wrapper = mount(<Rate count={3} value={1} direction="rtl" />);
+      expect(wrapper.find('.rc-rate-rtl').length).toBe(1);
+    });
+    it('disabled', () => {
+      const wrapper = mount(<Rate count={3} value={1} disabled />);
+      expect(wrapper.find('.rc-rate-disabled').length).toBe(1);
+    });
+  });
+
+  describe('events', () => {
+    it('onKeyDown', () => {
+      const onKeyDown = jest.fn();
+      const wrapper = mount(<Rate count={3} onKeyDown={onKeyDown} />);
+      wrapper.simulate('keydown');
+      expect(onKeyDown).toHaveBeenCalled();
     });
   });
 });
