@@ -230,6 +230,30 @@ describe('rate', () => {
       wrapper.simulate('keyDown', { keyCode: KeyCode.RIGHT });
       expect(handleChange).toBeCalledWith(1);
     });
+
+    it('hover Rate of allowHalf', () => {
+      const onHoverChange = jest.fn();
+      const wrapper = mount(<Rate count={3} value={1} allowHalf onHoverChange={onHoverChange} />);
+      wrapper
+        .find('li > div')
+        .at(1)
+        .simulate('mouseMove', {
+          pageX: -1,
+        });
+      expect(onHoverChange).toHaveBeenCalledWith(1.5);
+    });
+
+    it('hover Rate of allowHalf and rtl', () => {
+      const onHoverChange = jest.fn();
+      const wrapper = mount(<Rate count={3} value={1} allowHalf direction="rtl" onHoverChange={onHoverChange} />);
+      wrapper
+        .find('li > div')
+        .at(1)
+        .simulate('mouseMove', {
+          pageX: 1,
+        });
+      expect(onHoverChange).toHaveBeenCalledWith(1.5);
+    });
   });
 
   describe('allowClear', () => {
@@ -339,6 +363,15 @@ describe('rate', () => {
     it('disabled', () => {
       const wrapper = mount(<Rate count={3} value={1} disabled />);
       expect(wrapper.find('.rc-rate-disabled').length).toBe(1);
+    });
+  });
+
+  describe('events', () => {
+    it('onKeyDown', () => {
+      const onKeyDown = jest.fn();
+      const wrapper = mount(<Rate count={3} onKeyDown={onKeyDown} />);
+      wrapper.simulate('keydown');
+      expect(onKeyDown).toHaveBeenCalled();
     });
   });
 });
