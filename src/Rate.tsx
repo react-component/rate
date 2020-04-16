@@ -1,7 +1,6 @@
 import React from 'react';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { getOffsetLeft } from './util';
 import Star, { StarProps } from './Star';
@@ -141,27 +140,35 @@ class Rate extends React.Component<RateProps, RateState> {
     const { count, allowHalf, onKeyDown, direction } = this.props;
     const reverse = direction === 'rtl';
     let { value } = this.state;
-    if (keyCode === KeyCode.RIGHT && value < count) {
-      if (allowHalf && reverse) {
-        value -= 0.5;
-      } else if (allowHalf && !reverse) {
+    if (keyCode === KeyCode.RIGHT && value < count && !reverse) {
+      if (allowHalf) {
         value += 0.5;
-      } else if (!allowHalf && reverse) {
-        value -= 1;
       } else {
         value += 1;
       }
       this.changeValue(value);
       event.preventDefault();
-    } else if (keyCode === KeyCode.LEFT && value > 0) {
-      if (allowHalf && reverse) {
-        value += 0.5;
-      } else if (allowHalf && !reverse) {
+    } else if (keyCode === KeyCode.LEFT && value > 0 && !reverse) {
+      if (allowHalf) {
         value -= 0.5;
-      } else if (!allowHalf && reverse) {
-        value += 1;
       } else {
         value -= 1;
+      }
+      this.changeValue(value);
+      event.preventDefault();
+    } else if (keyCode === KeyCode.RIGHT && value > 0 && reverse){
+      if (allowHalf) {
+        value -= 0.5;
+      } else {
+        value -= 1;
+      }
+      this.changeValue(value);
+      event.preventDefault();
+    } else if (keyCode === KeyCode.LEFT && value < count && reverse){
+      if (allowHalf) {
+        value += 0.5;
+      } else {
+        value += 1;
       }
       this.changeValue(value);
       event.preventDefault();
@@ -289,7 +296,5 @@ class Rate extends React.Component<RateProps, RateState> {
     );
   }
 }
-
-polyfill(Rate);
 
 export default Rate;
