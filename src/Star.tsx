@@ -58,7 +58,7 @@ export default class Star extends React.Component<StarProps> {
   render() {
     const { onHover, onClick, onKeyDown } = this;
     const { disabled, prefixCls, character, characterRender, index, count, value } = this.props;
-    const characterNode = typeof character === 'function' ? character(index) : character;
+    const characterNode = typeof character === 'function' ? character({ index }) : character;
     let start: React.ReactNode = (
       <li className={this.getClassName()}>
         <div
