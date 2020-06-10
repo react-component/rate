@@ -25,7 +25,7 @@ describe('rate', () => {
         <Rate
           count={3}
           value={1}
-          character={index => {
+          character={({ index }) => {
             return index + 1;
           }}
         />,

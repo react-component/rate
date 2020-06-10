@@ -144,7 +144,7 @@ ReactDOM.render(
         </tr>
         <tr>
           <td>character</td>
-          <td>ReactNode | index => ReactNode</td>
+          <td>ReactNode | ({index}) => ReactNode</td>
           <td>★</td>
           <td>The each character of rate</td>
         </tr>

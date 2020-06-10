@@ -11,7 +11,7 @@ export interface StarProps {
     e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>,
     index: number,
   ) => void;
-  character?: (index: number) => React.ReactNode | React.ReactNode;
+  character?: ({ index: number }) => React.ReactNode | React.ReactNode;
   characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   focused?: boolean;
   count?: number;
