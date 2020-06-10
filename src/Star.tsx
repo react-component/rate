@@ -11,7 +11,7 @@ export interface StarProps {
     e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>,
     index: number,
   ) => void;
-  character?: React.ReactNode;
+  character?: ({ index: number }) => React.ReactNode | React.ReactNode;
   characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   focused?: boolean;
   count?: number;
@@ -58,6 +58,7 @@ export default class Star extends React.Component<StarProps> {
   render() {
     const { onHover, onClick, onKeyDown } = this;
     const { disabled, prefixCls, character, characterRender, index, count, value } = this.props;
+    const characterNode = typeof character === 'function' ? character({ index }) : character;
     let start: React.ReactNode = (
       <li className={this.getClassName()}>
         <div
@@ -70,8 +71,8 @@ export default class Star extends React.Component<StarProps> {
           aria-setsize={count}
           tabIndex={0}
         >
-          <div className={`${prefixCls}-first`}>{character}</div>
-          <div className={`${prefixCls}-second`}>{character}</div>
+          <div className={`${prefixCls}-first`}>{characterNode}</div>
+          <div className={`${prefixCls}-second`}>{characterNode}</div>
         </div>
       </li>
     );

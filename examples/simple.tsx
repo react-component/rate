@@ -27,6 +27,15 @@ export default () => (
     />
     <br />
     <Rate
+      defaultValue={1}
+      onChange={onChange}
+      style={{ fontSize: 50, marginTop: 24 }}
+      character={({ index }) => {
+        return index + 1;
+      }}
+    />
+    <br />
+    <Rate
       defaultValue={2.5}
       onChange={onChange}
       style={{ fontSize: 50, marginTop: 24 }}
