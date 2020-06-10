@@ -58,7 +58,7 @@ export default class Star extends React.Component<StarProps> {
   render() {
     const { onHover, onClick, onKeyDown } = this;
     const { disabled, prefixCls, character, characterRender, index, count, value } = this.props;
-    const iconNode = typeof character === 'function' ? character(index) : character;
+    const characterNode = typeof character === 'function' ? character(index) : character;
     let start: React.ReactNode = (
       <li className={this.getClassName()}>
         <div
@@ -71,8 +71,8 @@ export default class Star extends React.Component<StarProps> {
           aria-setsize={count}
           tabIndex={0}
         >
-          <div className={`${prefixCls}-first`}>{iconNode}</div>
-          <div className={`${prefixCls}-second`}>{iconNode}</div>
+          <div className={`${prefixCls}-first`}>{characterNode}</div>
+          <div className={`${prefixCls}-second`}>{characterNode}</div>
         </div>
       </li>
     );

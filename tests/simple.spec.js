@@ -15,6 +15,24 @@ describe('rate', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
+    it('render works with character node', () => {
+      const wrapper = render(<Rate count={3} value={1} character="1" />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('render works with character function', () => {
+      const wrapper = render(
+        <Rate
+          count={3}
+          value={1}
+          character={index => {
+            return index + 1;
+          }}
+        />,
+      );
+      expect(wrapper).toMatchSnapshot();
+    });
+
     it('click works', () => {
       const handleChange = jest.fn();
       const wrapper = mount(<Rate count={3} value={1} onChange={handleChange} />);
@@ -223,7 +241,9 @@ describe('rate', () => {
 
     it('support keyboard in RTL', () => {
       const handleChange = jest.fn();
-      const wrapper = mount(<Rate count={3} value={1.5} allowHalf direction="rtl" onChange={handleChange} />);
+      const wrapper = mount(
+        <Rate count={3} value={1.5} allowHalf direction="rtl" onChange={handleChange} />,
+      );
       wrapper.simulate('keyDown', { keyCode: KeyCode.LEFT });
       expect(handleChange).toBeCalledWith(2);
       handleChange.mockReset();
@@ -245,7 +265,9 @@ describe('rate', () => {
 
     it('hover Rate of allowHalf and rtl', () => {
       const onHoverChange = jest.fn();
-      const wrapper = mount(<Rate count={3} value={1} allowHalf direction="rtl" onHoverChange={onHoverChange} />);
+      const wrapper = mount(
+        <Rate count={3} value={1} allowHalf direction="rtl" onHoverChange={onHoverChange} />,
+      );
       wrapper
         .find('li > div')
         .at(1)
