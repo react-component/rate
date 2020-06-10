@@ -30,8 +30,7 @@ export default () => (
       defaultValue={1}
       onChange={onChange}
       style={{ fontSize: 50, marginTop: 24 }}
-      character="1"
-      iconRender={index => {
+      character={index => {
         return index + 1;
       }}
     />

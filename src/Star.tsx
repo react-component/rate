@@ -11,8 +11,7 @@ export interface StarProps {
     e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>,
     index: number,
   ) => void;
-  character?: React.ReactNode;
-  iconRender?: (index: number) => React.ReactNode;
+  character?: (index: number) => React.ReactNode | React.ReactNode;
   characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   focused?: boolean;
   count?: number;
@@ -58,17 +57,8 @@ export default class Star extends React.Component<StarProps> {
 
   render() {
     const { onHover, onClick, onKeyDown } = this;
-    const {
-      disabled,
-      prefixCls,
-      character,
-      iconRender,
-      characterRender,
-      index,
-      count,
-      value,
-    } = this.props;
-    const iconNode = iconRender ? iconRender(index) : character;
+    const { disabled, prefixCls, character, characterRender, index, count, value } = this.props;
+    const iconNode = typeof character === 'function' ? character(index) : character;
     let start: React.ReactNode = (
       <li className={this.getClassName()}>
         <div
