@@ -12,6 +12,7 @@ export interface StarProps {
     index: number,
   ) => void;
   character?: React.ReactNode;
+  iconRender?: (index: number) => React.ReactNode;
   characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   focused?: boolean;
   count?: number;
@@ -57,7 +58,17 @@ export default class Star extends React.Component<StarProps> {
 
   render() {
     const { onHover, onClick, onKeyDown } = this;
-    const { disabled, prefixCls, character, characterRender, index, count, value } = this.props;
+    const {
+      disabled,
+      prefixCls,
+      character,
+      iconRender,
+      characterRender,
+      index,
+      count,
+      value,
+    } = this.props;
+    const iconNode = iconRender ? iconRender(index) : character;
     let start: React.ReactNode = (
       <li className={this.getClassName()}>
         <div
@@ -70,8 +81,8 @@ export default class Star extends React.Component<StarProps> {
           aria-setsize={count}
           tabIndex={0}
         >
-          <div className={`${prefixCls}-first`}>{character}</div>
-          <div className={`${prefixCls}-second`}>{character}</div>
+          <div className={`${prefixCls}-first`}>{iconNode}</div>
+          <div className={`${prefixCls}-second`}>{iconNode}</div>
         </div>
       </li>
     );

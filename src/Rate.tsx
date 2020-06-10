@@ -20,6 +20,7 @@ export interface RateProps {
   onHoverChange?: (value: number) => void;
   className?: string;
   character?: React.ReactNode;
+  iconRender?: (index: number) => React.ReactNode;
   characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   tabIndex?: number;
   onFocus?: () => void;
@@ -156,7 +157,7 @@ class Rate extends React.Component<RateProps, RateState> {
       }
       this.changeValue(value);
       event.preventDefault();
-    } else if (keyCode === KeyCode.RIGHT && value > 0 && reverse){
+    } else if (keyCode === KeyCode.RIGHT && value > 0 && reverse) {
       if (allowHalf) {
         value -= 0.5;
       } else {
@@ -164,7 +165,7 @@ class Rate extends React.Component<RateProps, RateState> {
       }
       this.changeValue(value);
       event.preventDefault();
-    } else if (keyCode === KeyCode.LEFT && value < count && reverse){
+    } else if (keyCode === KeyCode.LEFT && value < count && reverse) {
       if (allowHalf) {
         value += 0.5;
       } else {
@@ -250,6 +251,7 @@ class Rate extends React.Component<RateProps, RateState> {
       disabled,
       className,
       character,
+      iconRender,
       characterRender,
       tabIndex,
       direction,
@@ -271,6 +273,7 @@ class Rate extends React.Component<RateProps, RateState> {
           onHover={this.onHover}
           key={index}
           character={character}
+          iconRender={iconRender}
           characterRender={characterRender}
           focused={focused}
         />,
