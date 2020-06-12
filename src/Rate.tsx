@@ -19,7 +19,7 @@ export interface RateProps {
   onChange?: (value: number) => void;
   onHoverChange?: (value: number) => void;
   className?: string;
-  character?: ({ index: number }) => React.ReactNode | React.ReactNode;
+  character?: (props: StarProps) => React.ReactNode | React.ReactNode;
   characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   tabIndex?: number;
   onFocus?: () => void;
