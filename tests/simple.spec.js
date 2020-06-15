@@ -170,6 +170,11 @@ describe('rate', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
+    it('render works more than half ', () => {
+      const wrapper = render(<Rate count={3} value={1.6} allowHalf className="custom" />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
     it('render works in RTL', () => {
       const wrapper = render(
         <Rate count={3} value={1.5} allowHalf direction="rtl" className="custom" />,
