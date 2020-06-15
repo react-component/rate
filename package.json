@@ -1,6 +1,6 @@
 {
   "name": "rc-rate",
-  "version": "2.8.2",
+  "version": "2.8.3",
   "description": "React Star Rate Component",
   "engines": {
     "node": ">=8.x"
