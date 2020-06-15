@@ -69,7 +69,7 @@ export default class Star extends React.Component<StarProps> {
           aria-checked={value > index ? 'true' : 'false'}
           aria-posinset={index + 1}
           aria-setsize={count}
-          tabIndex={0}
+          tabIndex={disabled ? -1 : 0}
         >
           <div className={`${prefixCls}-first`}>{characterNode}</div>
           <div className={`${prefixCls}-second`}>{characterNode}</div>

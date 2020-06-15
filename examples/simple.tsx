@@ -42,10 +42,11 @@ export default () => (
       allowHalf
       character={<i className="anticon anticon-star" />}
     />
-    <br />
+    <h2>Disabled</h2>
     <Rate
       defaultValue={2}
       onChange={onChange}
+      disabled
       style={{ fontSize: 50, marginTop: 24 }}
       character={<i className="anticon anticon-star" />}
     />
