@@ -1,8 +1,6 @@
 # rc-rate
----
 
 React Rate Component
-
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
@@ -26,6 +24,9 @@ React Rate Component
 
 <img src="https://img.alicdn.com/tps/TB1ijlpLVXXXXb8XpXXXXXXXXXX-466-172.png" width="288"/>
 
+## History
+
+- [HISTORY](./HISTORY.md)
 
 ## Development
 
@@ -36,17 +37,13 @@ npm start
 
 ## Example
 
-http://localhost:8000/examples/
+- Local: http://localhost:9001/
 
-
-online example: http://react-component.github.io/rate/
-
+- Online: http://react-component.github.io/rate/
 
 ## install
 
-
 [![rc-rate](https://nodei.co/npm/rc-rate.png)](https://npmjs.org/package/rc-rate)
-
 
 ## Usage
 
@@ -84,85 +81,19 @@ ReactDOM.render(
 
 ### props
 
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th style="width: 100px;">name</th>
-        <th style="width: 50px;">type</th>
-        <th style="width: 50px;">default</th>
-        <th>description</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td>count</td>
-          <td>number</td>
-          <td>5</td>
-          <td>star numbers</td>
-        </tr>
-        <tr>
-          <td>value</td>
-          <td>number</td>
-          <td></td>
-          <td>controlled value</td>
-        </tr>
-        <tr>
-          <td>defaultValue</td>
-          <td>number</td>
-          <td>0</td>
-          <td>initial value</td>
-        </tr>
-        <tr>
-          <td>allowHalf</td>
-          <td>bool</td>
-          <td>false</td>
-          <td>support half star</td>
-        </tr>
-        <tr>
-          <td>allowClear</td>
-          <td>bool</td>
-          <td>true</td>
-          <td>reset when click again</td>
-        </tr>
-        <tr>
-          <td>style</td>
-          <td>object</td>
-          <td>{}</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>onChange</td>
-          <td>function(value: Number)</td>
-          <td></td>
-          <td>`onChange` will be triggered when click.</td>
-        </tr>
-        <tr>
-          <td>onHoverChange</td>
-          <td>function(value: Number)</td>
-          <td></td>
-          <td>`onHoverChange` will be triggered when hover on stars.</td>
-        </tr>
-        <tr>
-          <td>character</td>
-          <td>ReactNode | (props) => ReactNode</td>
-          <td>★</td>
-          <td>The each character of rate</td>
-        </tr>
-        <tr>
-          <td>disabled</td>
-          <td>bool</td>
-          <td>false</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>direction</td>
-          <td>string</td>
-          <td>ltr</td>
-          <td>The direction of rate</td>
-        </tr>
-    </tbody>
-</table>
-
+| name          | type                              | default       | description                                           |
+| ------------- | --------------------------------- | ------------- | ----------------------------------------------------- |
+| count         | number                            | 5             | Star numbers                                          |
+| value         | number                            | -             | Controlled value                                      |
+| defaultValue  | number                            | 0             | Initial value                                         |
+| allowHalf     | boolean                           | false         | Support half star                                     |
+| allowClear    | boolean                           | true          | Reset when click again                                |
+| style         | object                            | {}            |                                                       |
+| onChange      | function                          | (value) => {} | `onChange` will be triggered when click               |
+| onHoverChange | function                          | (value) => {} | `onHoverChange` will be triggered when hover on stars |
+| character     | ReactNode \| (props) => ReactNode | ★             | The each character of rate                            |
+| disabled      | boolean                           | false         |                                                       |
+| direction     | string                            | `ltr`         | The direction of rate                                 |
 
 ## Test Case
 
