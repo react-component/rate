@@ -1,13 +1,14 @@
 # rc-rate
 
 ## 2.8.2
-`2020-06-15`
 
+`2020-06-15`
 - fix: improve defaultvalue more than half [#86](https://github.com/react-component/rate/pull/86)
 
 - fix: star tabindex when disabled [#87](https://github.com/react-component/rate/pull/87)
 
 ## 2.8.1 
+
 `2020-06-12`
 
 - feat: character support props [#85](https://github.com/react-component/rate/pull/85)
