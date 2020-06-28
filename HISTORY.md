@@ -10,7 +10,6 @@
 ## 2.8.1 
 
 `2020-06-12`
-
 - feat: character support props [#85](https://github.com/react-component/rate/pull/85)
 
 ## 2.8.0 
