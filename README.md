@@ -47,10 +47,11 @@ npm start
 
 ## Usage
 
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Rate from 'rc-rate'
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Rate from 'rc-rate';
+import "rc-rate/assets/index.css";
 
 ReactDOM.render(
   <Rate />,
@@ -59,11 +60,11 @@ ReactDOM.render(
 ```
 
 ### with [styled-components](https://github.com/styled-components/styled-components)
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Rate from 'rc-rate'
-import styled from 'styled-components'
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Rate from 'rc-rate';
+import styled from 'styled-components';
 
 const StyledRate = styled(Rate)`
   &.rc-rate {
