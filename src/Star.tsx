@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 export interface StarProps {
   value?: number;
@@ -17,26 +17,34 @@ export interface StarProps {
   count?: number;
 }
 
-export default class Star extends React.Component<StarProps> {
-  onHover: React.MouseEventHandler<HTMLDivElement> = e => {
-    const { onHover, index } = this.props;
-    onHover(e, index);
+const Star = props => {
+  const {
+    disabled,
+    prefixCls,
+    character,
+    characterRender,
+    index,
+    count,
+    value,
+    allowHalf,
+    focused,
+  } = props;
+
+  const onHover: React.MouseEventHandler<HTMLDivElement> = e => {
+    props.onHover(e, index);
   };
 
-  onClick = e => {
-    const { onClick, index } = this.props;
-    onClick(e, index);
+  const onClick = e => {
+    props.onClick(e, index);
   };
 
-  onKeyDown: React.KeyboardEventHandler<HTMLDivElement> = e => {
-    const { onClick, index } = this.props;
+  const onKeyDown: React.KeyboardEventHandler<HTMLDivElement> = e => {
     if (e.keyCode === 13) {
-      onClick(e, index);
+      props.onClick(e, index);
     }
   };
 
-  getClassName() {
-    const { prefixCls, index, value, allowHalf, focused } = this.props;
+  const getClassName = () => {
     const starValue = index + 1;
     let className = prefixCls;
     if (value === 0 && index === 0 && focused) {
@@ -53,34 +61,33 @@ export default class Star extends React.Component<StarProps> {
       }
     }
     return className;
+  };
+
+  const characterNode = typeof character === 'function' ? character(props) : character;
+
+  let start: React.ReactNode = (
+    <li className={getClassName()}>
+      <div
+        onClick={disabled ? null : onClick}
+        onKeyDown={disabled ? null : onKeyDown}
+        onMouseMove={disabled ? null : onHover}
+        role="radio"
+        aria-checked={value > index ? 'true' : 'false'}
+        aria-posinset={index + 1}
+        aria-setsize={count}
+        tabIndex={disabled ? -1 : 0}
+      >
+        <div className={`${prefixCls}-first`}>{characterNode}</div>
+        <div className={`${prefixCls}-second`}>{characterNode}</div>
+      </div>
+    </li>
+  );
+
+  if (characterRender) {
+    start = characterRender(start as React.ReactElement, props);
   }
 
-  render() {
-    const { onHover, onClick, onKeyDown } = this;
-    const { disabled, prefixCls, character, characterRender, index, count, value } = this.props;
-    const characterNode = typeof character === 'function' ? character(this.props) : character;
-    let start: React.ReactNode = (
-      <li className={this.getClassName()}>
-        <div
-          onClick={disabled ? null : onClick}
-          onKeyDown={disabled ? null : onKeyDown}
-          onMouseMove={disabled ? null : onHover}
-          role="radio"
-          aria-checked={value > index ? 'true' : 'false'}
-          aria-posinset={index + 1}
-          aria-setsize={count}
-          tabIndex={disabled ? -1 : 0}
-        >
-          <div className={`${prefixCls}-first`}>{characterNode}</div>
-          <div className={`${prefixCls}-second`}>{characterNode}</div>
-        </div>
-      </li>
-    );
+  return start;
+};
 
-    if (characterRender) {
-      start = characterRender(start as React.ReactElement, this.props);
-    }
-
-    return start;
-  }
-}
+export default Star;

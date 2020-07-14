@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import classNames from 'classnames';
 import KeyCode from 'rc-util/lib/KeyCode';
@@ -29,175 +29,60 @@ export interface RateProps {
   direction?: string;
 }
 
-interface RateState {
-  value: number;
-  cleanedValue: number;
-  hoverValue?: number;
-  focused: boolean;
-}
+const Rate = React.forwardRef<unknown, RateProps>((props, ref) => {
+  const [stateValue, setStateValue] = React.useState(undefined);
+  const [cleanedValue, setCleanedValue] = React.useState(null);
+  const [hoverValue, setHoverValue] = React.useState(undefined);
+  const [focused, setFocused] = React.useState(false);
 
-class Rate extends React.Component<RateProps, RateState> {
-  static defaultProps = {
-    defaultValue: 0,
-    count: 5,
-    allowHalf: false,
-    allowClear: true,
-    style: {},
-    prefixCls: 'rc-rate',
-    onChange: noop,
-    character: '★',
-    onHoverChange: noop,
-    tabIndex: 0,
-    direction: 'ltr',
+  let stars: Record<string, StarProps>;
+  let rate: HTMLUListElement;
+
+  const focus = () => {
+    const { disabled } = props;
+    if (!disabled) {
+      rate.focus();
+    }
   };
 
-  stars: Record<string, Star>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const blur = () => {
+    const { disabled } = props;
+    if (!disabled) {
+      rate.blur();
+    }
+  };
 
-  rate: HTMLUListElement;
-
-  constructor(props: RateProps) {
-    super(props);
+  React.useEffect(() => {
     let { value } = props;
     if (value === undefined) {
       value = props.defaultValue;
     }
+    setStateValue(value);
+    stars = {};
+  }, []);
 
-    this.stars = {};
-
-    this.state = {
-      value,
-      focused: false,
-      cleanedValue: null,
-    };
-  }
-
-  componentDidMount() {
-    const { autoFocus, disabled } = this.props;
+  React.useEffect(() => {
+    const { autoFocus, disabled } = props;
     if (autoFocus && !disabled) {
-      this.focus();
+      focus();
     }
-  }
+  }, []);
 
-  onHover = (event: React.MouseEvent<HTMLDivElement>, index: number) => {
-    const { onHoverChange } = this.props;
-    const hoverValue = this.getStarValue(index, event.pageX);
-    const { cleanedValue } = this.state;
-    if (hoverValue !== cleanedValue) {
-      this.setState({
-        hoverValue,
-        cleanedValue: null,
-      });
-    }
-    onHoverChange(hoverValue);
+  React.useEffect(() => {
+    setStateValue(props.value);
+  }, [props.value]);
+
+  const getStarDOM = (index: number): HTMLElement => {
+    return findDOMNode(stars[index]);
   };
 
-  onMouseLeave = () => {
-    const { onHoverChange } = this.props;
-    this.setState({
-      hoverValue: undefined,
-      cleanedValue: null,
-    });
-    onHoverChange(undefined);
-  };
-
-  onClick = (event: React.MouseEvent | React.KeyboardEvent, index: number) => {
-    const { allowClear } = this.props;
-    const { value } = this.state;
-    const newValue = this.getStarValue(index, (event as React.MouseEvent).pageX);
-    let isReset = false;
-    if (allowClear) {
-      isReset = newValue === value;
-    }
-    this.onMouseLeave();
-    this.changeValue(isReset ? 0 : newValue);
-    this.setState({
-      cleanedValue: isReset ? newValue : null,
-    });
-  };
-
-  onFocus = () => {
-    const { onFocus } = this.props;
-    this.setState({
-      focused: true,
-    });
-    if (onFocus) {
-      onFocus();
-    }
-  };
-
-  onBlur = () => {
-    const { onBlur } = this.props;
-    this.setState({
-      focused: false,
-    });
-    if (onBlur) {
-      onBlur();
-    }
-  };
-
-  onKeyDown: React.KeyboardEventHandler<HTMLUListElement> = event => {
-    const { keyCode } = event;
-    const { count, allowHalf, onKeyDown, direction } = this.props;
-    const reverse = direction === 'rtl';
-    let { value } = this.state;
-    if (keyCode === KeyCode.RIGHT && value < count && !reverse) {
-      if (allowHalf) {
-        value += 0.5;
-      } else {
-        value += 1;
-      }
-      this.changeValue(value);
-      event.preventDefault();
-    } else if (keyCode === KeyCode.LEFT && value > 0 && !reverse) {
-      if (allowHalf) {
-        value -= 0.5;
-      } else {
-        value -= 1;
-      }
-      this.changeValue(value);
-      event.preventDefault();
-    } else if (keyCode === KeyCode.RIGHT && value > 0 && reverse) {
-      if (allowHalf) {
-        value -= 0.5;
-      } else {
-        value -= 1;
-      }
-      this.changeValue(value);
-      event.preventDefault();
-    } else if (keyCode === KeyCode.LEFT && value < count && reverse) {
-      if (allowHalf) {
-        value += 0.5;
-      } else {
-        value += 1;
-      }
-      this.changeValue(value);
-      event.preventDefault();
-    }
-    if (onKeyDown) {
-      onKeyDown(event);
-    }
-  };
-
-  static getDerivedStateFromProps(nextProps: RateProps, state: RateState) {
-    if ('value' in nextProps && nextProps.value !== undefined) {
-      return {
-        ...state,
-        value: nextProps.value,
-      };
-    }
-    return state;
-  }
-
-  getStarDOM(index: number): HTMLElement {
-    return findDOMNode(this.stars[index]);
-  }
-
-  getStarValue(index: number, x: number) {
-    const { allowHalf, direction } = this.props;
+  const getStarValue = (index: number, x: number) => {
+    const { allowHalf, direction } = props;
     const reverse = direction === 'rtl';
     let value = index + 1;
     if (allowHalf) {
-      const starEle = this.getStarDOM(index);
+      const starEle = getStarDOM(index);
       const leftDis = getOffsetLeft(starEle);
       const width = starEle.clientWidth;
       if (reverse && x - leftDis > width / 2) {
@@ -207,94 +92,172 @@ class Rate extends React.Component<RateProps, RateState> {
       }
     }
     return value;
-  }
-
-  saveRef = (index: number) => (node: Star) => {
-    this.stars[index] = node;
   };
 
-  saveRate = (node: HTMLUListElement) => {
-    this.rate = node;
-  };
-
-  focus() {
-    const { disabled } = this.props;
-    if (!disabled) {
-      this.rate.focus();
-    }
-  }
-
-  blur() {
-    const { disabled } = this.props;
-    if (!disabled) {
-      this.rate.blur();
-    }
-  }
-
-  changeValue(value: number) {
-    const { onChange } = this.props;
-    if (!('value' in this.props)) {
-      this.setState({
-        value,
-      });
+  const changeValue = (value: number) => {
+    const { onChange } = props;
+    if (!('value' in props)) {
+      setStateValue(value);
     }
     onChange(value);
-  }
+  };
 
-  render() {
-    const {
-      count,
-      allowHalf,
-      style,
-      prefixCls,
-      disabled,
-      className,
-      character,
-      characterRender,
-      tabIndex,
-      direction,
-    } = this.props;
-    const { value, hoverValue, focused } = this.state;
-    const stars = [];
-    const disabledClass = disabled ? `${prefixCls}-disabled` : '';
-    for (let index = 0; index < count; index += 1) {
-      stars.push(
-        <Star
-          ref={this.saveRef(index)}
-          index={index}
-          count={count}
-          disabled={disabled}
-          prefixCls={`${prefixCls}-star`}
-          allowHalf={allowHalf}
-          value={hoverValue === undefined ? value : hoverValue}
-          onClick={this.onClick}
-          onHover={this.onHover}
-          key={index}
-          character={character}
-          characterRender={characterRender}
-          focused={focused}
-        />,
-      );
+  const onHover = (event: React.MouseEvent<HTMLDivElement>, index: number) => {
+    const { onHoverChange } = props;
+    const hoverStarValue = getStarValue(index, event.pageX);
+    if (hoverStarValue !== cleanedValue) {
+      setHoverValue(hoverStarValue);
+      setCleanedValue(null);
     }
-    const rateClassName = classNames(prefixCls, disabledClass, className, {
-      [`${prefixCls}-rtl`]: direction === 'rtl',
-    });
-    return (
-      <ul
-        className={rateClassName}
-        style={style}
-        onMouseLeave={disabled ? null : this.onMouseLeave}
-        tabIndex={disabled ? -1 : tabIndex}
-        onFocus={disabled ? null : this.onFocus}
-        onBlur={disabled ? null : this.onBlur}
-        onKeyDown={disabled ? null : this.onKeyDown}
-        ref={this.saveRate}
-        role="radiogroup"
-      >
-        {stars}
-      </ul>
+    onHoverChange(hoverStarValue);
+  };
+
+  const onFocus = () => {
+    setFocused(true);
+    if (props.onFocus) {
+      props.onFocus();
+    }
+  };
+
+  const onBlur = () => {
+    setFocused(false);
+    if (props.onBlur) {
+      props.onBlur();
+    }
+  };
+
+  const onMouseLeave = () => {
+    const { onHoverChange } = props;
+    setHoverValue(undefined);
+    setCleanedValue(null);
+    onHoverChange(undefined);
+  };
+
+  const onClick = (event: React.MouseEvent | React.KeyboardEvent, index: number) => {
+    const { allowClear } = props;
+    const newValue = getStarValue(index, (event as React.MouseEvent).pageX);
+    let isReset = false;
+    if (allowClear) {
+      isReset = newValue === stateValue;
+    }
+    onMouseLeave();
+    changeValue(isReset ? 0 : newValue);
+    setCleanedValue(isReset ? newValue : null);
+  };
+
+  const onKeyDown: React.KeyboardEventHandler<HTMLUListElement> = event => {
+    const { keyCode } = event;
+    const { count, allowHalf, onKeyDown: onKeyDownProp, direction } = props;
+    const reverse = direction === 'rtl';
+    let value = stateValue;
+    if (keyCode === KeyCode.RIGHT && value < count && !reverse) {
+      if (allowHalf) {
+        value += 0.5;
+      } else {
+        value += 1;
+      }
+      changeValue(value);
+      event.preventDefault();
+    } else if (keyCode === KeyCode.LEFT && value > 0 && !reverse) {
+      if (allowHalf) {
+        value -= 0.5;
+      } else {
+        value -= 1;
+      }
+      changeValue(value);
+      event.preventDefault();
+    } else if (keyCode === KeyCode.RIGHT && value > 0 && reverse) {
+      if (allowHalf) {
+        value -= 0.5;
+      } else {
+        value -= 1;
+      }
+      changeValue(value);
+      event.preventDefault();
+    } else if (keyCode === KeyCode.LEFT && value < count && reverse) {
+      if (allowHalf) {
+        value += 0.5;
+      } else {
+        value += 1;
+      }
+      changeValue(value);
+      event.preventDefault();
+    }
+    if (onKeyDownProp) {
+      onKeyDownProp(event);
+    }
+  };
+
+  const saveRef = (index: number) => (node: StarProps) => {
+    stars[index] = node;
+  };
+
+  const {
+    count,
+    allowHalf,
+    style,
+    prefixCls,
+    disabled,
+    className,
+    character,
+    characterRender,
+    tabIndex,
+    direction,
+  } = props;
+
+  const starsNode = [];
+  const disabledClass = disabled ? `${prefixCls}-disabled` : '';
+  for (let index = 0; index < count; index += 1) {
+    starsNode.push(
+      <Star
+        ref={saveRef(index)}
+        index={index}
+        count={count}
+        disabled={disabled}
+        prefixCls={`${prefixCls}-star`}
+        allowHalf={allowHalf}
+        value={hoverValue === undefined ? stateValue : hoverValue}
+        onClick={onClick}
+        onHover={onHover}
+        key={index}
+        character={character}
+        characterRender={characterRender}
+        focused={focused}
+      />,
     );
   }
-}
+  const rateClassName = classNames(prefixCls, disabledClass, className, {
+    [`${prefixCls}-rtl`]: direction === 'rtl',
+  });
+  return (
+    <ul
+      className={rateClassName}
+      style={style}
+      onMouseLeave={disabled ? null : onMouseLeave}
+      tabIndex={disabled ? -1 : tabIndex}
+      onFocus={disabled ? null : onFocus}
+      onBlur={disabled ? null : onBlur}
+      onKeyDown={disabled ? null : onKeyDown}
+      ref={ref as any}
+      role="radiogroup"
+    >
+      {starsNode}
+    </ul>
+  );
+});
+
+Rate.defaultProps = {
+  defaultValue: 0,
+  count: 5,
+  allowHalf: false,
+  allowClear: true,
+  style: {},
+  prefixCls: 'rc-rate',
+  onChange: noop,
+  character: ('★' as unknown) as RateProps['character'],
+  onHoverChange: noop,
+  tabIndex: 0,
+  direction: 'ltr',
+};
 
 export default Rate;
