@@ -24,9 +24,9 @@ React Rate Component
 
 <img src="https://img.alicdn.com/tps/TB1ijlpLVXXXXb8XpXXXXXXXXXX-466-172.png" width="288"/>
 
-## History
+## Changelog
 
-- [HISTORY](./HISTORY.md)
+- [CHANGELOG](./CHANGELOG.md)
 
 ## Development
 
