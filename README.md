@@ -51,7 +51,7 @@ npm start
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Rate from 'rc-rate';
-import "rc-rate/assets/index.css";
+import 'rc-rate/assets/index.css';
 
 ReactDOM.render(
   <Rate />,
