@@ -1,5 +1,12 @@
 # rc-rate
 
+## 2.9.0
+
+`2020-11-02`
+
+- Update devDependencies include np/typescript/rc-tooltip
+- Add peerDependencies [#97](https://github.com/react-component/rate/pull/97)
+
 ## 2.8.2
 
 `2020-06-15`
