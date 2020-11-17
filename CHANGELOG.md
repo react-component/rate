@@ -1,5 +1,11 @@
 # rc-rate
 
+## 2.9.1
+
+`2020-11-17`
+
+- fix: character type [#102](https://github.com/react-component/rate/pull/102)
+
 ## 2.9.0
 
 `2020-11-02`
