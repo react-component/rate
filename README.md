@@ -2,7 +2,7 @@
 
 React Rate Component
 
-[![NPM version][npm-image]][npm-url][![build status][travis-image]][travis-url][![Test coverage][codecov-image]][codecov-url][![gemnasium deps][gemnasium-image]][gemnasium-url][![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url] [![build status][travis-image]][travis-url] [![Test coverage][codecov-image]][codecov-url] [![gemnasium deps][gemnasium-image]][gemnasium-url] [![npm download][download-image]][download-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-rate.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-rate
