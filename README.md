@@ -2,12 +2,12 @@
 
 React Rate Component
 
-[![NPM version][npm-image]][npm-url] [![build status][travis-image]][travis-url] [![Test coverage][codecov-image]][codecov-url] [![gemnasium deps][gemnasium-image]][gemnasium-url] [![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url] [![build status][github-actions-image]][github-actions-url] [![Test coverage][codecov-image]][codecov-url] [![gemnasium deps][gemnasium-image]][gemnasium-url] [![npm download][download-image]][download-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-rate.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-rate
-[travis-image]: https://img.shields.io/travis/react-component/rate.svg?style=flat-square
-[travis-url]: https://travis-ci.org/react-component/rate
+[github-actions-image]: https://github.com/react-component/rate/workflows/CI/badge.svg
+[github-actions-url]: https://github.com/react-component/rate/actions
 [codecov-image]: https://img.shields.io/codecov/c/github/react-component/rate/master.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/react-component/rate/branch/master
 [gemnasium-image]: http://img.shields.io/gemnasium/react-component/rate.svg?style=flat-square
