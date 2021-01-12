@@ -2,8 +2,8 @@
 import React from 'react';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap_white.css';
-import Rate from '../src';
-import '../assets/index.less';
+import Rate from 'rc-rate';
+import '../../assets/index.less';
 
 export default () => (
   <div style={{ margin: 100 }}>

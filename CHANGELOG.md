@@ -1,4 +1,4 @@
-# rc-rate
+# Changelog
 
 ## 2.9.1
 
