@@ -3,7 +3,8 @@ import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import classNames from 'classnames';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { getOffsetLeft } from './util';
-import Star, { StarProps } from './Star';
+import type { StarProps } from './Star';
+import Star from './Star';
 
 function noop() {}
 
@@ -25,6 +26,8 @@ export interface RateProps {
   onFocus?: () => void;
   onBlur?: () => void;
   onKeyDown?: React.KeyboardEventHandler<HTMLUListElement>;
+  onMouseEnter?: React.MouseEventHandler<HTMLUListElement>;
+  onMouseLeave?: React.MouseEventHandler<HTMLUListElement>;
   autoFocus?: boolean;
   direction?: string;
 }
@@ -135,7 +138,7 @@ class Rate extends React.Component<RateProps, RateState> {
     }
   };
 
-  onKeyDown: React.KeyboardEventHandler<HTMLUListElement> = event => {
+  onKeyDown: React.KeyboardEventHandler<HTMLUListElement> = (event) => {
     const { keyCode } = event;
     const { count, allowHalf, onKeyDown, direction } = this.props;
     const reverse = direction === 'rtl';
@@ -253,6 +256,8 @@ class Rate extends React.Component<RateProps, RateState> {
       characterRender,
       tabIndex,
       direction,
+      onMouseEnter,
+      onMouseLeave,
     } = this.props;
     const { value, hoverValue, focused } = this.state;
     const stars = [];
@@ -283,10 +288,20 @@ class Rate extends React.Component<RateProps, RateState> {
       <ul
         className={rateClassName}
         style={style}
-        onMouseLeave={disabled ? null : this.onMouseLeave}
+        onMouseLeave={
+          disabled
+            ? onMouseLeave
+            : (e) => {
+                if (onMouseLeave) {
+                  onMouseLeave(e);
+                }
+                this.onMouseLeave();
+              }
+        }
         tabIndex={disabled ? -1 : tabIndex}
         onFocus={disabled ? null : this.onFocus}
         onBlur={disabled ? null : this.onBlur}
+        onMouseEnter={onMouseEnter}
         onKeyDown={disabled ? null : this.onKeyDown}
         ref={this.saveRate}
         role="radiogroup"
