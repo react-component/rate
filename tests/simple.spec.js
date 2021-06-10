@@ -36,87 +36,45 @@ describe('rate', () => {
     it('click works', () => {
       const handleChange = jest.fn();
       const wrapper = mount(<Rate count={3} value={1} onChange={handleChange} />);
-      wrapper
-        .find('li > div')
-        .at(1)
-        .simulate('click');
+      wrapper.find('li > div').at(1).simulate('click');
       expect(handleChange).toBeCalledWith(2);
     });
 
     it('click works in RTL', () => {
       const handleChange = jest.fn();
       const wrapper = mount(<Rate count={3} value={1} direction="rtl" onChange={handleChange} />);
-      wrapper
-        .find('li > div')
-        .at(1)
-        .simulate('click');
+      wrapper.find('li > div').at(1).simulate('click');
       expect(handleChange).toBeCalledWith(2);
     });
 
     it('support mouseMove', () => {
       const wrapper = mount(<Rate count={3} value={1} />);
-      wrapper
-        .find('li > div')
-        .at(1)
-        .simulate('mouseMove');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-full'),
-      ).toBe(true);
+      wrapper.find('li > div').at(1).simulate('mouseMove');
+      expect(wrapper.find('li').at(1).hasClass('rc-rate-star-full')).toBe(true);
     });
 
     it('support mouseMove in RTL', () => {
       const wrapper = mount(<Rate count={3} value={1} direction="rtl" />);
-      wrapper
-        .find('li > div')
-        .at(1)
-        .simulate('mouseMove');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-full'),
-      ).toBe(true);
+      wrapper.find('li > div').at(1).simulate('mouseMove');
+      expect(wrapper.find('li').at(1).hasClass('rc-rate-star-full')).toBe(true);
     });
 
     it('support focus and blur', () => {
       const wrapper = mount(<Rate count={3} value={2} />);
       wrapper.simulate('focus');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-focused'),
-      ).toBe(true);
+      expect(wrapper.find('li').at(1).hasClass('rc-rate-star-focused')).toBe(true);
 
       wrapper.simulate('blur');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-focused'),
-      ).toBe(false);
+      expect(wrapper.find('li').at(1).hasClass('rc-rate-star-focused')).toBe(false);
     });
 
     it('support focus and blur in RTL', () => {
       const wrapper = mount(<Rate count={3} value={2} direction="rtl" />);
       wrapper.simulate('focus');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-focused'),
-      ).toBe(true);
+      expect(wrapper.find('li').at(1).hasClass('rc-rate-star-focused')).toBe(true);
 
       wrapper.simulate('blur');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-focused'),
-      ).toBe(false);
+      expect(wrapper.find('li').at(1).hasClass('rc-rate-star-focused')).toBe(false);
     });
 
     describe('support keyboard', () => {
@@ -133,10 +91,7 @@ describe('rate', () => {
       it('enter', () => {
         const handleChange = jest.fn();
         const wrapper = mount(<Rate count={3} value={1} onChange={handleChange} />);
-        wrapper
-          .find('li > div')
-          .at(2)
-          .simulate('keyDown', { keyCode: KeyCode.ENTER });
+        wrapper.find('li > div').at(2).simulate('keyDown', { keyCode: KeyCode.ENTER });
         expect(handleChange).toBeCalledWith(3);
       });
     });
@@ -155,10 +110,7 @@ describe('rate', () => {
       it('enter', () => {
         const handleChange = jest.fn();
         const wrapper = mount(<Rate count={3} value={1} direction="rtl" onChange={handleChange} />);
-        wrapper
-          .find('li > div')
-          .at(2)
-          .simulate('keyDown', { keyCode: KeyCode.ENTER });
+        wrapper.find('li > div').at(2).simulate('keyDown', { keyCode: KeyCode.ENTER });
         expect(handleChange).toBeCalledWith(3);
       });
     });
@@ -184,54 +136,26 @@ describe('rate', () => {
 
     it('click works', () => {
       const wrapper = mount(<Rate count={5} value={4.5} allowHalf />);
-      wrapper
-        .find('li > div')
-        .at(2)
-        .simulate('click');
-      expect(
-        wrapper
-          .find('li')
-          .at(4)
-          .hasClass('rc-rate-star-full'),
-      ).toBe(false);
+      wrapper.find('li > div').at(2).simulate('click');
+      expect(wrapper.find('li').at(4).hasClass('rc-rate-star-full')).toBe(false);
     });
 
     it('support focus and blur', () => {
       const wrapper = mount(<Rate count={3} value={1.5} allowHalf />);
       wrapper.simulate('focus');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-focused'),
-      ).toBe(true);
+      expect(wrapper.find('li').at(1).hasClass('rc-rate-star-focused')).toBe(true);
 
       wrapper.simulate('blur');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-focused'),
-      ).toBe(false);
+      expect(wrapper.find('li').at(1).hasClass('rc-rate-star-focused')).toBe(false);
     });
 
     it('support focus and blur in RTL', () => {
       const wrapper = mount(<Rate count={3} value={1.5} direction="rtl" allowHalf />);
       wrapper.simulate('focus');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-focused'),
-      ).toBe(true);
+      expect(wrapper.find('li').at(1).hasClass('rc-rate-star-focused')).toBe(true);
 
       wrapper.simulate('blur');
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .hasClass('rc-rate-star-focused'),
-      ).toBe(false);
+      expect(wrapper.find('li').at(1).hasClass('rc-rate-star-focused')).toBe(false);
     });
 
     it('support keyboard', () => {
@@ -259,12 +183,9 @@ describe('rate', () => {
     it('hover Rate of allowHalf', () => {
       const onHoverChange = jest.fn();
       const wrapper = mount(<Rate count={3} value={1} allowHalf onHoverChange={onHoverChange} />);
-      wrapper
-        .find('li > div')
-        .at(1)
-        .simulate('mouseMove', {
-          pageX: -1,
-        });
+      wrapper.find('li > div').at(1).simulate('mouseMove', {
+        pageX: -1,
+      });
       expect(onHoverChange).toHaveBeenCalledWith(1.5);
     });
 
@@ -273,12 +194,9 @@ describe('rate', () => {
       const wrapper = mount(
         <Rate count={3} value={1} allowHalf direction="rtl" onHoverChange={onHoverChange} />,
       );
-      wrapper
-        .find('li > div')
-        .at(1)
-        .simulate('mouseMove', {
-          pageX: 1,
-        });
+      wrapper.find('li > div').at(1).simulate('mouseMove', {
+        pageX: 1,
+      });
       expect(onHoverChange).toHaveBeenCalledWith(1.5);
     });
   });
@@ -289,59 +207,28 @@ describe('rate', () => {
       const wrapper = mount(
         <Rate count={5} value={1} allowClear={false} onChange={handleChange} />,
       );
-      wrapper
-        .find('li > div')
-        .at(3)
-        .simulate('click');
-      wrapper
-        .find('li > div')
-        .at(3)
-        .simulate('click');
+      wrapper.find('li > div').at(3).simulate('click');
+      wrapper.find('li > div').at(3).simulate('click');
       expect(handleChange).toBeCalledWith(4);
     });
     it('allowClear is true', () => {
       const handleChange = jest.fn();
       const wrapper = mount(<Rate count={5} value={4} onChange={handleChange} />);
-      wrapper
-        .find('li > div')
-        .at(3)
-        .simulate('click');
+      wrapper.find('li > div').at(3).simulate('click');
       expect(handleChange).toBeCalledWith(0);
     });
     it('cleaned star disable hover', () => {
       const wrapper = mount(<Rate count={5} defaultValue={4} />);
-      wrapper
-        .find('li > div')
-        .at(3)
-        .simulate('click');
-      wrapper
-        .find('li > div')
-        .at(3)
-        .simulate('mouseMove');
-      expect(
-        wrapper
-          .find('li')
-          .at(3)
-          .hasClass('rc-rate-star-full'),
-      ).toBe(false);
+      wrapper.find('li > div').at(3).simulate('click');
+      wrapper.find('li > div').at(3).simulate('mouseMove');
+      expect(wrapper.find('li').at(3).hasClass('rc-rate-star-full')).toBe(false);
     });
     it('cleaned star reset', () => {
       const wrapper = mount(<Rate count={5} defaultValue={4} />);
-      wrapper
-        .find('li > div')
-        .at(3)
-        .simulate('click');
+      wrapper.find('li > div').at(3).simulate('click');
       wrapper.find('ul').simulate('mouseLeave');
-      wrapper
-        .find('li > div')
-        .at(3)
-        .simulate('mouseMove');
-      expect(
-        wrapper
-          .find('li')
-          .at(3)
-          .hasClass('rc-rate-star-full'),
-      ).toBe(true);
+      wrapper.find('li > div').at(3).simulate('mouseMove');
+      expect(wrapper.find('li').at(3).hasClass('rc-rate-star-full')).toBe(true);
     });
   });
 
@@ -399,6 +286,30 @@ describe('rate', () => {
       const wrapper = mount(<Rate count={3} onKeyDown={onKeyDown} />);
       wrapper.simulate('keydown');
       expect(onKeyDown).toHaveBeenCalled();
+    });
+
+    // https://github.com/ant-design/ant-design/issues/30940
+    it('range picker should accept onMouseEnter and onMouseLeave event when Rate component is diabled', () => {
+      const handleMouseEnter = jest.fn();
+      const handleMouseLeave = jest.fn();
+      const wrapper = mount(
+        <Rate onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} disabled />,
+      );
+      wrapper.simulate('mouseenter');
+      expect(handleMouseEnter).toHaveBeenCalled();
+      wrapper.simulate('mouseleave');
+      expect(handleMouseLeave).toHaveBeenCalled();
+    });
+    it('range picker should accept onMouseEnter and onMouseLeave event when Rate component is not diabled', () => {
+      const handleMouseEnter = jest.fn();
+      const handleMouseLeave = jest.fn();
+      const wrapper = mount(
+        <Rate onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />,
+      );
+      wrapper.simulate('mouseenter');
+      expect(handleMouseEnter).toHaveBeenCalled();
+      wrapper.simulate('mouseleave');
+      expect(handleMouseLeave).toHaveBeenCalled();
     });
   });
 });
