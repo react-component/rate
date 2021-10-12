@@ -3,24 +3,20 @@ import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import classNames from 'classnames';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { getOffsetLeft } from './util';
-import Star, { StarProps } from './Star';
+import Star from './Star';
+import type { StarProps } from './Star';
 
 function noop() {}
 
-export interface RateProps {
-  disabled?: boolean;
+export interface RateProps extends Pick<StarProps, "count" | "character" | "characterRender" | "allowHalf" | "disabled"> {
   value?: number;
   defaultValue?: number;
-  count?: number;
-  allowHalf?: boolean;
   allowClear?: boolean;
   style?: React.CSSProperties;
   prefixCls?: string;
   onChange?: (value: number) => void;
   onHoverChange?: (value: number) => void;
   className?: string;
-  character?: React.ReactNode;
-  characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   tabIndex?: number;
   onFocus?: () => void;
   onBlur?: () => void;
