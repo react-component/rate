@@ -8,7 +8,7 @@ import type { StarProps } from './Star';
 
 function noop() {}
 
-export interface RateProps extends Pick<StarProps, "count" | "character" | "characterRender" | "allowHalf" | "disabled"> {
+export interface RateProps extends Pick<StarProps, "count" | "character" | "characterRender" | "allowHalf" | "disabled" | "highlightSelectedOnly"> {
   value?: number;
   defaultValue?: number;
   allowClear?: boolean;
@@ -45,6 +45,7 @@ class Rate extends React.Component<RateProps, RateState> {
     onHoverChange: noop,
     tabIndex: 0,
     direction: 'ltr',
+    highlightSelectedOnly: false,
   };
 
   stars: Record<string, Star>;
@@ -249,6 +250,7 @@ class Rate extends React.Component<RateProps, RateState> {
       characterRender,
       tabIndex,
       direction,
+      highlightSelectedOnly
     } = this.props;
     const { value, hoverValue, focused } = this.state;
     const stars = [];
@@ -269,6 +271,7 @@ class Rate extends React.Component<RateProps, RateState> {
           character={character}
           characterRender={characterRender}
           focused={focused}
+          highlightSelectedOnly={highlightSelectedOnly}
         />,
       );
     }
