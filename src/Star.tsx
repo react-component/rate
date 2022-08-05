@@ -15,6 +15,7 @@ export interface StarProps {
   characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   focused?: boolean;
   count?: number;
+  highlightSelectedOnly?: boolean;
 }
 
 export default class Star extends React.Component<StarProps> {
@@ -36,7 +37,7 @@ export default class Star extends React.Component<StarProps> {
   };
 
   getClassName() {
-    const { prefixCls, index, value, allowHalf, focused } = this.props;
+    const { prefixCls, index, value, allowHalf, focused, highlightSelectedOnly } = this.props;
     const starValue = index + 1;
     let className = prefixCls;
     if (value === 0 && index === 0 && focused) {
@@ -46,7 +47,7 @@ export default class Star extends React.Component<StarProps> {
       if (focused) {
         className += ` ${prefixCls}-focused`;
       }
-    } else {
+    } else if (!highlightSelectedOnly || value === index + 1) {
       className += starValue <= value ? ` ${prefixCls}-full` : ` ${prefixCls}-zero`;
       if (starValue === value && focused) {
         className += ` ${prefixCls}-focused`;
