@@ -90,6 +90,7 @@ ReactDOM.render(
 | character     | ReactNode \| (props) => ReactNode | ★             | The each character of rate                            |
 | disabled      | boolean                           | false         |                                                       |
 | direction     | string                            | `ltr`         | The direction of rate                                 |
+| starsSpacing  | string                            | 0             | defines the spacing between stars                     |
 
 ## Test Case
 

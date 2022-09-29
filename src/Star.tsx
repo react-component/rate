@@ -3,6 +3,7 @@ import React from 'react';
 export interface StarProps {
   value?: number;
   index?: number;
+  spacing?: string;
   prefixCls?: string;
   allowHalf?: boolean;
   disabled?: boolean;
@@ -57,10 +58,10 @@ export default class Star extends React.Component<StarProps> {
 
   render() {
     const { onHover, onClick, onKeyDown } = this;
-    const { disabled, prefixCls, character, characterRender, index, count, value } = this.props;
+    const { disabled, prefixCls, character, characterRender, index, count, spacing, value } = this.props;
     const characterNode = typeof character === 'function' ? character(this.props) : character;
     let start: React.ReactNode = (
-      <li className={this.getClassName()}>
+      <li className={this.getClassName()} style={{marginRight: spacing}}>
         <div
           onClick={disabled ? null : onClick}
           onKeyDown={disabled ? null : onKeyDown}

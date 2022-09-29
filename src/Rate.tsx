@@ -13,6 +13,7 @@ export interface RateProps extends Pick<StarProps, "count" | "character" | "char
   defaultValue?: number;
   allowClear?: boolean;
   style?: React.CSSProperties;
+  starsSpacing?: React.CSSProperties;
   prefixCls?: string;
   onChange?: (value: number) => void;
   onHoverChange?: (value: number) => void;
@@ -39,6 +40,7 @@ class Rate extends React.Component<RateProps, RateState> {
     allowHalf: false,
     allowClear: true,
     style: {},
+    starsStyle: {},
     prefixCls: 'rc-rate',
     onChange: noop,
     character: '★',
@@ -249,6 +251,7 @@ class Rate extends React.Component<RateProps, RateState> {
       characterRender,
       tabIndex,
       direction,
+      starsSpacing,
     } = this.props;
     const { value, hoverValue, focused } = this.state;
     const stars = [];
@@ -266,6 +269,7 @@ class Rate extends React.Component<RateProps, RateState> {
           onClick={this.onClick}
           onHover={this.onHover}
           key={index}
+          spacing={starsSpacing}
           character={character}
           characterRender={characterRender}
           focused={focused}
