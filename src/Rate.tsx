@@ -8,7 +8,8 @@ import type { StarProps } from './Star';
 
 function noop() {}
 
-export interface RateProps extends Pick<StarProps, "count" | "character" | "characterRender" | "allowHalf" | "disabled"> {
+export interface RateProps
+  extends Pick<StarProps, 'count' | 'character' | 'characterRender' | 'allowHalf' | 'disabled'> {
   value?: number;
   defaultValue?: number;
   allowClear?: boolean;
@@ -47,7 +48,7 @@ class Rate extends React.Component<RateProps, RateState> {
     direction: 'ltr',
   };
 
-  stars: Record<string, Star>;
+  stars: Record<string, HTMLLIElement>;
 
   rate: HTMLUListElement;
 
@@ -131,7 +132,7 @@ class Rate extends React.Component<RateProps, RateState> {
     }
   };
 
-  onKeyDown: React.KeyboardEventHandler<HTMLUListElement> = event => {
+  onKeyDown: React.KeyboardEventHandler<HTMLUListElement> = (event) => {
     const { keyCode } = event;
     const { count, allowHalf, onKeyDown, direction } = this.props;
     const reverse = direction === 'rtl';
@@ -205,7 +206,7 @@ class Rate extends React.Component<RateProps, RateState> {
     return value;
   }
 
-  saveRef = (index: number) => (node: Star) => {
+  saveRef = (index: number) => (node: HTMLLIElement) => {
     this.stars[index] = node;
   };
 
