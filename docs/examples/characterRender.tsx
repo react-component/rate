@@ -9,6 +9,7 @@ export default () => (
   <div style={{ margin: 100 }}>
     <Rate
       defaultValue={3}
+      starsSpacing="8px"
       characterRender={(node, props) => (
         <Tooltip placement="top" overlay={props.index}>
           {node}
