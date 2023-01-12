@@ -53,6 +53,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     disabled,
     direction = 'ltr',
     tabIndex = 0,
+    autoFocus,
 
     // Events
     onHoverChange,
@@ -66,12 +67,14 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
   const rateRef = React.useRef<HTMLUListElement>(null);
 
   // ============================ Ref =============================
+  const triggerFocus = () => {
+    if (!disabled) {
+      rateRef.current?.focus();
+    }
+  };
+
   React.useImperativeHandle(ref, () => ({
-    focus: () => {
-      if (!disabled) {
-        rateRef.current?.focus();
-      }
-    },
+    focus: triggerFocus,
     blur: () => {
       if (!disabled) {
         rateRef.current?.blur();
@@ -192,6 +195,14 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     onKeyDown?.(event);
   };
 
+  // =========================== Effect ===========================
+
+  React.useEffect(() => {
+    if (autoFocus && !disabled) {
+      triggerFocus();
+    }
+  }, []);
+
   // =========================== Render ===========================
   // >>> Star
   const starNodes = new Array(count).fill(0).map((_, index) => {
@@ -203,7 +214,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
         disabled={disabled}
         prefixCls={`${prefixCls}-star`}
         allowHalf={allowHalf}
-        value={hoverValue === undefined ? value : hoverValue}
+        value={hoverValue === null ? value : hoverValue}
         onClick={onClick}
         onHover={onHover}
         key={index}
