@@ -67,7 +67,24 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     onKeyDown,
     onMouseEnter,
     onMouseLeave,
+    
+    ...restProps,
   } = props;
+
+  const dataOrAriaAttributeProps = Object.keys(restProps).reduce(
+    (prev, key) => {
+      if (
+        key.substr(0, 5) === 'data-' ||
+        key.substr(0, 5) === 'aria-' ||
+        key === 'role'
+      ) {
+        // eslint-disable-next-line no-param-reassign
+        prev[key] = this.props[key];
+      }
+      return prev;
+    },
+    {},
+  );
 
   const [getStarRef, setStarRef] = useRefs<HTMLElement>();
   const rateRef = React.useRef<HTMLUListElement>(null);
@@ -252,6 +269,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
       onKeyDown={disabled ? null : onInternalKeyDown}
       ref={rateRef}
       role="radiogroup"
+      {...dataOrAriaAttributeProps}
     >
       {starNodes}
     </ul>
