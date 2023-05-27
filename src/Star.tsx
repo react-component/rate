@@ -1,4 +1,6 @@
 import React from 'react';
+import KeyCode from 'rc-util/lib/KeyCode';
+import classNames from 'classnames';
 
 export interface StarProps {
   value?: number;
@@ -11,76 +13,92 @@ export interface StarProps {
     e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>,
     index: number,
   ) => void;
-  character?: React.ReactNode;
+  character?: React.ReactNode | ((props: StarProps) => React.ReactNode);
   characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   focused?: boolean;
   count?: number;
 }
 
-export default class Star extends React.Component<StarProps> {
-  onHover: React.MouseEventHandler<HTMLDivElement> = e => {
-    const { onHover, index } = this.props;
+function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
+  const {
+    disabled,
+    prefixCls,
+    character,
+    characterRender,
+    index,
+    count,
+    value,
+    allowHalf,
+    focused,
+    onHover,
+    onClick,
+  } = props;
+
+  // =========================== Events ===========================
+  const onInternalHover: React.MouseEventHandler<HTMLDivElement> = (e) => {
     onHover(e, index);
   };
 
-  onClick = e => {
-    const { onClick, index } = this.props;
+  const onInternalClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
     onClick(e, index);
   };
 
-  onKeyDown: React.KeyboardEventHandler<HTMLDivElement> = e => {
-    const { onClick, index } = this.props;
-    if (e.keyCode === 13) {
+  const onInternalKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
+    if (e.keyCode === KeyCode.ENTER) {
       onClick(e, index);
     }
   };
 
-  getClassName() {
-    const { prefixCls, index, value, allowHalf, focused } = this.props;
-    const starValue = index + 1;
-    let className = prefixCls;
-    if (value === 0 && index === 0 && focused) {
-      className += ` ${prefixCls}-focused`;
-    } else if (allowHalf && value + 0.5 >= starValue && value < starValue) {
-      className += ` ${prefixCls}-half ${prefixCls}-active`;
-      if (focused) {
-        className += ` ${prefixCls}-focused`;
-      }
+  // =========================== Render ===========================
+  // >>>>> ClassName
+  const starValue = index + 1;
+  const classNameList = new Set([prefixCls]);
+
+  // TODO: Current we just refactor from CC to FC. This logic seems can be optimized.
+  if (value === 0 && index === 0 && focused) {
+    classNameList.add(`${prefixCls}-focused`);
+  } else if (allowHalf && value + 0.5 >= starValue && value < starValue) {
+    classNameList.add(`${prefixCls}-half`);
+    classNameList.add(`${prefixCls}-active`);
+    if (focused) {
+      classNameList.add(`${prefixCls}-focused`);
+    }
+  } else {
+    if (starValue <= value) {
+      classNameList.add(`${prefixCls}-full`);
     } else {
-      className += starValue <= value ? ` ${prefixCls}-full` : ` ${prefixCls}-zero`;
-      if (starValue === value && focused) {
-        className += ` ${prefixCls}-focused`;
-      }
+      classNameList.add(`${prefixCls}-zero`);
     }
-    return className;
+    if (starValue === value && focused) {
+      classNameList.add(`${prefixCls}-focused`);
+    }
   }
 
-  render() {
-    const { onHover, onClick, onKeyDown } = this;
-    const { disabled, prefixCls, character, characterRender, index, count, value } = this.props;
-    const characterNode = typeof character === 'function' ? character(this.props) : character;
-    let start: React.ReactNode = (
-      <li className={this.getClassName()}>
-        <div
-          onClick={disabled ? null : onClick}
-          onKeyDown={disabled ? null : onKeyDown}
-          onMouseMove={disabled ? null : onHover}
-          role="radio"
-          aria-checked={value > index ? 'true' : 'false'}
-          aria-posinset={index + 1}
-          aria-setsize={count}
-          tabIndex={disabled ? -1 : 0}
-        >
-          <div className={`${prefixCls}-first`}>{characterNode}</div>
-          <div className={`${prefixCls}-second`}>{characterNode}</div>
-        </div>
-      </li>
-    );
+  // >>>>> Node
+  const characterNode = typeof character === 'function' ? character(props) : character;
+  let start: React.ReactNode = (
+    <li className={classNames(Array.from(classNameList))} ref={ref}>
+      <div
+        onClick={disabled ? null : onInternalClick}
+        onKeyDown={disabled ? null : onInternalKeyDown}
+        onMouseMove={disabled ? null : onInternalHover}
+        role="radio"
+        aria-checked={value > index ? 'true' : 'false'}
+        aria-posinset={index + 1}
+        aria-setsize={count}
+        tabIndex={disabled ? -1 : 0}
+      >
+        <div className={`${prefixCls}-first`}>{characterNode}</div>
+        <div className={`${prefixCls}-second`}>{characterNode}</div>
+      </div>
+    </li>
+  );
 
-    if (characterRender) {
-      start = characterRender(start as React.ReactElement, this.props);
-    }
-
-    return start;
+  if (characterRender) {
+    start = characterRender(start as React.ReactElement, props);
   }
+
+  return start as React.ReactElement;
 }
+
+export default React.forwardRef(Star);
