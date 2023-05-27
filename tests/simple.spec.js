@@ -326,7 +326,7 @@ describe('rate', () => {
     
     it('id', () => {
       const wrapper = mount(<Rate id="myrate" />);
-      expect(wrapper.getDOMNode().getAttribute(id).toBe('myrate'));
+      expect(wrapper.getDOMNode().getAttribute('id').toBe('myrate'));
     });
   });
 });
