@@ -3,7 +3,8 @@ import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import KeyCode from 'rc-util/lib/KeyCode';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
-import classNames from 'classnames'
+import classNames from 'classnames';
+
 import type { StarProps } from './Star';
 import Star from './Star';
 import useRefs from './useRefs';
@@ -26,7 +27,6 @@ export interface RateProps
   onMouseEnter?: React.MouseEventHandler<HTMLUListElement>;
   onMouseLeave?: React.MouseEventHandler<HTMLUListElement>;
   id?: string;
-  role: React.HTMLAttributes<HTMLUListElement>['role'];
   autoFocus?: boolean;
   direction?: string;
 }
@@ -43,7 +43,6 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     className,
     style,
     id,
-    role = 'radiogroup',
 
     // Value
     defaultValue,
@@ -256,7 +255,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
       onBlur={disabled ? null : onInternalBlur}
       onKeyDown={disabled ? null : onInternalKeyDown}
       ref={rateRef}
-      role={role}
+      role="radiogroup"
       {...pickAttrs(restProps, { aria: true, data: true })}
     >
       {starNodes}
