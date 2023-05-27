@@ -1,12 +1,12 @@
-import React from 'react';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
-import classNames from 'classnames';
+import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import KeyCode from 'rc-util/lib/KeyCode';
-import { getOffsetLeft } from './util';
-import Star from './Star';
+import pickAttrs from 'rc-util/lib/pickAttrs';
+import React from 'react';
 import type { StarProps } from './Star';
+import Star from './Star';
 import useRefs from './useRefs';
+import { getOffsetLeft } from './util';
 
 export interface RateProps
   extends Pick<StarProps, 'count' | 'character' | 'characterRender' | 'allowHalf' | 'disabled'> {
@@ -25,6 +25,7 @@ export interface RateProps
   onMouseEnter?: React.MouseEventHandler<HTMLUListElement>;
   onMouseLeave?: React.MouseEventHandler<HTMLUListElement>;
   id?: string;
+  role: React.HTMLAttributes<HTMLUListElement>['role'];
   autoFocus?: boolean;
   direction?: string;
 }
@@ -41,6 +42,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     className,
     style,
     id,
+    role = 'radiogroup',
 
     // Value
     defaultValue,
@@ -67,24 +69,9 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     onKeyDown,
     onMouseEnter,
     onMouseLeave,
-    
+
     ...restProps
   } = props;
-
-  const dataOrAriaAttributeProps = Object.keys(restProps).reduce(
-    (prev, key) => {
-      if (
-        key.substr(0, 5) === 'data-' ||
-        key.substr(0, 5) === 'aria-' ||
-        key === 'role'
-      ) {
-        // eslint-disable-next-line no-param-reassign
-        prev[key] = restProps[key];
-      }
-      return prev;
-    },
-    {},
-  );
 
   const [getStarRef, setStarRef] = useRefs<HTMLElement>();
   const rateRef = React.useRef<HTMLUListElement>(null);
@@ -268,8 +255,8 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
       onBlur={disabled ? null : onInternalBlur}
       onKeyDown={disabled ? null : onInternalKeyDown}
       ref={rateRef}
-      role="radiogroup"
-      {...dataOrAriaAttributeProps}
+      role={role}
+      {...pickAttrs(restProps, { aria: true, data: true })}
     >
       {starNodes}
     </ul>
