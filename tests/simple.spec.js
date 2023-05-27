@@ -319,13 +319,13 @@ describe('rate', () => {
   describe('html attributes', () => {
     it('data-* and aria-* and role', () => {
       const wrapper = mount(<Rate data-number="1" aria-label="label" role="button" />);
-      expect(wrapper.getDOMNode().getAttribute('data-number').toBe('1'));
-      expect(wrapper.getDOMNode().getAttribute('aria-label').toBe('label'));
-      expect(wrapper.getDOMNode().getAttribute('role').toBe('button'));
+      expect(wrapper.getDOMNode().getAttribute('data-number')).toBe('1');
+      expect(wrapper.getDOMNode().getAttribute('aria-label')).toBe('label');
+      expect(wrapper.getDOMNode().getAttribute('role')).toBe('button');
     });
     it('id', () => {
       const wrapper = mount(<Rate id="myrate" />);
-      expect(wrapper.getDOMNode().getAttribute('id').toBe('myrate'));
+      expect(wrapper.getDOMNode().getAttribute('id')).toBe('myrate');
     });
   });
 });
