@@ -79,7 +79,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
         key === 'role'
       ) {
         // eslint-disable-next-line no-param-reassign
-        prev[key] = this.props[key];
+        prev[key] = restProps[key];
       }
       return prev;
     },
