@@ -3,6 +3,7 @@ import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import KeyCode from 'rc-util/lib/KeyCode';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
+import classNames from 'classnames'
 import type { StarProps } from './Star';
 import Star from './Star';
 import useRefs from './useRefs';
