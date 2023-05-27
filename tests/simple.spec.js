@@ -245,20 +245,22 @@ describe('rate', () => {
 
     it('focus()', () => {
       const handleFocus = jest.fn();
-      const wrapper = mount(<Rate count={3} value={1} onFocus={handleFocus} />, {
+      const rateRef = React.createRef();
+      mount(<Rate ref={rateRef} count={3} value={1} onFocus={handleFocus} />, {
         attachTo: container,
       });
-      wrapper.instance().focus();
+      rateRef.current.focus();
       expect(handleFocus).toBeCalled();
     });
 
     it('blur()', () => {
       const handleBlur = jest.fn();
-      const wrapper = mount(<Rate count={3} value={1} onBlur={handleBlur} />, {
+      const rateRef = React.createRef();
+      mount(<Rate ref={rateRef} count={3} value={1} onBlur={handleBlur} />, {
         attachTo: container,
       });
-      wrapper.instance().focus();
-      wrapper.instance().blur();
+      rateRef.current.focus();
+      rateRef.current.blur();
       expect(handleBlur).toBeCalled();
     });
 
