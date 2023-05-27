@@ -2,7 +2,12 @@
 
 React Rate Component
 
-[![NPM version][npm-image]][npm-url] [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi) [![build status][github-actions-image]][github-actions-url] [![Test coverage][codecov-image]][codecov-url] [![gemnasium deps][gemnasium-image]][gemnasium-url] [![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url]
+[![npm download][download-image]][download-url]
+[![build status][github-actions-image]][github-actions-url]
+[![Codecov][codecov-image]][codecov-url]
+[![bundle size][bundlephobia-image]][bundlephobia-url]
+[![dumi][dumi-image]][dumi-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-rate.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-rate
@@ -10,11 +15,16 @@ React Rate Component
 [github-actions-url]: https://github.com/react-component/rate/actions
 [codecov-image]: https://img.shields.io/codecov/c/github/react-component/rate/master.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/react-component/rate/branch/master
-[gemnasium-image]: http://img.shields.io/gemnasium/react-component/rate.svg?style=flat-square
-[gemnasium-url]: https://gemnasium.com/react-component/rate
-[node-url]: http://nodejs.org/download/
+[david-url]: https://david-dm.org/react-component/rate
+[david-image]: https://david-dm.org/react-component/rate/status.svg?style=flat-square
+[david-dev-url]: https://david-dm.org/react-component/rate?type=dev
+[david-dev-image]: https://david-dm.org/react-component/rate/dev-status.svg?style=flat-square
 [download-image]: https://img.shields.io/npm/dm/rc-rate.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-rate
+[bundlephobia-url]: https://bundlephobia.com/result?p=rc-rate
+[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-rate
+[dumi-url]: https://github.com/umijs/dumi
+[dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
 
 ## Screenshots
 
