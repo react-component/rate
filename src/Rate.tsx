@@ -24,6 +24,7 @@ export interface RateProps
   onKeyDown?: React.KeyboardEventHandler<HTMLUListElement>;
   onMouseEnter?: React.MouseEventHandler<HTMLUListElement>;
   onMouseLeave?: React.MouseEventHandler<HTMLUListElement>;
+  id?: string;
   autoFocus?: boolean;
   direction?: string;
 }
@@ -39,6 +40,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     prefixCls = 'rc-rate',
     className,
     style,
+    id,
 
     // Value
     defaultValue,
@@ -241,6 +243,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
         [`${prefixCls}-rtl`]: direction === 'rtl',
       })}
       style={style}
+      id={id}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeaveCallback}
       tabIndex={disabled ? -1 : tabIndex}
