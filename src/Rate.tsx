@@ -68,7 +68,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     onMouseEnter,
     onMouseLeave,
     
-    ...restProps,
+    ...restProps
   } = props;
 
   const dataOrAriaAttributeProps = Object.keys(restProps).reduce(
@@ -158,13 +158,13 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     onHoverChange?.(nextHoverValue);
   };
 
-  const onMouseLeaveCallback = (event: React.MouseEvent) => {
+  const onMouseLeaveCallback = (event?: React.MouseEvent<HTMLUListElement>) => {
     if (!disabled) {
       setHoverValue(null);
       setCleanedValue(null);
       onHoverChange?.(undefined);
     }
-    if (e) {
+    if (event) {
       onMouseLeave?.(event);
     }
   };
