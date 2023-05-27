@@ -289,5 +289,43 @@ describe('rate', () => {
       wrapper.simulate('keydown');
       expect(onKeyDown).toHaveBeenCalled();
     });
+
+    // https://github.com/ant-design/ant-design/issues/30940
+    it('range picker should accept onMouseEnter and onMouseLeave event when Rate component is diabled', () => {
+      const handleMouseEnter = jest.fn();
+      const handleMouseLeave = jest.fn();
+      const wrapper = mount(
+        <Rate onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} disabled />,
+      );
+      wrapper.simulate('mouseenter');
+      expect(handleMouseEnter).toHaveBeenCalled();
+      wrapper.simulate('mouseleave');
+      expect(handleMouseLeave).toHaveBeenCalled();
+    });
+
+    it('range picker should accept onMouseEnter and onMouseLeave event when Rate component is not diabled', () => {
+      const handleMouseEnter = jest.fn();
+      const handleMouseLeave = jest.fn();
+      const wrapper = mount(
+        <Rate onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />,
+      );
+      wrapper.simulate('mouseenter');
+      expect(handleMouseEnter).toHaveBeenCalled();
+      wrapper.simulate('mouseleave');
+      expect(handleMouseLeave).toHaveBeenCalled();
+    });
+  });
+
+  describe('html attributes', () => {
+    it('data-* and aria-* and role', () => {
+      const wrapper = mount(<Rate data-number="1" aria-label="label" role="button" />);
+      expect(wrapper.getDOMNode().getAttribute('data-number')).toBe('1');
+      expect(wrapper.getDOMNode().getAttribute('aria-label')).toBe('label');
+      expect(wrapper.getDOMNode().getAttribute('role')).toBe('button');
+    });
+    it('id', () => {
+      const wrapper = mount(<Rate id="myrate" />);
+      expect(wrapper.getDOMNode().getAttribute('id')).toBe('myrate');
+    });
   });
 });

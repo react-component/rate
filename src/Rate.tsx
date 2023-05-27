@@ -22,6 +22,9 @@ export interface RateProps
   onFocus?: () => void;
   onBlur?: () => void;
   onKeyDown?: React.KeyboardEventHandler<HTMLUListElement>;
+  onMouseEnter?: React.MouseEventHandler<HTMLUListElement>;
+  onMouseLeave?: React.MouseEventHandler<HTMLUListElement>;
+  id?: string;
   autoFocus?: boolean;
   direction?: string;
 }
@@ -37,6 +40,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     prefixCls = 'rc-rate',
     className,
     style,
+    id,
 
     // Value
     defaultValue,
@@ -61,7 +65,26 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     onFocus,
     onBlur,
     onKeyDown,
+    onMouseEnter,
+    onMouseLeave,
+    
+    ...restProps
   } = props;
+
+  const dataOrAriaAttributeProps = Object.keys(restProps).reduce(
+    (prev, key) => {
+      if (
+        key.substr(0, 5) === 'data-' ||
+        key.substr(0, 5) === 'aria-' ||
+        key === 'role'
+      ) {
+        // eslint-disable-next-line no-param-reassign
+        prev[key] = restProps[key];
+      }
+      return prev;
+    },
+    {},
+  );
 
   const [getStarRef, setStarRef] = useRefs<HTMLElement>();
   const rateRef = React.useRef<HTMLUListElement>(null);
@@ -135,10 +158,15 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     onHoverChange?.(nextHoverValue);
   };
 
-  const onMouseLeave = () => {
-    setHoverValue(null);
-    setCleanedValue(null);
-    onHoverChange?.(undefined);
+  const onMouseLeaveCallback = (event?: React.MouseEvent<HTMLUListElement>) => {
+    if (!disabled) {
+      setHoverValue(null);
+      setCleanedValue(null);
+      onHoverChange?.(undefined);
+    }
+    if (event) {
+      onMouseLeave?.(event);
+    }
   };
 
   // =========================== Click ============================
@@ -148,12 +176,11 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     if (allowClear) {
       isReset = newValue === value;
     }
-    onMouseLeave();
+    onMouseLeaveCallback();
     changeValue(isReset ? 0 : newValue);
     setCleanedValue(isReset ? newValue : null);
   };
 
-  // ========================== Keyboard ==========================
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLUListElement> = (event) => {
     const { keyCode } = event;
     const reverse = direction === 'rtl';
@@ -233,13 +260,16 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
         [`${prefixCls}-rtl`]: direction === 'rtl',
       })}
       style={style}
-      onMouseLeave={disabled ? null : onMouseLeave}
+      id={id}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeaveCallback}
       tabIndex={disabled ? -1 : tabIndex}
       onFocus={disabled ? null : onInternalFocus}
       onBlur={disabled ? null : onInternalBlur}
       onKeyDown={disabled ? null : onInternalKeyDown}
       ref={rateRef}
       role="radiogroup"
+      {...dataOrAriaAttributeProps}
     >
       {starNodes}
     </ul>
