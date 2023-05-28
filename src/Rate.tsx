@@ -1,10 +1,9 @@
+import classNames from 'classnames';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import KeyCode from 'rc-util/lib/KeyCode';
+import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
-import classNames from 'classnames';
-
 import type { StarProps } from './Star';
 import Star from './Star';
 import useRefs from './useRefs';
@@ -41,8 +40,6 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     // Base
     prefixCls = 'rc-rate',
     className,
-    style,
-    id,
 
     // Value
     defaultValue,
@@ -67,7 +64,6 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     onFocus,
     onBlur,
     onKeyDown,
-    onMouseEnter,
     onMouseLeave,
 
     ...restProps
@@ -239,16 +235,15 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     );
   });
 
+  const classString = classNames(prefixCls, className, {
+    [`${prefixCls}-disabled`]: disabled,
+    [`${prefixCls}-rtl`]: direction === 'rtl',
+  });
+
   // >>> Node
   return (
     <ul
-      className={classNames(prefixCls, className, {
-        [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-rtl`]: direction === 'rtl',
-      })}
-      style={style}
-      id={id}
-      onMouseEnter={onMouseEnter}
+      className={classString}
       onMouseLeave={onMouseLeaveCallback}
       tabIndex={disabled ? -1 : tabIndex}
       onFocus={disabled ? null : onInternalFocus}
@@ -256,7 +251,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
       onKeyDown={disabled ? null : onInternalKeyDown}
       ref={rateRef}
       role="radiogroup"
-      {...pickAttrs(restProps, { aria: true, data: true })}
+      {...pickAttrs(restProps, { aria: true, data: true, attr: true })}
     >
       {starNodes}
     </ul>
