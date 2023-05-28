@@ -1,10 +1,8 @@
-import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
+import classNames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import KeyCode from 'rc-util/lib/KeyCode';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
-import classNames from 'classnames';
-
 import type { StarProps } from './Star';
 import Star from './Star';
 import useRefs from './useRefs';
@@ -41,8 +39,6 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     // Base
     prefixCls = 'rc-rate',
     className,
-    style,
-    id,
 
     // Value
     defaultValue,
@@ -67,7 +63,6 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     onFocus,
     onBlur,
     onKeyDown,
-    onMouseEnter,
     onMouseLeave,
 
     ...restProps
@@ -102,7 +97,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     const reverse = direction === 'rtl';
     let starValue = index + 1;
     if (allowHalf) {
-      const starEle = findDOMNode<HTMLElement>(getStarRef(index));
+      const starEle = getStarRef(index);
       const leftDis = getOffsetLeft(starEle);
       const width = starEle.clientWidth;
       if (reverse && x - leftDis > width / 2) {
@@ -219,8 +214,9 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
 
   // =========================== Render ===========================
   // >>> Star
-  const starNodes = new Array(count).fill(0).map((_, index) => {
-    return (
+  const starNodes = new Array(count)
+    .fill(0)
+    .map((item, index) => (
       <Star
         ref={setStarRef(index)}
         index={index}
@@ -231,24 +227,22 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
         value={hoverValue === null ? value : hoverValue}
         onClick={onClick}
         onHover={onHover}
-        key={index}
+        key={item || index}
         character={character}
         characterRender={characterRender}
         focused={focused}
       />
-    );
+    ));
+
+  const classString = classNames(prefixCls, className, {
+    [`${prefixCls}-disabled`]: disabled,
+    [`${prefixCls}-rtl`]: direction === 'rtl',
   });
 
   // >>> Node
   return (
     <ul
-      className={classNames(prefixCls, className, {
-        [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-rtl`]: direction === 'rtl',
-      })}
-      style={style}
-      id={id}
-      onMouseEnter={onMouseEnter}
+      className={classString}
       onMouseLeave={onMouseLeaveCallback}
       tabIndex={disabled ? -1 : tabIndex}
       onFocus={disabled ? null : onInternalFocus}
@@ -256,7 +250,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
       onKeyDown={disabled ? null : onInternalKeyDown}
       ref={rateRef}
       role="radiogroup"
-      {...pickAttrs(restProps, { aria: true, data: true })}
+      {...pickAttrs(restProps, { aria: true, data: true, attr: true })}
     >
       {starNodes}
     </ul>
