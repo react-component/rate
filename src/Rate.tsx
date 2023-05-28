@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import KeyCode from 'rc-util/lib/KeyCode';
 import pickAttrs from 'rc-util/lib/pickAttrs';
@@ -98,8 +97,8 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     const reverse = direction === 'rtl';
     let starValue = index + 1;
     if (allowHalf) {
-      // eslint-disable-next-line react/no-find-dom-node
-      const starEle = findDOMNode<HTMLElement>(getStarRef(index));
+      console.log(getStarRef(index));
+      const starEle = getStarRef(index);
       const leftDis = getOffsetLeft(starEle);
       const width = starEle.clientWidth;
       if (reverse && x - leftDis > width / 2) {
