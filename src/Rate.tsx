@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
-import KeyCode from 'rc-util/lib/KeyCode';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
+import KeyCode from 'rc-util/lib/KeyCode';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import type { StarProps } from './Star';
@@ -98,6 +98,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     const reverse = direction === 'rtl';
     let starValue = index + 1;
     if (allowHalf) {
+      // eslint-disable-next-line react/no-find-dom-node
       const starEle = findDOMNode<HTMLElement>(getStarRef(index));
       const leftDis = getOffsetLeft(starEle);
       const width = starEle.clientWidth;
@@ -215,8 +216,9 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
 
   // =========================== Render ===========================
   // >>> Star
-  const starNodes = new Array(count).fill(0).map((_, index) => {
-    return (
+  const starNodes = new Array(count)
+    .fill(0)
+    .map((_, index) => (
       <Star
         ref={setStarRef(index)}
         index={index}
@@ -232,8 +234,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
         characterRender={characterRender}
         focused={focused}
       />
-    );
-  });
+    ));
 
   const classString = classNames(prefixCls, className, {
     [`${prefixCls}-disabled`]: disabled,
