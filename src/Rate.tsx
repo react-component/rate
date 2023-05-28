@@ -97,7 +97,6 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     const reverse = direction === 'rtl';
     let starValue = index + 1;
     if (allowHalf) {
-      console.log(getStarRef(index));
       const starEle = getStarRef(index);
       const leftDis = getOffsetLeft(starEle);
       const width = starEle.clientWidth;
@@ -217,7 +216,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
   // >>> Star
   const starNodes = new Array(count)
     .fill(0)
-    .map((_, index) => (
+    .map((item, index) => (
       <Star
         ref={setStarRef(index)}
         index={index}
@@ -228,7 +227,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
         value={hoverValue === null ? value : hoverValue}
         onClick={onClick}
         onHover={onHover}
-        key={index}
+        key={item || index}
         character={character}
         characterRender={characterRender}
         focused={focused}
