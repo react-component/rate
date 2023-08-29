@@ -8,7 +8,8 @@ import type { StarProps } from './Star';
 
 function noop() {}
 
-export interface RateProps extends Pick<StarProps, "count" | "character" | "characterRender" | "allowHalf" | "disabled"> {
+export interface RateProps
+  extends Pick<StarProps, 'count' | 'character' | 'characterRender' | 'allowHalf' | 'disabled'> {
   value?: number;
   defaultValue?: number;
   allowClear?: boolean;
@@ -17,6 +18,7 @@ export interface RateProps extends Pick<StarProps, "count" | "character" | "char
   onChange?: (value: number) => void;
   onHoverChange?: (value: number) => void;
   className?: string;
+  id?: string;
   tabIndex?: number;
   onFocus?: () => void;
   onBlur?: () => void;
@@ -131,7 +133,7 @@ class Rate extends React.Component<RateProps, RateState> {
     }
   };
 
-  onKeyDown: React.KeyboardEventHandler<HTMLUListElement> = event => {
+  onKeyDown: React.KeyboardEventHandler<HTMLUListElement> = (event) => {
     const { keyCode } = event;
     const { count, allowHalf, onKeyDown, direction } = this.props;
     const reverse = direction === 'rtl';
@@ -242,6 +244,7 @@ class Rate extends React.Component<RateProps, RateState> {
       count,
       allowHalf,
       style,
+      id,
       prefixCls,
       disabled,
       className,
@@ -279,6 +282,7 @@ class Rate extends React.Component<RateProps, RateState> {
       <ul
         className={rateClassName}
         style={style}
+        id={id}
         onMouseLeave={disabled ? null : this.onMouseLeave}
         tabIndex={disabled ? -1 : tabIndex}
         onFocus={disabled ? null : this.onFocus}
