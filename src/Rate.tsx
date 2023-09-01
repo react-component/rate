@@ -9,7 +9,10 @@ import useRefs from './useRefs';
 import { getOffsetLeft } from './util';
 
 export interface RateProps
-  extends Pick<StarProps, 'count' | 'character' | 'characterRender' | 'allowHalf' | 'disabled'> {
+  extends Pick<
+    StarProps,
+    'count' | 'character' | 'characterRender' | 'allowHalf' | 'disabled' | 'emptyCharacter'
+  > {
   value?: number;
   defaultValue?: number;
   allowClear?: boolean;
@@ -50,6 +53,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     // Display
     character = '★',
     characterRender,
+    emptyCharacter,
 
     // Meta
     disabled,
@@ -229,6 +233,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
         onHover={onHover}
         key={item || index}
         character={character}
+        emptyCharacter={emptyCharacter}
         characterRender={characterRender}
         focused={focused}
       />
