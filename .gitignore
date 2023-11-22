@@ -1,4 +1,3 @@
-.storybook
 *.iml
 *.log
 .idea
@@ -29,14 +28,8 @@ yarn.lock
 package-lock.json
 .doc/
 
-# umi
-.umi
-.umi-production
-.umi-test
-.env.local
-
-
-# dumi
 .doc
+# dumi
 .dumi/tmp
+.dumi/tmp-test
 .dumi/tmp-production
