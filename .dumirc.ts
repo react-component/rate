@@ -6,8 +6,6 @@ export default defineConfig({
     'rc-rate$': path.resolve('src'),
     'rc-rate/es': path.resolve('src'),
   },
-  outputPath: '.doc',
-  exportStatic: {},
   favicons: ['https://avatars0.githubusercontent.com/u/9441414?s=200&v=4'],
   themeConfig: {
     name: 'Rate',
