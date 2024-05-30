@@ -314,6 +314,22 @@ describe('rate', () => {
       wrapper.simulate('mouseleave');
       expect(handleMouseLeave).toHaveBeenCalled();
     });
+
+    it('should ignore key presses when keyboard is false', () => {
+      const mockChange = jest.fn();
+      const mockKeyDown = jest.fn();
+      const wrapper = mount(
+        <Rate
+          defaultValue={3}
+          onChange={mockChange}
+          onKeyDown={mockKeyDown}
+          keyboard={false}
+        />
+      );
+      wrapper.simulate('keyDown', { keyCode: KeyCode.LEFT });
+      expect(mockChange).not.toHaveBeenCalled();
+      expect(mockKeyDown).toHaveBeenCalled();
+    });
   });
 
   describe('html attributes', () => {

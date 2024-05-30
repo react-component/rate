@@ -27,6 +27,11 @@ export interface RateProps
   id?: string;
   autoFocus?: boolean;
   direction?: string;
+  /**
+   * Is keyboard control enabled.
+   * @default true
+   */
+  keyboard?: boolean;
 }
 
 export interface RateRef {
@@ -46,6 +51,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     count = 5,
     allowHalf = false,
     allowClear = true,
+    keyboard = true,
 
     // Display
     character = '★',
@@ -166,39 +172,22 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLUListElement> = (event) => {
     const { keyCode } = event;
     const reverse = direction === 'rtl';
-    let nextValue = value;
-    if (keyCode === KeyCode.RIGHT && nextValue < count && !reverse) {
-      if (allowHalf) {
-        nextValue += 0.5;
-      } else {
-        nextValue += 1;
+    const step = allowHalf ? 0.5 : 1;
+
+    if (keyboard) {
+      if (keyCode === KeyCode.RIGHT && value < count && !reverse) {
+        changeValue(value + step);
+        event.preventDefault();
+      } else if (keyCode === KeyCode.LEFT && value > 0 && !reverse) {
+        changeValue(value - step);
+        event.preventDefault();
+      } else if (keyCode === KeyCode.RIGHT && value > 0 && reverse) {
+        changeValue(value - step);
+        event.preventDefault();
+      } else if (keyCode === KeyCode.LEFT && value < count && reverse) {
+        changeValue(value + step);
+        event.preventDefault();
       }
-      changeValue(nextValue);
-      event.preventDefault();
-    } else if (keyCode === KeyCode.LEFT && nextValue > 0 && !reverse) {
-      if (allowHalf) {
-        nextValue -= 0.5;
-      } else {
-        nextValue -= 1;
-      }
-      changeValue(nextValue);
-      event.preventDefault();
-    } else if (keyCode === KeyCode.RIGHT && nextValue > 0 && reverse) {
-      if (allowHalf) {
-        nextValue -= 0.5;
-      } else {
-        nextValue -= 1;
-      }
-      changeValue(nextValue);
-      event.preventDefault();
-    } else if (keyCode === KeyCode.LEFT && nextValue < count && reverse) {
-      if (allowHalf) {
-        nextValue += 0.5;
-      } else {
-        nextValue += 1;
-      }
-      changeValue(nextValue);
-      event.preventDefault();
     }
 
     onKeyDown?.(event);
