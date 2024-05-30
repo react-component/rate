@@ -27,6 +27,8 @@ export interface RateProps
   id?: string;
   autoFocus?: boolean;
   direction?: string;
+  /** Is keyboard control enabled. */
+  keyboardControl?: boolean;
 }
 
 export interface RateRef {
@@ -46,6 +48,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     count = 5,
     allowHalf = false,
     allowClear = true,
+    keyboardControl = true,
 
     // Display
     character = '★',
@@ -168,18 +171,20 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     const reverse = direction === 'rtl';
     const step = allowHalf ? 0.5 : 1;
 
-    if (keyCode === KeyCode.RIGHT && value < count && !reverse) {
-      changeValue(value + step);
-      event.preventDefault();
-    } else if (keyCode === KeyCode.LEFT && value > 0 && !reverse) {
-      changeValue(value - step);
-      event.preventDefault();
-    } else if (keyCode === KeyCode.RIGHT && value > 0 && reverse) {
-      changeValue(value - step);
-      event.preventDefault();
-    } else if (keyCode === KeyCode.LEFT && value < count && reverse) {
-      changeValue(value + step);
-      event.preventDefault();
+    if (keyboardControl) {
+      if (keyCode === KeyCode.RIGHT && value < count && !reverse) {
+        changeValue(value + step);
+        event.preventDefault();
+      } else if (keyCode === KeyCode.LEFT && value > 0 && !reverse) {
+        changeValue(value - step);
+        event.preventDefault();
+      } else if (keyCode === KeyCode.RIGHT && value > 0 && reverse) {
+        changeValue(value - step);
+        event.preventDefault();
+      } else if (keyCode === KeyCode.LEFT && value < count && reverse) {
+        changeValue(value + step);
+        event.preventDefault();
+      }
     }
 
     onKeyDown?.(event);
