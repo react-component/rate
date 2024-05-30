@@ -315,7 +315,7 @@ describe('rate', () => {
       expect(handleMouseLeave).toHaveBeenCalled();
     });
 
-    it('should ignore key presses when keyboardControl is false', () => {
+    it('should ignore key presses when keyboard is false', () => {
       const mockChange = jest.fn();
       const mockKeyDown = jest.fn();
       const wrapper = mount(
