@@ -27,7 +27,10 @@ export interface RateProps
   id?: string;
   autoFocus?: boolean;
   direction?: string;
-  /** Is keyboard control enabled. */
+  /**
+   * Is keyboard control enabled.
+   * @default true
+   */
   keyboard?: boolean;
 }
 
