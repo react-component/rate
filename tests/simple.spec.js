@@ -323,7 +323,7 @@ describe('rate', () => {
           defaultValue={3}
           onChange={mockChange}
           onKeyDown={mockKeyDown}
-          keyboardControl={false}
+          keyboard={false}
         />
       );
       wrapper.simulate('keyDown', { keyCode: KeyCode.LEFT });
