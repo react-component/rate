@@ -166,38 +166,19 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLUListElement> = (event) => {
     const { keyCode } = event;
     const reverse = direction === 'rtl';
-    let nextValue = value;
-    if (keyCode === KeyCode.RIGHT && nextValue < count && !reverse) {
-      if (allowHalf) {
-        nextValue += 0.5;
-      } else {
-        nextValue += 1;
-      }
-      changeValue(nextValue);
+    const step = allowHalf ? 0.5 : 1;
+
+    if (keyCode === KeyCode.RIGHT && value < count && !reverse) {
+      changeValue(value + step);
       event.preventDefault();
-    } else if (keyCode === KeyCode.LEFT && nextValue > 0 && !reverse) {
-      if (allowHalf) {
-        nextValue -= 0.5;
-      } else {
-        nextValue -= 1;
-      }
-      changeValue(nextValue);
+    } else if (keyCode === KeyCode.LEFT && value > 0 && !reverse) {
+      changeValue(value - step);
       event.preventDefault();
-    } else if (keyCode === KeyCode.RIGHT && nextValue > 0 && reverse) {
-      if (allowHalf) {
-        nextValue -= 0.5;
-      } else {
-        nextValue -= 1;
-      }
-      changeValue(nextValue);
+    } else if (keyCode === KeyCode.RIGHT && value > 0 && reverse) {
+      changeValue(value - step);
       event.preventDefault();
-    } else if (keyCode === KeyCode.LEFT && nextValue < count && reverse) {
-      if (allowHalf) {
-        nextValue += 0.5;
-      } else {
-        nextValue += 1;
-      }
-      changeValue(nextValue);
+    } else if (keyCode === KeyCode.LEFT && value < count && reverse) {
+      changeValue(value + step);
       event.preventDefault();
     }
 
