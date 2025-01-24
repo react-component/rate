@@ -79,10 +79,10 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
   let start: React.ReactNode = (
     <li className={classNames(Array.from(classNameList))} ref={ref}>
       <div
+        role="radio"
         onClick={disabled ? null : onInternalClick}
         onKeyDown={disabled ? null : onInternalKeyDown}
         onMouseMove={disabled ? null : onInternalHover}
-        role="radio"
         aria-checked={value > index ? 'true' : 'false'}
         aria-posinset={index + 1}
         aria-setsize={count}
