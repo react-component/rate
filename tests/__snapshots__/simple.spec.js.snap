@@ -3,7 +3,6 @@
 exports[`rate allowHalf render works 1`] = `
 <ul
   class="rc-rate custom"
-  role="radiogroup"
   tabindex="0"
 >
   <li
@@ -78,7 +77,6 @@ exports[`rate allowHalf render works 1`] = `
 exports[`rate allowHalf render works in RTL 1`] = `
 <ul
   class="rc-rate custom rc-rate-rtl"
-  role="radiogroup"
   tabindex="0"
 >
   <li
@@ -153,7 +151,6 @@ exports[`rate allowHalf render works in RTL 1`] = `
 exports[`rate allowHalf render works more than half  1`] = `
 <ul
   class="rc-rate custom"
-  role="radiogroup"
   tabindex="0"
 >
   <li
@@ -228,7 +225,6 @@ exports[`rate allowHalf render works more than half  1`] = `
 exports[`rate full render works 1`] = `
 <ul
   class="rc-rate custom"
-  role="radiogroup"
   tabindex="0"
 >
   <li
@@ -303,7 +299,6 @@ exports[`rate full render works 1`] = `
 exports[`rate full render works in RTL 1`] = `
 <ul
   class="rc-rate custom rc-rate-rtl"
-  role="radiogroup"
   tabindex="0"
 >
   <li
@@ -378,7 +373,6 @@ exports[`rate full render works in RTL 1`] = `
 exports[`rate full render works with character function 1`] = `
 <ul
   class="rc-rate"
-  role="radiogroup"
   tabindex="0"
 >
   <li
@@ -453,7 +447,6 @@ exports[`rate full render works with character function 1`] = `
 exports[`rate full render works with character node 1`] = `
 <ul
   class="rc-rate"
-  role="radiogroup"
   tabindex="0"
 >
   <li

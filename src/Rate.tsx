@@ -238,7 +238,6 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
       onBlur={disabled ? null : onInternalBlur}
       onKeyDown={disabled ? null : onInternalKeyDown}
       ref={rateRef}
-      role="radiogroup"
       {...pickAttrs(restProps, { aria: true, data: true, attr: true })}
     >
       {starNodes}
