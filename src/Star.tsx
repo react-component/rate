@@ -17,6 +17,7 @@ export interface StarProps {
   characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   focused?: boolean;
   count?: number;
+  emptyCharacter?: React.ReactNode | ((props: StarProps) => React.ReactNode);
 }
 
 function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
@@ -32,6 +33,7 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
     focused,
     onHover,
     onClick,
+    emptyCharacter,
   } = props;
 
   // =========================== Events ===========================
@@ -76,6 +78,9 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
 
   // >>>>> Node
   const characterNode = typeof character === 'function' ? character(props) : character;
+  const emptyCharacterNode =
+    typeof emptyCharacter === 'function' ? emptyCharacter(props) : emptyCharacter;
+
   let start: React.ReactNode = (
     <li className={classNames(Array.from(classNameList))} ref={ref}>
       <div
@@ -89,7 +94,7 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
         tabIndex={disabled ? -1 : 0}
       >
         <div className={`${prefixCls}-first`}>{characterNode}</div>
-        <div className={`${prefixCls}-second`}>{characterNode}</div>
+        <div className={`${prefixCls}-second`}>{emptyCharacterNode || characterNode}</div>
       </div>
     </li>
   );
