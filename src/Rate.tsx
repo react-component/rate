@@ -129,8 +129,9 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
 
     const starEle = getStarRef(index);
     const { left, right } = getBoundingClientRect(starEle);
-    const percentage = calculatePercentage(delta, left, right);
+    if (!left || !right) return allowHalf ? starValue + 0.5 : starValue + 1;
 
+    const percentage = calculatePercentage(delta, left, right);
     let roundedValue = roundValueToPrecision(percentage + mergedPrecision / 2, mergedPrecision);
     roundedValue = clamp(roundedValue, mergedPrecision, 1);
     starValue += roundedValue;
