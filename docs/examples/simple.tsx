@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */
-import React from 'react';
 import Rate from 'rc-rate';
+import React from 'react';
 import '../../assets/index.less';
 
 function onChange(v: number) {
@@ -56,6 +56,15 @@ export default () => (
       direction="rtl"
       onChange={onChange}
       allowHalf
+      style={{ fontSize: 50, marginTop: 24 }}
+      character={<i className="anticon anticon-star" />}
+    />
+    <h2>Precision</h2>
+    <Rate
+      defaultValue={1.2}
+      precision={0.1}
+      onChange={onChange}
+      count={10}
       style={{ fontSize: 50, marginTop: 24 }}
       character={<i className="anticon anticon-star" />}
     />

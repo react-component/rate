@@ -45,11 +45,6 @@
       float: right;
     }
 
-    &-first,
-    &-second {
-      transition: all .3s;
-    }
-
     &-focused, &:hover {
       transform: scale(1.1);
     }
@@ -58,10 +53,11 @@
       position: absolute;
       left: 0;
       top: 0;
-      width: 50%;
+      width: 0%;
       height: 100%;
       overflow: hidden;
-      opacity: 0;
+      opacity: 1;
+      color: @rate-star-color;
 
       .@{rate-prefix-cls}-rtl & {
         right: 0;
@@ -72,16 +68,6 @@
     &-half &-first,
     &-half &-second {
       opacity: 1;
-    }
-
-    &-half &-first,
-    &-full &-second {
-      color: @rate-star-color;
-    }
-
-    &-half:hover &-first,
-    &-full:hover &-second {
-      color: tint(@rate-star-color,30%);
     }
   }
 }
