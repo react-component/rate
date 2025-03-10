@@ -94,7 +94,6 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
           className={`${prefixCls}-first`}
           style={{
             width: `${memoWidth}%`,
-            overflow: 'hidden',
           }}
         >
           {characterNode}
