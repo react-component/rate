@@ -6,7 +6,7 @@ import React from 'react';
 import type { StarProps } from './Star';
 import Star from './Star';
 import useRefs from './useRefs';
-import { getOffsetLeft } from './util';
+import { clamp, getBoundingClientRect, roundValueToPrecision } from './util';
 
 export interface RateProps
   extends Pick<StarProps, 'count' | 'character' | 'characterRender' | 'allowHalf' | 'disabled'> {
@@ -32,6 +32,10 @@ export interface RateProps
    * @default true
    */
   keyboard?: boolean;
+  /**
+   * Define the minimum increment value change
+   */
+  precision?: number;
 }
 
 export interface RateRef {
@@ -49,9 +53,14 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     defaultValue,
     value: propValue,
     count = 5,
+    /**
+     * allow half star
+     * @deprecated Since precision has been implemented, `allowHalf` is no longer needed.
+     */
     allowHalf = false,
     allowClear = true,
     keyboard = true,
+    precision = 1,
 
     // Display
     character = '★',
@@ -76,6 +85,8 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
 
   const [getStarRef, setStarRef] = useRefs<HTMLElement>();
   const rateRef = React.useRef<HTMLUListElement>(null);
+  const mergedPrecision = allowHalf ? 0.5 : precision > 0 ? precision : 1;
+  const reverse = direction === 'rtl';
 
   // ============================ Ref =============================
   const triggerFocus = () => {
@@ -99,19 +110,36 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
   });
   const [cleanedValue, setCleanedValue] = useMergedState<number | null>(null);
 
-  const getStarValue = (index: number, x: number) => {
-    const reverse = direction === 'rtl';
-    let starValue = index + 1;
-    if (allowHalf) {
-      const starEle = getStarRef(index);
-      const leftDis = getOffsetLeft(starEle);
-      const width = starEle.clientWidth;
-      if (reverse && x - leftDis > width / 2) {
-        starValue -= 0.5;
-      } else if (!reverse && x - leftDis < width / 2) {
-        starValue -= 0.5;
-      }
+  const calculatePercentage = (delta: number, left: number, right: number) => {
+    return (reverse ? right - delta : delta - left) / (right - left);
+  };
+
+  const dealWithMergedPrecision = (delta: number) => {
+    const rootNode = rateRef.current;
+    const { right, left } = getBoundingClientRect(rootNode);
+    const percentage = calculatePercentage(delta, left, right);
+
+    let newHover = roundValueToPrecision(count * percentage + mergedPrecision / 2, mergedPrecision);
+    newHover = clamp(newHover, mergedPrecision, count);
+    return newHover;
+  };
+
+  const getStarValue = (index: number, delta: number) => {
+    let starValue = index;
+
+    const starEle = getStarRef(index);
+    const { left, right } = getBoundingClientRect(starEle);
+    if (!left || !right) return allowHalf ? starValue + 0.5 : starValue + 1;
+
+    const percentage = calculatePercentage(delta, left, right);
+    let roundedValue = roundValueToPrecision(percentage + mergedPrecision / 2, mergedPrecision);
+    roundedValue = clamp(roundedValue, mergedPrecision, 1);
+    starValue += roundedValue;
+
+    if (mergedPrecision > 1) {
+      return dealWithMergedPrecision(delta);
     }
+
     return starValue;
   };
 
@@ -138,7 +166,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
   const [hoverValue, setHoverValue] = React.useState<number | null>(null);
 
   const onHover = (event: React.MouseEvent<HTMLDivElement>, index: number) => {
-    const nextHoverValue = getStarValue(index, event.pageX);
+    const nextHoverValue = getStarValue(index, event.clientX);
     if (nextHoverValue !== cleanedValue) {
       setHoverValue(nextHoverValue);
       setCleanedValue(null);
@@ -159,7 +187,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
 
   // =========================== Click ============================
   const onClick = (event: React.MouseEvent | React.KeyboardEvent, index: number) => {
-    const newValue = getStarValue(index, (event as React.MouseEvent).pageX);
+    const newValue = getStarValue(index, (event as React.MouseEvent).clientX);
     let isReset = false;
     if (allowClear) {
       isReset = newValue === value;
@@ -171,8 +199,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
 
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLUListElement> = (event) => {
     const { keyCode } = event;
-    const reverse = direction === 'rtl';
-    const step = allowHalf ? 0.5 : 1;
+    const step = mergedPrecision;
 
     if (keyboard) {
       if (keyCode === KeyCode.RIGHT && value < count && !reverse) {

@@ -1,6 +1,6 @@
-import React from 'react';
-import { render, mount } from 'enzyme';
+import { mount, render } from 'enzyme';
 import KeyCode from 'rc-util/lib/KeyCode';
+import React from 'react';
 import Rate from '../src';
 
 describe('rate', () => {
@@ -319,12 +319,7 @@ describe('rate', () => {
       const mockChange = jest.fn();
       const mockKeyDown = jest.fn();
       const wrapper = mount(
-        <Rate
-          defaultValue={3}
-          onChange={mockChange}
-          onKeyDown={mockKeyDown}
-          keyboard={false}
-        />
+        <Rate defaultValue={3} onChange={mockChange} onKeyDown={mockKeyDown} keyboard={false} />,
       );
       wrapper.simulate('keyDown', { keyCode: KeyCode.LEFT });
       expect(mockChange).not.toHaveBeenCalled();
@@ -342,6 +337,23 @@ describe('rate', () => {
     it('id', () => {
       const wrapper = mount(<Rate id="myrate" />);
       expect(wrapper.getDOMNode().getAttribute('id')).toBe('myrate');
+    });
+  });
+
+  describe('precision', () => {
+    it('support precision', () => {
+      const wrapper = mount(<Rate defaultValue={2} precision={0.1} />);
+
+      expect(wrapper.find('li > div > .rc-rate-star-first').at(1).prop('style').width).toBe('100%');
+    });
+
+    it('should show the number of stars at the current precision', () => {
+      const wrapper = mount(<Rate defaultValue={2.2} precision={0.1} />);
+
+      const width = parseFloat(
+        wrapper.find('li > div > .rc-rate-star-first').at(2).prop('style').width,
+      );
+      expect(width).toBeCloseTo(20);
     });
   });
 });

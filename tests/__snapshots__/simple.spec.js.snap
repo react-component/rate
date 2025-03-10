@@ -17,6 +17,7 @@ exports[`rate allowHalf render works 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:100%;overflow:hidden"
       >
         ★
       </div>
@@ -39,6 +40,7 @@ exports[`rate allowHalf render works 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:50%;overflow:hidden"
       >
         ★
       </div>
@@ -61,6 +63,7 @@ exports[`rate allowHalf render works 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:0%;overflow:hidden"
       >
         ★
       </div>
@@ -91,6 +94,7 @@ exports[`rate allowHalf render works in RTL 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:100%;overflow:hidden"
       >
         ★
       </div>
@@ -113,6 +117,7 @@ exports[`rate allowHalf render works in RTL 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:50%;overflow:hidden"
       >
         ★
       </div>
@@ -135,6 +140,7 @@ exports[`rate allowHalf render works in RTL 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:0%;overflow:hidden"
       >
         ★
       </div>
@@ -165,6 +171,7 @@ exports[`rate allowHalf render works more than half  1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:100%;overflow:hidden"
       >
         ★
       </div>
@@ -187,6 +194,7 @@ exports[`rate allowHalf render works more than half  1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:60.00000000000001%;overflow:hidden"
       >
         ★
       </div>
@@ -209,6 +217,7 @@ exports[`rate allowHalf render works more than half  1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:0%;overflow:hidden"
       >
         ★
       </div>
@@ -239,6 +248,7 @@ exports[`rate full render works 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:100%;overflow:hidden"
       >
         ★
       </div>
@@ -261,6 +271,7 @@ exports[`rate full render works 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:0%;overflow:hidden"
       >
         ★
       </div>
@@ -283,6 +294,7 @@ exports[`rate full render works 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:0%;overflow:hidden"
       >
         ★
       </div>
@@ -313,6 +325,7 @@ exports[`rate full render works in RTL 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:100%;overflow:hidden"
       >
         ★
       </div>
@@ -335,6 +348,7 @@ exports[`rate full render works in RTL 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:0%;overflow:hidden"
       >
         ★
       </div>
@@ -357,6 +371,7 @@ exports[`rate full render works in RTL 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:0%;overflow:hidden"
       >
         ★
       </div>
@@ -387,6 +402,7 @@ exports[`rate full render works with character function 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:100%;overflow:hidden"
       >
         1
       </div>
@@ -409,6 +425,7 @@ exports[`rate full render works with character function 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:0%;overflow:hidden"
       >
         2
       </div>
@@ -431,6 +448,7 @@ exports[`rate full render works with character function 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:0%;overflow:hidden"
       >
         3
       </div>
@@ -461,6 +479,7 @@ exports[`rate full render works with character node 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:100%;overflow:hidden"
       >
         1
       </div>
@@ -483,6 +502,7 @@ exports[`rate full render works with character node 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:0%;overflow:hidden"
       >
         1
       </div>
@@ -505,6 +525,7 @@ exports[`rate full render works with character node 1`] = `
     >
       <div
         class="rc-rate-star-first"
+        style="width:0%;overflow:hidden"
       >
         1
       </div>

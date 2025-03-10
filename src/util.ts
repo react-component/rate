@@ -38,3 +38,29 @@ export function getOffsetLeft(el: HTMLElement) {
   pos.left += getScroll(w);
   return pos.left;
 }
+
+export const getBoundingClientRect = (element: HTMLElement) => {
+  return element.getBoundingClientRect();
+};
+
+function getDecimalPrecision(value: number) {
+  const decimalPart = value.toString().split('.')[1];
+  return decimalPart ? decimalPart.length : 0;
+}
+
+export function roundValueToPrecision(value: number, precision: number) {
+  if (value == null) {
+    return value;
+  }
+
+  const nearest = Math.round(value / precision) * precision;
+  return Number(nearest.toFixed(getDecimalPrecision(precision)));
+}
+
+export function clamp(
+  val: number,
+  min: number = Number.MIN_SAFE_INTEGER,
+  max: number = Number.MAX_SAFE_INTEGER,
+): number {
+  return Math.max(min, Math.min(val, max));
+}

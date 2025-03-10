@@ -1,6 +1,6 @@
-import React from 'react';
-import KeyCode from 'rc-util/lib/KeyCode';
 import classNames from 'classnames';
+import KeyCode from 'rc-util/lib/KeyCode';
+import React from 'react';
 
 export interface StarProps {
   value?: number;
@@ -73,7 +73,9 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
       classNameList.add(`${prefixCls}-focused`);
     }
   }
-
+  const memoWidth = React.useMemo(() => {
+    return Math.max(0, Math.min((value - index) * 100, 100));
+  }, [index, value]);
   // >>>>> Node
   const characterNode = typeof character === 'function' ? character(props) : character;
   let start: React.ReactNode = (
@@ -88,7 +90,14 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
         aria-setsize={count}
         tabIndex={disabled ? -1 : 0}
       >
-        <div className={`${prefixCls}-first`}>{characterNode}</div>
+        <div
+          className={`${prefixCls}-first`}
+          style={{
+            width: `${memoWidth}%`,
+          }}
+        >
+          {characterNode}
+        </div>
         <div className={`${prefixCls}-second`}>{characterNode}</div>
       </div>
     </li>
