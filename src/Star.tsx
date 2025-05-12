@@ -17,7 +17,7 @@ export interface StarProps {
   characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   focused?: boolean;
   count?: number;
-  tabIndex?: numner;
+  tabIndex?: number;
 }
 
 function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
