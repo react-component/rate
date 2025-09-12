@@ -8,21 +8,10 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@@/*": [
-        ".dumi/tmp/*"
-      ],
-      "rc-rate": [
-        "src/index.tsx"
-      ]
+      "@/*": ["src/*"],
+      "@@/*": [".dumi/tmp/*"],
+      "@rc-component/slider": ["src/index.tsx"]
     }
   },
-  "include": [
-    ".dumirc.ts",
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    "./docs/**/*.tsx"
-  ]
+  "include": [".dumirc.ts", "./src/**/*.ts", "./src/**/*.tsx", "./docs/**/*.tsx"]
 }

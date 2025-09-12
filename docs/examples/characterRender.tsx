@@ -2,7 +2,7 @@
 import React from 'react';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap_white.css';
-import Rate from 'rc-rate';
+import Rate from '@rc-component/slider';
 import '../../assets/index.less';
 
 export default () => (
