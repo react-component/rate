@@ -10,7 +10,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@@/*": [".dumi/tmp/*"],
-      "@rc-component/slider": ["src/index.tsx"]
+      "@rc-component/rate": ["src/index.tsx"]
     }
   },
   "include": [".dumirc.ts", "./src/**/*.ts", "./src/**/*.tsx", "./docs/**/*.tsx"]
