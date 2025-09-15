@@ -282,6 +282,17 @@ describe('rate', () => {
     });
   });
 
+  describe('size', () => {
+    it('size=small', () => {
+      const wrapper = mount(<Rate count={3} value={1} size="small" />);
+      expect(wrapper.find('.rc-rate-small').length).toBe(1);
+    });
+    it('size=large', () => {
+      const wrapper = mount(<Rate count={3} value={1} size="large" />);
+      expect(wrapper.find('.rc-rate-large').length).toBe(1);
+    });
+  });
+
   describe('events', () => {
     it('onKeyDown', () => {
       const onKeyDown = jest.fn();

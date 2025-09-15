@@ -32,6 +32,7 @@ export interface RateProps
    * @default true
    */
   keyboard?: boolean;
+  size?: 'small' | 'middle' | 'large';
 }
 
 export interface RateRef {
@@ -56,6 +57,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     // Display
     character = '★',
     characterRender,
+    size = 'middle',
 
     // Meta
     disabled,
@@ -223,7 +225,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
       />
     ));
 
-  const classString = classNames(prefixCls, className, {
+  const classString = classNames(prefixCls, className, `${prefixCls}-${size}`, {
     [`${prefixCls}-disabled`]: disabled,
     [`${prefixCls}-rtl`]: direction === 'rtl',
   });
