@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */
 import React from 'react';
-import Rate from 'rc-rate';
+import Rate from '@rc-component/rate';
 import '../../assets/index.less';
 
 function onChange(v: number) {

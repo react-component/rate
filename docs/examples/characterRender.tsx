@@ -1,8 +1,8 @@
 /* eslint no-console: 0 */
+import Rate from '@rc-component/rate';
+import Tooltip from '@rc-component/tooltip';
+import '@rc-component/tooltip/assets/bootstrap_white.css';
 import React from 'react';
-import Tooltip from 'rc-tooltip';
-import 'rc-tooltip/assets/bootstrap_white.css';
-import Rate from 'rc-rate';
 import '../../assets/index.less';
 
 export default () => (

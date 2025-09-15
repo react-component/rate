@@ -56,7 +56,7 @@ npm start
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Rate from 'rc-rate';
+import Rate from '@rc-component/rate';
 
 ReactDOM.render(
   <Rate />,
@@ -68,7 +68,7 @@ ReactDOM.render(
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Rate from 'rc-rate';
+import Rate from '@rc-component/rate';
 import styled from 'styled-components';
 
 const StyledRate = styled(Rate)`

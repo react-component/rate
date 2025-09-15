@@ -1,7 +1,7 @@
+import useControlledState from '@rc-component/util/lib/hooks/useControlledState';
+import KeyCode from '@rc-component/util/lib/KeyCode';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import classNames from 'classnames';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import KeyCode from 'rc-util/lib/KeyCode';
-import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import type { StarProps } from './Star';
 import Star from './Star';
@@ -94,10 +94,8 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
   }));
 
   // =========================== Value ============================
-  const [value, setValue] = useMergedState(defaultValue || 0, {
-    value: propValue,
-  });
-  const [cleanedValue, setCleanedValue] = useMergedState<number | null>(null);
+  const [value, setValue] = useControlledState(defaultValue || 0, propValue);
+  const [cleanedValue, setCleanedValue] = useControlledState<number | null>(null);
 
   const getStarValue = (index: number, x: number) => {
     const reverse = direction === 'rtl';
