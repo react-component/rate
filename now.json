@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "rc-rate",
+  "name": "@rc-component/rate",
   "builds": [
     {
       "src": "package.json",
