@@ -1,7 +1,7 @@
 import useControlledState from '@rc-component/util/lib/hooks/useControlledState';
 import KeyCode from '@rc-component/util/lib/KeyCode';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import type { StarProps } from './Star';
 import Star from './Star';
@@ -221,7 +221,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
       />
     ));
 
-  const classString = classNames(prefixCls, className, {
+  const classString = clsx(prefixCls, className, {
     [`${prefixCls}-disabled`]: disabled,
     [`${prefixCls}-rtl`]: direction === 'rtl',
   });

@@ -1,6 +1,6 @@
 import React from 'react';
 import KeyCode from '@rc-component/util/lib/KeyCode';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 
 export interface StarProps {
   value?: number;
@@ -76,8 +76,9 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
 
   // >>>>> Node
   const characterNode = typeof character === 'function' ? character(props) : character;
+
   let start: React.ReactNode = (
-    <li className={classNames(Array.from(classNameList))} ref={ref}>
+    <li className={clsx(Array.from(classNameList))} ref={ref}>
       <div
         onClick={disabled ? null : onInternalClick}
         onKeyDown={disabled ? null : onInternalKeyDown}
