@@ -1,6 +1,6 @@
-import React from 'react';
-import KeyCode from '@rc-component/util/lib/KeyCode';
+import { KeyCode } from '@rc-component/util';
 import { clsx } from 'clsx';
+import React from 'react';
 
 export interface StarProps {
   value?: number;
