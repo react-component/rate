@@ -8,9 +8,11 @@ describe('props', () => {
       <Rate characterRender={(_, { index }) => <span className="render-holder">{index}</span>} />,
     );
 
-    Array.from(container.querySelectorAll('li')).forEach((li, index) => {
-      expect(li.querySelectorAll('span.render-holder')).toHaveLength(1);
-      expect(li.textContent).toEqual(String(index));
+    const holders = container.querySelectorAll('span.render-holder');
+    expect(holders).toHaveLength(5);
+
+    holders.forEach((span, index) => {
+      expect(span.textContent).toEqual(String(index));
     });
   });
 });
