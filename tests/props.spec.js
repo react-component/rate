@@ -1,16 +1,18 @@
+import { render } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import Rate from '../src';
 
 describe('props', () => {
   it('characterRender', () => {
-    const wrapper = mount(
+    const { container } = render(
       <Rate characterRender={(_, { index }) => <span className="render-holder">{index}</span>} />,
     );
 
-    wrapper.find('li').forEach((li, index) => {
-      expect(li.find('span.render-holder').length).toEqual(1);
-      expect(li.text()).toEqual(index);
+    const holders = container.querySelectorAll('span.render-holder');
+    expect(holders).toHaveLength(5);
+
+    holders.forEach((span, index) => {
+      expect(span.textContent).toEqual(String(index));
     });
   });
 });
