@@ -1,6 +1,6 @@
 ---
 hero:
-  title: rc-rate
+  title: '@rc-component/rate'
   description: React Rate Component
 ---
 
