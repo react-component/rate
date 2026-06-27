@@ -1,7 +1,7 @@
 <div align="center">
   <h1>@rc-component/rate</h1>
-  <p><sub>Part of the Ant Design ecosystem.</sub></p>
-  <p>⭐ Accessible React rating component with half-star and keyboard support.</p>
+  <p><sub>Ant Design 生态的一部分。</sub></p>
+  <p>⭐ React 评分组件，支持半星、自定义字符、清除和键盘交互。</p>
 
   <p>
     <a href="https://www.npmjs.com/package/@rc-component/rate"><img src="https://img.shields.io/npm/v/@rc-component/rate.svg?style=flat-square" alt="npm version" /></a>
@@ -13,23 +13,23 @@
   </p>
 </div>
 
-<p align="center">English | <a href="./README.zh-CN.md">简体中文</a></p>
+<p align="center"><a href="./README.md">English</a> | 简体中文</p>
 
 
-## Highlights
+## 特性
 
 - Controlled and uncontrolled rating values.
 - Half-star selection, custom characters, and custom character rendering.
 - Keyboard interaction, focus/blur methods, disabled state, and RTL support.
 - TypeScript definitions for props and imperative refs.
 
-## Install
+## 安装
 
 ```bash
 npm install @rc-component/rate
 ```
 
-## Usage
+## 使用
 
 ```tsx | pure
 import Rate from '@rc-component/rate';
@@ -50,9 +50,9 @@ export default () => (
 );
 ```
 
-## Examples
+## 示例
 
-Run the examples locally:
+本地运行示例：
 
 ```bash
 npm install
@@ -63,7 +63,7 @@ npm start
 
 ### Rate
 
-| Name | Type | Default | Description |
+| 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `allowClear` | boolean | true | Clear the value when clicking the selected item again. |
 | `allowHalf` | boolean | false | Enable half item selection. |
@@ -91,12 +91,12 @@ npm start
 
 ### Ref
 
-| Name    | Type       | Description                   |
+| 名称    | 类型       | 说明                   |
 | ------- | ---------- | ----------------------------- |
 | `blur`  | () => void | Remove focus from the rating. |
 | `focus` | () => void | Focus the rating.             |
 
-## Development
+## 本地开发
 
 ```bash
 npm install
@@ -107,7 +107,7 @@ npm run compile
 npm run build
 ```
 
-## Release
+## 发布
 
 ```bash
 npm run prepublishOnly
@@ -115,6 +115,6 @@ npm run prepublishOnly
 
 The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
 
-## License
+## 许可证
 
 @rc-component/rate is released under the [MIT](./LICENSE.md) license.
