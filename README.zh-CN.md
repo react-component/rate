@@ -1,6 +1,7 @@
 <div align="center">
   <h1>@rc-component/rate</h1>
   <p><sub>Ant Design 生态的一部分。</sub></p>
+  <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
   <p>⭐ React 评分组件，支持半星、自定义字符、清除和键盘交互。</p>
 
   <p>
