@@ -1,12 +1,7 @@
 <div align="center">
   <h1>@rc-component/rate</h1>
+  <p><sub>Part of the Ant Design ecosystem.</sub></p>
   <p>⭐ Accessible React rating component with half-star and keyboard support.</p>
-
-  <p>
-    <a href="https://ant.design">
-      <img width="32" height="32" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="Ant Design" />
-    </a>
-  </p>
   <p>
     Part of the <a href="https://ant.design">Ant Design</a> ecosystem
   </p>
@@ -21,14 +16,6 @@
   </p>
 </div>
 
-<p align="center">
-  <sub>
-    <a href="https://ant.design">
-      <img alt="Ant Design" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" height="16">
-    </a>
-    Part of the Ant Design ecosystem.
-  </sub>
-</p>
 
 ## Highlights
 
@@ -47,15 +34,11 @@ npm install @rc-component/rate
 
 ```tsx | pure
 import Rate from '@rc-component/rate';
-import React from 'react';
-
 export default () => <Rate defaultValue={2.5} allowHalf />;
 ```
 
 ```tsx | pure
 import Rate from '@rc-component/rate';
-import React from 'react';
-
 export default () => (
   <Rate
     count={5}
