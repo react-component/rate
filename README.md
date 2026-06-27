@@ -1,8 +1,7 @@
 <div align="center">
   <h1>@rc-component/rate</h1>
-  <p><sub>Part of the Ant Design ecosystem.</sub></p>
-  <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
-  <p>⭐ Accessible React rating component with half-star and keyboard support.</p>
+  <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Part of the Ant Design ecosystem.</sub></p>
+  <p>📦 ⭐ Accessible React rating component with half-star and keyboard support.</p>
 
   <p>
     <a href="https://www.npmjs.com/package/@rc-component/rate"><img src="https://img.shields.io/npm/v/@rc-component/rate.svg?style=flat-square" alt="npm version" /></a>

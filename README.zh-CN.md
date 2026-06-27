@@ -1,8 +1,7 @@
 <div align="center">
   <h1>@rc-component/rate</h1>
-  <p><sub>Ant Design 生态的一部分。</sub></p>
-  <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
-  <p>⭐ React 评分组件，支持半星、自定义字符、清除和键盘交互。</p>
+  <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Ant Design 生态的一部分。</sub></p>
+  <p>📦 ⭐ React 评分组件，支持半星、自定义字符、清除和键盘交互。</p>
 
   <p>
     <a href="https://www.npmjs.com/package/@rc-component/rate"><img src="https://img.shields.io/npm/v/@rc-component/rate.svg?style=flat-square" alt="npm version" /></a>
@@ -19,10 +18,10 @@
 
 ## 特性
 
-- Controlled and uncontrolled rating values.
-- Half-star selection, custom characters, and custom character rendering.
-- Keyboard interaction, focus/blur methods, disabled state, and RTL support.
-- TypeScript definitions for props and imperative refs.
+- 受控和非受控额定值。
+- 半星选择、自定义角色和自定义角色渲染。
+- 支持键盘交互、焦点/模糊方法、取消状态和RTL。
+- props 和命令式引用的 TypeScript 定义。
 
 ## 安装
 
@@ -66,36 +65,36 @@ npm start
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `allowClear` | boolean | true | Clear the value when clicking the selected item again. |
-| `allowHalf` | boolean | false | Enable half item selection. |
-| `autoFocus` | boolean | false | Focus the rating on mount. |
-| `character` | ReactNode \| (props: StarProps) => ReactNode | `'★'` | Custom character for each item. |
-| `characterRender` | (origin: ReactElement, props: StarProps) => ReactNode | - | Custom renderer for each item. |
-| `className` | string | - | Additional class name. |
-| `count` | number | 5 | Number of rating items. |
-| `defaultValue` | number | 0 | Initial uncontrolled value. |
-| `direction` | string | `'ltr'` | Layout direction. Use `'rtl'` for right-to-left display. |
-| `disabled` | boolean | false | Disable interaction. |
-| `id` | string | - | Root element id. |
-| `keyboard` | boolean | true | Enable keyboard control. |
-| `prefixCls` | string | `'rc-rate'` | Prefix class name. |
-| `style` | React.CSSProperties | - | Root style. |
-| `tabIndex` | number | 0 | Root tab index. |
-| `value` | number | - | Controlled value. |
-| `onBlur` | () => void | - | Blur callback. |
-| `onChange` | (value: number) => void | - | Value change callback. |
-| `onFocus` | () => void | - | Focus callback. |
-| `onHoverChange` | (value: number) => void | - | Hover value callback. |
-| `onKeyDown` | React.KeyboardEventHandler<HTMLUListElement> | - | Keydown callback. |
-| `onMouseEnter` | React.MouseEventHandler<HTMLUListElement> | - | Mouse enter callback. |
-| `onMouseLeave` | React.MouseEventHandler<HTMLUListElement> | - | Mouse leave callback. |
+| `allowClear` | boolean | true | 再次单击所选项目时清除该值。 |
+| `allowHalf` | boolean | false | 启用一半项目选择。 |
+| `autoFocus` | boolean | false | 将评级重点放在安装上。 |
+| `character` | ReactNode \| (props: StarProps) => ReactNode | `'★'` | 每项的自定义字符。 |
+| `characterRender` | (origin: ReactElement, props: StarProps) => ReactNode | - | 每项的自定义渲染函数。 |
+| `className` | string | - | 附加className。 |
+| `count` | number | 5 | 评级项目的数量。 |
+| `defaultValue` | number | 0 | 初始不受控值。 |
+| `direction` | string | `'ltr'` | 布局方向。使用 `'rtl'` 从右到左显示。 |
+| `disabled` | boolean | false | 禁用交互。 |
+| `id` | string | - | 根元素 ID。 |
+| `keyboard` | boolean | true | 启用键盘控制。 |
+| `prefixCls` | string | `'rc-rate'` | 前缀className。 |
+| `style` | React.CSSProperties | - | 根样式。 |
+| `tabIndex` | number | 0 | 根选项卡索引。 |
+| `value` | number | - | 受控值。 |
+| `onBlur` | () => void | - | 失焦回调。 |
+| `onChange` | （值：数字）=> 无效 | - | 值变化回调。 |
+| `onFocus` | () => void | - | 聚焦回调。 |
+| `onHoverChange` | （值：数字）=> 无效 | - | 悬浮值回调。 |
+| `onKeyDown` | React.KeyboardEventHandler<HTMLUListElement> | - | 按键回调。 |
+| `onMouseEnter` | React.MouseEventHandler<HTMLUListElement> | - | 鼠标进入回调。 |
+| `onMouseLeave` | React.MouseEventHandler<HTMLUListElement> | - | 鼠标离开回调。 |
 
 ### Ref
 
 | 名称    | 类型       | 说明                   |
 | ------- | ---------- | ----------------------------- |
-| `blur`  | () => void | Remove focus from the rating. |
-| `focus` | () => void | Focus the rating.             |
+| `blur`  | () => void | 移除评分组件焦点。 |
+| `focus` | () => void | 聚焦评分组件。             |
 
 ## 本地开发
 
@@ -114,8 +113,8 @@ npm run build
 npm run prepublishOnly
 ```
 
-The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
+包构建完成后，发布流程由 `@rc-component/np` 通过 `rc-np` 命令处理。
 
 ## 许可证
 
-@rc-component/rate is released under the [MIT](./LICENSE.md) license.
+@rc-component/rate 基于 [MIT](./LICENSE.md) 许可证发布。
