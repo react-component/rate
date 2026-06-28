@@ -119,4 +119,4 @@ The release flow is handled by `@rc-component/np` through the `rc-np` command af
 
 ## License
 
-@rc-component/rate is released under the [MIT](./LICENSE.md) license.
+@rc-component/rate is released under the [MIT](./LICENSE) license.
