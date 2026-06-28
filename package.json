@@ -8,7 +8,7 @@
     "react-rate",
     "rate"
   ],
-  "homepage": "https://github.com/react-component/rate",
+  "homepage": "https://react-component.github.io/rate",
   "bugs": {
     "url": "https://github.com/react-component/rate/issues"
   },
@@ -71,5 +71,8 @@
   },
   "engines": {
     "node": ">=8.x"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
