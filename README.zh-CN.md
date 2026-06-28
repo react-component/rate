@@ -4,12 +4,12 @@
   <p>📦 ⭐ React 评分组件，支持半星、自定义字符、清除和键盘交互。</p>
 
   <p>
-    <a href="https://www.npmjs.com/package/@rc-component/rate"><img src="https://img.shields.io/npm/v/@rc-component/rate.svg?style=flat-square" alt="npm version" /></a>
-    <a href="https://npmjs.org/package/@rc-component/rate"><img src="https://img.shields.io/npm/dm/@rc-component/rate.svg?style=flat-square" alt="npm downloads" /></a>
-    <a href="https://github.com/react-component/rate/actions"><img src="https://github.com/react-component/rate/actions/workflows/react-component-ci.yml/badge.svg" alt="CI" /></a>
-    <a href="https://codecov.io/gh/react-component/rate"><img src="https://img.shields.io/codecov/c/github/react-component/rate/master.svg?style=flat-square" alt="Codecov" /></a>
-    <a href="https://bundlephobia.com/package/@rc-component/rate"><img src="https://badgen.net/bundlephobia/minzip/@rc-component/rate" alt="Bundle size" /></a>
-    <a href="https://github.com/umijs/dumi"><img src="https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square" alt="dumi" /></a>
+    <a href="https://npmjs.org/package/@rc-component/rate"><img alt="NPM version" src="https://img.shields.io/npm/v/@rc-component/rate.svg?style=flat-square"></a>
+    <a href="https://npmjs.org/package/@rc-component/rate"><img alt="npm downloads" src="https://img.shields.io/npm/dm/@rc-component/rate.svg?style=flat-square"></a>
+    <a href="https://github.com/react-component/rate/actions/workflows/react-component-ci.yml"><img alt="build status" src="https://github.com/react-component/rate/actions/workflows/react-component-ci.yml/badge.svg"></a>
+    <a href="https://app.codecov.io/gh/react-component/rate"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/react-component/rate/master.svg?style=flat-square"></a>
+    <a href="https://bundlephobia.com/package/@rc-component/rate"><img alt="bundle size" src="https://img.shields.io/bundlephobia/minzip/@rc-component/rate?style=flat-square"></a>
+    <a href="https://github.com/umijs/dumi"><img alt="dumi" src="https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square"></a>
   </p>
 </div>
 
