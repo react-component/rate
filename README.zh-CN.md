@@ -84,9 +84,9 @@ npm start
 | `tabIndex` | number | 0 | 根选项卡索引。 |
 | `value` | number | - | 受控值。 |
 | `onBlur` | () => void | - | 失焦回调。 |
-| `onChange` | （值：数字）=> 无效 | - | 值变化回调。 |
+| `onChange` | (value: number) => void | - | 值变化回调。 |
 | `onFocus` | () => void | - | 聚焦回调。 |
-| `onHoverChange` | （值：数字）=> 无效 | - | 悬浮值回调。 |
+| `onHoverChange` | (value: number) => void | - | 悬浮值回调。 |
 | `onKeyDown` | React.KeyboardEventHandler<HTMLUListElement> | - | 按键回调。 |
 | `onMouseEnter` | React.MouseEventHandler<HTMLUListElement> | - | 鼠标进入回调。 |
 | `onMouseLeave` | React.MouseEventHandler<HTMLUListElement> | - | 鼠标离开回调。 |
