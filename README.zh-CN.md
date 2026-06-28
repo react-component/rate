@@ -72,14 +72,14 @@ npm start
 | `autoFocus` | boolean | false | 将评级重点放在安装上。 |
 | `character` | ReactNode \| (props: StarProps) => ReactNode | `'★'` | 每项的自定义字符。 |
 | `characterRender` | (origin: ReactElement, props: StarProps) => ReactNode | - | 每项的自定义渲染函数。 |
-| `className` | string | - | 附加className。 |
+| `className` | string | - | 附加 className。 |
 | `count` | number | 5 | 评级项目的数量。 |
 | `defaultValue` | number | 0 | 初始不受控值。 |
 | `direction` | string | `'ltr'` | 布局方向。使用 `'rtl'` 从右到左显示。 |
 | `disabled` | boolean | false | 禁用交互。 |
 | `id` | string | - | 根元素 ID。 |
 | `keyboard` | boolean | true | 启用键盘控制。 |
-| `prefixCls` | string | `'rc-rate'` | 前缀className。 |
+| `prefixCls` | string | `'rc-rate'` | className 前缀。 |
 | `style` | React.CSSProperties | - | 根样式。 |
 | `tabIndex` | number | 0 | 根选项卡索引。 |
 | `value` | number | - | 受控值。 |
