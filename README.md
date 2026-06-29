@@ -1,121 +1,124 @@
-# rc-rate
+<div align="center">
+  <h1>@rc-component/rate</h1>
+  <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Part of the Ant Design ecosystem.</sub></p>
+  <p>📦 ⭐ Accessible React rating component with half-star and keyboard support.</p>
 
-React Rate Component
+  <p>
+    <a href="https://npmjs.org/package/@rc-component/rate"><img alt="NPM version" src="https://img.shields.io/npm/v/@rc-component/rate.svg?style=flat-square"></a>
+    <a href="https://npmjs.org/package/@rc-component/rate"><img alt="npm downloads" src="https://img.shields.io/npm/dm/@rc-component/rate.svg?style=flat-square"></a>
+    <a href="https://github.com/react-component/rate/actions/workflows/react-component-ci.yml"><img alt="build status" src="https://github.com/react-component/rate/actions/workflows/react-component-ci.yml/badge.svg"></a>
+    <a href="https://app.codecov.io/gh/react-component/rate"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/react-component/rate/master.svg?style=flat-square"></a>
+    <a href="https://bundlephobia.com/package/@rc-component/rate"><img alt="bundle size" src="https://img.shields.io/bundlephobia/minzip/@rc-component/rate?style=flat-square"></a>
+    <a href="https://github.com/umijs/dumi"><img alt="dumi" src="https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square"></a>
+  </p>
+</div>
 
-[![NPM version][npm-image]][npm-url]
-[![npm download][download-image]][download-url]
-[![build status][github-actions-image]][github-actions-url]
-[![Codecov][codecov-image]][codecov-url]
-[![bundle size][bundlephobia-image]][bundlephobia-url]
-[![dumi][dumi-image]][dumi-url]
+<p align="center">English | <a href="./README.zh-CN.md">简体中文</a></p>
 
-[npm-image]: http://img.shields.io/npm/v/rc-rate.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/rc-rate
-[github-actions-image]: https://github.com/react-component/rate/workflows/CI/badge.svg
-[github-actions-url]: https://github.com/react-component/rate/actions
-[codecov-image]: https://img.shields.io/codecov/c/github/react-component/rate/master.svg?style=flat-square
-[codecov-url]: https://codecov.io/gh/react-component/rate/branch/master
-[david-url]: https://david-dm.org/react-component/rate
-[david-image]: https://david-dm.org/react-component/rate/status.svg?style=flat-square
-[david-dev-url]: https://david-dm.org/react-component/rate?type=dev
-[david-dev-image]: https://david-dm.org/react-component/rate/dev-status.svg?style=flat-square
-[download-image]: https://img.shields.io/npm/dm/rc-rate.svg?style=flat-square
-[download-url]: https://npmjs.org/package/rc-rate
-[bundlephobia-url]: https://bundlephobia.com/result?p=rc-rate
-[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-rate
-[dumi-url]: https://github.com/umijs/dumi
-[dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
 
-## Screenshots
+## Highlights
 
-<img src="https://img.alicdn.com/tps/TB1ijlpLVXXXXb8XpXXXXXXXXXX-466-172.png" width="288"/>
+- Controlled and uncontrolled rating values.
+- Half-star selection, custom characters, and custom character rendering.
+- Keyboard interaction, focus/blur methods, disabled state, and RTL support.
+- TypeScript definitions for props and imperative refs.
 
-## Changelog
+## Install
 
-- [CHANGELOG](./CHANGELOG.md)
-
-## Development
-
+```bash
+npm install @rc-component/rate
 ```
+
+## Usage
+
+```tsx | pure
+import Rate from '@rc-component/rate';
+export default () => <Rate defaultValue={2.5} allowHalf />;
+```
+
+```tsx | pure
+import Rate from '@rc-component/rate';
+export default () => (
+  <Rate
+    count={5}
+    defaultValue={3}
+    character={({ index }) => index + 1}
+    onChange={(value) => {
+      console.log('selected', value);
+    }}
+  />
+);
+```
+
+## Examples
+
+Run the local dumi site:
+
+```bash
 npm install
 npm start
 ```
 
-## Example
-
-- Local: http://localhost:9001/
-
-- Online: http://react-component.github.io/rate/
-
-## install
-
-[![rc-rate](https://nodei.co/npm/rc-rate.png)](https://npmjs.org/package/rc-rate)
-
-## Usage
-
-```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Rate from '@rc-component/rate';
-
-ReactDOM.render(
-  <Rate />,
-  document.getElementById('root')
-)
-```
-
-### with [styled-components](https://github.com/styled-components/styled-components)
-```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Rate from '@rc-component/rate';
-import styled from 'styled-components';
-
-const StyledRate = styled(Rate)`
-  &.rc-rate {
-    font-size: ${({ size }) => size}px;
-  }
-`
-
-ReactDOM.render(
-  <StyledRate size="24" />,
-  document.getElementById('root')
-)
-```
+Then open `http://localhost:8000`.
 
 ## API
 
-### props
+### Rate
 
-| name          | type                              | default       | description                                           |
-| ------------- | --------------------------------- | ------------- | ----------------------------------------------------- |
-| count         | number                            | 5             | Star numbers                                          |
-| value         | number                            | -             | Controlled value                                      |
-| defaultValue  | number                            | 0             | Initial value                                         |
-| allowHalf     | boolean                           | false         | Support half star                                     |
-| allowClear    | boolean                           | true          | Reset when click again                                |
-| style         | object                            | {}            |                                                       |
-| onChange      | function                          | (value) => {} | `onChange` will be triggered when click               |
-| onHoverChange | function                          | (value) => {} | `onHoverChange` will be triggered when hover on stars |
-| character     | ReactNode \| (props) => ReactNode | ★             | The each character of rate                            |
-| disabled      | boolean                           | false         |                                                       |
-| direction     | string                            | `ltr`         | The direction of rate                                 |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `allowClear` | boolean | true | Clear the value when clicking the selected item again. |
+| `allowHalf` | boolean | false | Enable half item selection. |
+| `autoFocus` | boolean | false | Focus the rating on mount. |
+| `character` | ReactNode \| (props: StarProps) => ReactNode | `'★'` | Custom character for each item. |
+| `characterRender` | (origin: ReactElement, props: StarProps) => ReactNode | - | Custom renderer for each item. |
+| `className` | string | - | Additional class name. |
+| `count` | number | 5 | Number of rating items. |
+| `defaultValue` | number | 0 | Initial uncontrolled value. |
+| `direction` | string | `'ltr'` | Layout direction. Use `'rtl'` for right-to-left display. |
+| `disabled` | boolean | false | Disable interaction. |
+| `id` | string | - | Root element id. |
+| `keyboard` | boolean | true | Enable keyboard control. |
+| `prefixCls` | string | `'rc-rate'` | Prefix class name. |
+| `style` | React.CSSProperties | - | Root style. |
+| `tabIndex` | number | 0 | Root tab index. |
+| `value` | number | - | Controlled value. |
+| `onBlur` | () => void | - | Blur callback. |
+| `onChange` | (value: number) => void | - | Value change callback. |
+| `onFocus` | () => void | - | Focus callback. |
+| `onHoverChange` | (value: number) => void | - | Hover value callback. |
+| `onKeyDown` | React.KeyboardEventHandler<HTMLUListElement> | - | Keydown callback. |
+| `onMouseEnter` | React.MouseEventHandler<HTMLUListElement> | - | Mouse enter callback. |
+| `onMouseLeave` | React.MouseEventHandler<HTMLUListElement> | - | Mouse leave callback. |
 
-## Test Case
+### Ref
 
-```
+| Name    | Type       | Description                   |
+| ------- | ---------- | ----------------------------- |
+| `blur`  | () => void | Remove focus from the rating. |
+| `focus` | () => void | Focus the rating.             |
+
+## Development
+
+```bash
+npm install
+npm start
 npm test
-npm run chrome-test
+npm run tsc
+npm run compile
+npm run build
 ```
 
-## Coverage
+The dumi site runs at `http://localhost:8000` by default.
 
-```
-npm run coverage
+## Release
+
+```bash
+npm run prepublishOnly
 ```
 
-open coverage/ dir
+The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
 
 ## License
 
-rc-rate is released under the MIT license.
+@rc-component/rate is released under the [MIT](./LICENSE) license.

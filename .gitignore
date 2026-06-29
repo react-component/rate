@@ -29,10 +29,12 @@ package-lock.json
 pnpm-lock.yaml
 .doc/
 dist
+docs-dist
 .doc
 # dumi
 .dumi/tmp
 .dumi/tmp-test
 .dumi/tmp-production
+.vercel
 
 bun.lockb
