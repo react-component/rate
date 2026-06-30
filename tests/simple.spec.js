@@ -1,5 +1,6 @@
+import { createEvent, fireEvent } from '@testing-library/dom';
 import { KeyCode } from '@rc-component/util';
-import { act, createEvent, fireEvent, render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import React from 'react';
 import Rate from '../src';
 
