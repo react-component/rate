@@ -15,7 +15,6 @@
 
 <p align="center"><a href="./README.md">English</a> | 简体中文</p>
 
-
 ## 特性
 
 - 受控和非受控额定值。
@@ -55,7 +54,7 @@ export default () => (
 运行本地 dumi 站点：
 
 ```bash
-npm install
+ut install
 npm start
 ```
 
@@ -93,15 +92,15 @@ npm start
 
 ### Ref
 
-| 名称    | 类型       | 说明                   |
-| ------- | ---------- | ----------------------------- |
+| 名称    | 类型       | 说明               |
+| ------- | ---------- | ------------------ |
 | `blur`  | () => void | 移除评分组件焦点。 |
-| `focus` | () => void | 聚焦评分组件。             |
+| `focus` | () => void | 聚焦评分组件。     |
 
 ## 本地开发
 
 ```bash
-npm install
+ut install
 npm start
 npm test
 npm run tsc
