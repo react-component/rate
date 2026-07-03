@@ -1,6 +1,6 @@
 <div align="center">
   <h1>@rc-component/rate</h1>
-  <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Ant Design 生态的一部分。</sub></p>
+  <p><sub><a href="https://ant.design"><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /></a> Ant Design 生态的一部分。</sub></p>
   <p>📦 ⭐ React 评分组件，支持半星、自定义字符、清除和键盘交互。</p>
 
   <p>
@@ -14,7 +14,6 @@
 </div>
 
 <p align="center"><a href="./README.md">English</a> | 简体中文</p>
-
 
 ## 特性
 
@@ -93,10 +92,10 @@ npm start
 
 ### Ref
 
-| 名称    | 类型       | 说明                   |
-| ------- | ---------- | ----------------------------- |
+| 名称    | 类型       | 说明               |
+| ------- | ---------- | ------------------ |
 | `blur`  | () => void | 移除评分组件焦点。 |
-| `focus` | () => void | 聚焦评分组件。             |
+| `focus` | () => void | 聚焦评分组件。     |
 
 ## 本地开发
 
