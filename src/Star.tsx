@@ -17,6 +17,7 @@ export interface StarProps {
   characterRender?: (origin: React.ReactElement, props: StarProps) => React.ReactNode;
   focused?: boolean;
   count?: number;
+  tabIndex?: number;
 }
 
 function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
@@ -32,6 +33,7 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
     focused,
     onHover,
     onClick,
+    tabIndex,
   } = props;
 
   // =========================== Events ===========================
@@ -87,7 +89,7 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
         aria-checked={value > index ? 'true' : 'false'}
         aria-posinset={index + 1}
         aria-setsize={count}
-        tabIndex={disabled ? -1 : 0}
+        tabIndex={disabled ? -1 : tabIndex}
       >
         <div className={`${prefixCls}-first`}>{characterNode}</div>
         <div className={`${prefixCls}-second`}>{characterNode}</div>
