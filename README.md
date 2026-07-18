@@ -86,9 +86,9 @@ Then open `http://localhost:8000`.
 | `onChange` | (value: number) => void | - | Value change callback. |
 | `onFocus` | () => void | - | Focus callback. |
 | `onHoverChange` | (value: number) => void | - | Hover value callback. |
-| `onKeyDown` | React.KeyboardEventHandler<HTMLUListElement> | - | Keydown callback. |
-| `onMouseEnter` | React.MouseEventHandler<HTMLUListElement> | - | Mouse enter callback. |
-| `onMouseLeave` | React.MouseEventHandler<HTMLUListElement> | - | Mouse leave callback. |
+| `onKeyDown` | `React.KeyboardEventHandler<HTMLUListElement>` | - | Keydown callback. |
+| `onMouseEnter` | `React.MouseEventHandler<HTMLUListElement>` | - | Mouse enter callback. |
+| `onMouseLeave` | `React.MouseEventHandler<HTMLUListElement>` | - | Mouse leave callback. |
 
 ### Ref
 
