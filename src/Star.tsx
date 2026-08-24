@@ -7,6 +7,7 @@ export interface StarProps {
   index?: number;
   prefixCls?: string;
   allowHalf?: boolean;
+  showExactValue?: boolean;
   disabled?: boolean;
   onHover?: (e: React.MouseEvent<HTMLDivElement>, index: number) => void;
   onClick?: (
@@ -29,6 +30,7 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
     count,
     value,
     allowHalf,
+    showExactValue,
     focused,
     onHover,
     onClick,
@@ -53,10 +55,19 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
   // >>>>> ClassName
   const starValue = index + 1;
   const classNameList = new Set([prefixCls]);
+  const fraction = value - index;
+  let firstStyle: React.CSSProperties | undefined;
 
   // TODO: Current we just refactor from CC to FC. This logic seems can be optimized.
   if (value === 0 && index === 0 && focused) {
     classNameList.add(`${prefixCls}-focused`);
+  } else if (showExactValue && fraction > 0 && fraction < 1) {
+    // Reuse the half state so existing themes only need the dynamic width override.
+    classNameList.add(`${prefixCls}-half`);
+    classNameList.add(`${prefixCls}-active`);
+    firstStyle = {
+      width: `${Number((fraction * 100).toFixed(10))}%`,
+    };
   } else if (allowHalf && value + 0.5 >= starValue && value < starValue) {
     classNameList.add(`${prefixCls}-half`);
     classNameList.add(`${prefixCls}-active`);
@@ -89,7 +100,9 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
         aria-setsize={count}
         tabIndex={disabled ? -1 : 0}
       >
-        <div className={`${prefixCls}-first`}>{characterNode}</div>
+        <div className={`${prefixCls}-first`} style={firstStyle}>
+          {characterNode}
+        </div>
         <div className={`${prefixCls}-second`}>{characterNode}</div>
       </div>
     </li>
