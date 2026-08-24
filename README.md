@@ -79,6 +79,7 @@ Then open `http://localhost:8000`.
 | `id` | string | - | Root element id. |
 | `keyboard` | boolean | true | Enable keyboard control. |
 | `prefixCls` | string | `'rc-rate'` | Prefix class name. |
+| `showExactValue` | boolean | false | Display the value exactly instead of rounding to whole or half items. Only works when `disabled` is enabled. |
 | `style` | React.CSSProperties | - | Root style. |
 | `tabIndex` | number | 0 | Root tab index. |
 | `value` | number | - | Controlled value. |

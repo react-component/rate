@@ -237,6 +237,52 @@ describe('rate', () => {
     });
   });
 
+  describe('showExactValue', () => {
+    it.each([
+      [3.8, 3, '80%'],
+      [4.9, 4, '90%'],
+    ])('renders %s in disabled mode', (value, index, width) => {
+      const { container } = render(<Rate value={value} disabled showExactValue />);
+      const star = getStar(container, index);
+
+      expect(star.classList.contains('rc-rate-star-half')).toBe(true);
+      expect(star.querySelector('.rc-rate-star-first')).toHaveStyle({ width });
+    });
+
+    it('renders fraction in RTL', () => {
+      const { container } = render(<Rate value={3.8} disabled showExactValue direction="rtl" />);
+      const star = getStar(container, 3);
+
+      expect(star.classList.contains('rc-rate-star-half')).toBe(true);
+      expect(star.querySelector('.rc-rate-star-first')).toHaveStyle({ width: '80%' });
+    });
+
+    it('only works in disabled mode', () => {
+      const { container } = render(<Rate value={3.8} showExactValue />);
+      const star = getStar(container, 3);
+
+      expect(star.classList.contains('rc-rate-star-half')).toBe(false);
+      expect(star.classList.contains('rc-rate-star-zero')).toBe(true);
+      expect(star.querySelector('.rc-rate-star-first')).not.toHaveAttribute('style');
+    });
+
+    it('does not override allowHalf in interactive mode', () => {
+      const { container } = render(<Rate value={3.8} allowHalf showExactValue />);
+      const star = getStar(container, 3);
+
+      expect(star.classList.contains('rc-rate-star-half')).toBe(true);
+      expect(star.querySelector('.rc-rate-star-first')).not.toHaveAttribute('style');
+    });
+
+    it('takes precedence over allowHalf in disabled mode', () => {
+      const { container } = render(<Rate value={3.8} disabled allowHalf showExactValue />);
+      const star = getStar(container, 3);
+
+      expect(star.classList.contains('rc-rate-star-half')).toBe(true);
+      expect(star.querySelector('.rc-rate-star-first')).toHaveStyle({ width: '80%' });
+    });
+  });
+
   describe('allowClear', () => {
     it('allowClear is false', () => {
       const handleChange = jest.fn();
