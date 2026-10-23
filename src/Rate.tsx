@@ -6,8 +6,10 @@ import Star from './Star';
 import useRefs from './useRefs';
 import { getOffsetLeft } from './util';
 
-export interface RateProps
-  extends Pick<StarProps, 'count' | 'character' | 'characterRender' | 'allowHalf' | 'disabled'> {
+export interface RateProps extends Pick<
+  StarProps,
+  'count' | 'character' | 'characterRender' | 'allowHalf' | 'disabled'
+> {
   value?: number;
   defaultValue?: number;
   allowClear?: boolean;
@@ -171,17 +173,20 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     const step = allowHalf ? 0.5 : 1;
 
     if (keyboard) {
-      if (keyCode === KeyCode.RIGHT && value < count && !reverse) {
+      const isIncrease =
+        keyCode === KeyCode.UP ||
+        (!reverse && keyCode === KeyCode.RIGHT) ||
+        (reverse && keyCode === KeyCode.LEFT);
+      const isDecrease =
+        keyCode === KeyCode.DOWN ||
+        (!reverse && keyCode === KeyCode.LEFT) ||
+        (reverse && keyCode === KeyCode.RIGHT);
+
+      if (isIncrease && value < count) {
         changeValue(value + step);
         event.preventDefault();
-      } else if (keyCode === KeyCode.LEFT && value > 0 && !reverse) {
+      } else if (isDecrease && value > 0) {
         changeValue(value - step);
-        event.preventDefault();
-      } else if (keyCode === KeyCode.RIGHT && value > 0 && reverse) {
-        changeValue(value - step);
-        event.preventDefault();
-      } else if (keyCode === KeyCode.LEFT && value < count && reverse) {
-        changeValue(value + step);
         event.preventDefault();
       }
     }
