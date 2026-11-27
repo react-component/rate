@@ -6,8 +6,10 @@ import Star from './Star';
 import useRefs from './useRefs';
 import { getOffsetLeft } from './util';
 
-export interface RateProps
-  extends Pick<StarProps, 'count' | 'character' | 'characterRender' | 'allowHalf' | 'disabled'> {
+export interface RateProps extends Pick<
+  StarProps,
+  'count' | 'character' | 'characterRender' | 'allowHalf' | 'showExactValue' | 'disabled'
+> {
   value?: number;
   defaultValue?: number;
   allowClear?: boolean;
@@ -52,6 +54,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
     keyboard = true,
 
     // Display
+    showExactValue = false,
     character = '★',
     characterRender,
 
@@ -209,6 +212,7 @@ function Rate(props: RateProps, ref: React.Ref<RateRef>) {
         disabled={disabled}
         prefixCls={`${prefixCls}-star`}
         allowHalf={allowHalf}
+        showExactValue={disabled && showExactValue}
         value={hoverValue === null ? value : hoverValue}
         onClick={onClick}
         onHover={onHover}

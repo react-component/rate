@@ -50,6 +50,14 @@ export default () => (
       style={{ fontSize: 50, marginTop: 24 }}
       character={<i className="anticon anticon-star" />}
     />
+    <br />
+    <Rate
+      value={3.8}
+      disabled
+      showExactValue
+      style={{ fontSize: 50, marginTop: 24 }}
+      character={<i className="anticon anticon-star" />}
+    />
     <h2>RTL</h2>
     <Rate
       defaultValue={1}

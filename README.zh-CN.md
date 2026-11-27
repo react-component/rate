@@ -79,6 +79,7 @@ npm start
 | `id` | string | - | 根元素 ID。 |
 | `keyboard` | boolean | true | 启用键盘控制。 |
 | `prefixCls` | string | `'rc-rate'` | className 前缀。 |
+| `showExactValue` | boolean | false | 按传入值精确展示，而不是取整星或半星，仅在开启 `disabled` 时生效。 |
 | `style` | React.CSSProperties | - | 根样式。 |
 | `tabIndex` | number | 0 | 根选项卡索引。 |
 | `value` | number | - | 受控值。 |
