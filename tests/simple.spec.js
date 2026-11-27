@@ -216,6 +216,30 @@ describe('rate', () => {
       expect(handleChange).toBeCalledWith(1);
     });
 
+    it('support UP and DOWN arrow keys', () => {
+      const handleChange = jest.fn();
+      const { container } = render(
+        <Rate count={3} value={1.5} allowHalf onChange={handleChange} />,
+      );
+      fireEvent.keyDown(getRate(container), { keyCode: KeyCode.DOWN });
+      expect(handleChange).toBeCalledWith(1);
+      handleChange.mockReset();
+      fireEvent.keyDown(getRate(container), { keyCode: KeyCode.UP });
+      expect(handleChange).toBeCalledWith(2);
+    });
+
+    it('support UP and DOWN arrow keys in RTL', () => {
+      const handleChange = jest.fn();
+      const { container } = render(
+        <Rate count={3} value={1.5} allowHalf direction="rtl" onChange={handleChange} />,
+      );
+      fireEvent.keyDown(getRate(container), { keyCode: KeyCode.DOWN });
+      expect(handleChange).toBeCalledWith(1);
+      handleChange.mockReset();
+      fireEvent.keyDown(getRate(container), { keyCode: KeyCode.UP });
+      expect(handleChange).toBeCalledWith(2);
+    });
+
     it('hover Rate of allowHalf', () => {
       const onHoverChange = jest.fn();
       const { container } = render(
