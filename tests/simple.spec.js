@@ -118,11 +118,20 @@ describe('rate', () => {
         expect(handleChange).toBeCalledWith(2);
       });
 
-      it('enter', () => {
+      it('enter and space', () => {
         const handleChange = jest.fn();
         const { container } = render(<Rate count={3} value={1} onChange={handleChange} />);
-        fireEvent.keyDown(getStarHandler(container, 2), { keyCode: KeyCode.ENTER });
-        expect(handleChange).toBeCalledWith(3);
+        const handler = getStarHandler(container, 2);
+        const enterEvent = createEvent.keyDown(handler, { keyCode: KeyCode.ENTER });
+        const spaceEvent = createEvent.keyDown(handler, { keyCode: KeyCode.SPACE });
+
+        fireEvent(handler, enterEvent);
+        fireEvent(handler, spaceEvent);
+
+        expect(handleChange).toHaveBeenNthCalledWith(1, 3);
+        expect(handleChange).toHaveBeenNthCalledWith(2, 3);
+        expect(enterEvent.defaultPrevented).toBe(true);
+        expect(spaceEvent.defaultPrevented).toBe(true);
       });
     });
 

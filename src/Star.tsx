@@ -44,7 +44,8 @@ function Star(props: StarProps, ref: React.Ref<HTMLLIElement>) {
   };
 
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
-    if (e.keyCode === KeyCode.ENTER) {
+    if (e.keyCode === KeyCode.ENTER || e.keyCode === KeyCode.SPACE) {
+      e.preventDefault();
       onClick(e, index);
     }
   };
